@@ -8,11 +8,13 @@
   #cam { position: absolute; inset: 0; transform-origin: 0 0; }
   #map, #bg, #fx { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
   #ui { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+  @font-face { font-family: 'Bangers'; src: url('../node_modules/@fontsource/bangers/files/bangers-latin-400-normal.woff2') format('woff2'); }
+  @font-face { font-family: 'Gochi Hand'; src: url('../node_modules/@fontsource/gochi-hand/files/gochi-hand-latin-400-normal.woff2') format('woff2'); }
   svg text { font-family: Inter, "Arial Black", Arial, sans-serif; }
 </style>
 </head>
 <body>
-<div id="stage">
+<div id="stage"><span style="font-family:Bangers;position:absolute;opacity:0">a</span><span style="font-family:'Gochi Hand';position:absolute;opacity:0">a</span>
   <div id="cam">
     <div id="bg"></div>
     <canvas id="map" width="1080" height="1920"></canvas>

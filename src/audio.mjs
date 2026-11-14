@@ -11,6 +11,12 @@ const SFX = {
     '-filter_complex', '[1]lowpass=f=420,afade=t=out:st=0.03:d=1.7[n];[0][n]amix=inputs=2:normalize=0,volume=1.4'],
   drone: ['-f', 'lavfi', '-i', "aevalsrc='0.22*sin(2*PI*92*t)+0.18*sin(2*PI*95.5*t)+0.08*sin(2*PI*184*t)':s=44100:d=3", '-af', 'afade=t=in:d=0.6,afade=t=out:st=2.2:d=0.8'],
   thud: ['-f', 'lavfi', '-i', "aevalsrc='0.8*sin(2*PI*(140-80*t)*t)*exp(-14*t)':s=44100:d=0.3"],
+  slam: ['-f', 'lavfi', '-i', "aevalsrc='0.9*sin(2*PI*(110-60*t)*t)*exp(-10*t)':s=44100:d=0.5", '-f', 'lavfi', '-i', 'anoisesrc=d=0.5:c=brown:a=0.8:r=44100',
+    '-filter_complex', '[1]lowpass=f=900,afade=t=out:st=0.01:d=0.35[n];[0][n]amix=inputs=2:normalize=0'],
+  whistle: ['-f', 'lavfi', '-i', "aevalsrc='0.35*(sin(2*PI*660*t)+sin(2*PI*830*t)+0.5*sin(2*PI*990*t))*(1-exp(-20*t))*lt(t,1.1)':s=44100:d=1.4", '-af', 'afade=t=out:st=0.9:d=0.5'],
+  rumble: ['-f', 'lavfi', '-i', 'anoisesrc=d=2.5:c=brown:a=0.8:r=44100', '-af', 'lowpass=f=180,tremolo=f=9:d=0.5,afade=t=in:d=0.4,afade=t=out:st=1.8:d=0.7'],
+  cash: ['-f', 'lavfi', '-i', "aevalsrc='0.5*sin(2*PI*2093*t)*exp(-9*t)+0.4*sin(2*PI*2637*(t-0.09))*exp(-9*(t-0.09))*gt(t,0.09)':s=44100:d=0.7"],
+  crumble: ['-f', 'lavfi', '-i', 'anoisesrc=d=1.4:c=pink:a=0.7:r=44100', '-af', 'lowpass=f=1200,tremolo=f=23:d=0.8,afade=t=out:st=0.2:d=1.2'],
 };
 
 export async function ensureSfx(dir) {
@@ -30,20 +36,35 @@ export function sfxEvents(scenes, opts = {}) {
   const ev = [];
   const add = (type, t, vol = 1) => ev.push({ type, t, vol: vol * (opts.volume == null ? 1 : opts.volume) });
   scenes.forEach((sc, i) => {
-    if (i > 0 && sc.transitionSfx !== false) add('whoosh', sc.start, 0.35);
+    if (i > 0 && sc.transitionSfx !== false) add('whoosh', sc.start, sc.first ? 0.32 : 0.16);
     for (const it of sc.items || []) {
       const t = sc.start + (it.at || 0);
-      if (it.sfx === false) continue;
+      if (it.sfx === false || (it.at || 0) < -0.01 && it.type !== 'char') { if (it.blowAt == null) continue; }
       if (typeof it.sfx === 'string') { add(it.sfx, t, 0.8); continue; }
       switch (it.type) {
-        case 'boom': add('boom', t, 0.9 * (it.size || 1)); break;
+        case 'boom': add('boom', t, 0.6 * Math.min(it.size || 1, 1.2)); break;
         case 'arrow': add('whoosh', t, 0.45); break;
         case 'plane': add('drone', t, 0.6); break;
         case 'check': case 'cross': add('tick', t, 0.8); break;
         case 'text': add(it.style === 'stamp' ? 'thud' : it.style === 'date' ? 'tick' : 'pop', t, 0.7); break;
         case 'marker': case 'token': case 'image': case 'label': case 'flagpole': add('pop', t, 0.45); break;
-        case 'char': if ((it.enter || 'pop') !== 'none') add(it.enter === 'pop' || !it.enter ? 'pop' : 'whoosh', t, 0.4); break;
+        case 'char':
+          if ((it.at || 0) >= 0 && (it.enter || 'pop') !== 'none') add(it.enter === 'pop' || !it.enter ? 'pop' : 'whoosh', t, 0.4);
+          for (const th of it.throws || []) add('whoosh', sc.start + th.at, 0.5);
+          if (it.fly) add('whoosh', sc.start + it.fly.at, 0.6);
+          for (const e of it.emotes || []) add('pop', sc.start + e.at, 0.35);
+          for (const h of it.holds || []) if (h.drop) add('thud', sc.start + h.at + 0.4, 0.6);
+          break;
+        case 'vehicle': if ((it.at || 0) >= 0) add(it.kind === 'train' ? 'whistle' : 'rumble', t, it.kind === 'train' ? 0.25 : 0.6); break;
+        case 'flow': if ((it.at || 0) >= 0) add((it.icon || 'money') === 'money' || it.icon === 'gold' ? 'cash' : 'whoosh', t, 0.45); break;
+        case 'wararrow': add('boom', t, 0.5); break;
+        case 'route': if ((it.at || 0) >= 0) add('whoosh', t, 0.35); break;
+        case 'mushroom': add('boom', t, 1); break;
+        case 'icon': case 'fire': case 'bunker': case 'tunnel': case 'bridge': if ((it.at || 0) >= 0) add('pop', t, 0.4); break;
+        case 'drawer': if (it.closeAt != null) add('slam', sc.start + it.closeAt + 0.1, 1); break;
       }
+      if (it.blowAt != null) { add('boom', sc.start + it.blowAt, 0.65); if (it.type === 'bridge' || it.type === 'tunnel') add('crumble', sc.start + it.blowAt + 0.3, 0.8); }
+      if (it.explosives != null && it.explosives >= 0) add('tick', sc.start + it.explosives, 0.7);
     }
   });
   // avoid stacking identical sounds within 60ms

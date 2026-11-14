@@ -21,7 +21,7 @@ async function openPage(browser, data, scale) {
   page.on('console', m => { if (m.type() === 'warning' || m.type() === 'error') console.warn('  [page]', m.text()); });
   page.on('pageerror', e => console.error('  [page error]', e.message));
   await page.goto('file://' + path.join(ROOT, 'runtime/index.html'));
-  for (const f of ['node_modules/d3-array/dist/d3-array.min.js', 'node_modules/d3-geo/dist/d3-geo.min.js', 'node_modules/topojson-client/dist/topojson-client.min.js', 'runtime/engine.js'])
+  for (const f of ['node_modules/d3-array/dist/d3-array.min.js', 'node_modules/d3-geo/dist/d3-geo.min.js', 'node_modules/topojson-client/dist/topojson-client.min.js', 'runtime/engine.js', 'runtime/kit.js'])
     await page.addScriptTag({ path: path.join(ROOT, f) });
   await page.evaluate(d => window.__init(d), data);
   return page;

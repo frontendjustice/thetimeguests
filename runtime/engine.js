@@ -134,6 +134,7 @@ function flagInner(name) {
     case 'belgium': return '<rect width="10" height="20" fill="#000"/><rect x="10" width="10" height="20" fill="#fdda24"/><rect x="20" width="10" height="20" fill="#ef3340"/>';
     case 'netherlands': return '<rect width="30" height="7" fill="#ae1c28"/><rect y="6.6" width="30" height="7" fill="#fff"/><rect y="13.3" width="30" height="6.7" fill="#21468b"/>';
     case 'australia': return '<rect width="30" height="20" fill="#012169"/><circle cx="7.5" cy="15" r="1.6" fill="#fff"/><circle cx="22" cy="5" r=".9" fill="#fff"/><circle cx="25" cy="10" r=".9" fill="#fff"/><circle cx="22" cy="16" r=".9" fill="#fff"/><path d="M0,0 L15,10 M15,0 L0,10" stroke="#fff" stroke-width="2"/><path d="M7.5,0 V10 M0,5 H15" stroke="#fff" stroke-width="3"/><path d="M7.5,0 V10 M0,5 H15" stroke="#c8102e" stroke-width="1.6"/>';
+    case 'switzerland': case 'swiss': return '<rect width="30" height="20" fill="#da291c"/><path d="M13.4,4 h3.2 v4.4 h4.4 v3.2 h-4.4 v4.4 h-3.2 v-4.4 h-4.4 v-3.2 h4.4z" fill="#fff"/>';
     case 'white': return '<rect width="30" height="20" fill="#fff"/>';
     default: return `<rect width="30" height="20" fill="${esc(name || '#888')}"/>`;
   }
@@ -165,19 +166,20 @@ function drawMap(sc, lt) {
   const proj = d3.geoMercator().center([v.lon, v.lat]).scale(k).translate([W / 2, H / 2]).clipExtent([[-40, -40], [W + 40, H + 40]]);
   S.proj = proj;
   const path = d3.geoPath(proj, ctx);
-  const ocean = bg.ocean || '#1f5a6e';
+  const paper = bg.style === 'paper';
+  const ocean = bg.ocean || (paper ? '#cbbf9f' : '#1f5a6e');
   const grd = ctx.createRadialGradient(W / 2, H * 0.45, 100, W / 2, H / 2, H * 0.75);
-  grd.addColorStop(0, shade(ocean, 0.18)); grd.addColorStop(1, shade(ocean, -0.35));
+  grd.addColorStop(0, shade(ocean, paper ? 0.1 : 0.18)); grd.addColorStop(1, shade(ocean, paper ? -0.15 : -0.35));
   ctx.fillStyle = grd; ctx.fillRect(0, 0, W, H);
   // ocean texture
   const pat = ctx.createPattern(S.noise, 'repeat');
   const o = proj([0, 0]); const ts = clamp(k / (W / (60 * Math.PI / 180)), 0.6, 3);
   pat.setTransform(new DOMMatrix().translate(o[0] % 1024, o[1] % 1024).scale(ts));
-  ctx.globalAlpha = 0.6; ctx.fillStyle = pat; ctx.fillRect(0, 0, W, H); ctx.globalAlpha = 1;
+  ctx.globalAlpha = paper ? 0.25 : 0.6; ctx.fillStyle = pat; ctx.fillRect(0, 0, W, H); ctx.globalAlpha = 1;
   // land
   ctx.beginPath(); path(S.land);
-  ctx.save(); ctx.shadowColor = 'rgba(0,0,0,.45)'; ctx.shadowBlur = 24; ctx.fillStyle = bg.land || '#a9b487'; ctx.fill(); ctx.restore();
-  ctx.save(); ctx.clip(); ctx.fillStyle = pat; ctx.globalAlpha = 1; ctx.fillRect(0, 0, W, H); ctx.restore();
+  ctx.save(); ctx.shadowColor = 'rgba(0,0,0,.45)'; ctx.shadowBlur = 24; ctx.fillStyle = bg.land || (paper ? '#efe5c8' : '#a9b487'); ctx.fill(); ctx.restore();
+  ctx.save(); ctx.clip(); ctx.fillStyle = pat; ctx.globalAlpha = paper ? 0.35 : 1; ctx.fillRect(0, 0, W, H); ctx.restore();
   // country fills
   for (const f of bg.fills || []) {
     const a = appear(f, lt, f.fade == null ? 0.4 : f.fade) * (1 - exitP(f, lt, 0.4));
@@ -222,9 +224,10 @@ function bgSVG(sc, lt) {
       return src ? `<div style="width:${W}px;height:${H}px;overflow:hidden;background:#111"><img src="${src}" style="width:100%;height:100%;object-fit:cover;transform:scale(${z});${gray}"/></div>`
         : wrap(`<rect width="${W}" height="${H}" fill="#333"/><text x="540" y="960" fill="#fff" font-size="40" text-anchor="middle">missing image ${esc(bg.src)}</text>`);
     }
-    default: return '';
+    default: return BGX_get(bg.type) ? wrap(BGX_get(bg.type)(bg, lt, sc)) : '';
   }
 }
+const BGX_get = t => (window.BGX || {})[t];
 const animatedBg = bg => bg && (bg.type === 'sky' || bg.type === 'sea' || bg.type === 'image');
 
 function roomSVG(bg) {
@@ -355,9 +358,9 @@ function seaSVG(bg, lt) {
 function popT(it, lt, d = 0.32) { const p = appear(it, lt, d); return p >= 1 ? 1 : backOut(p); }
 function outlineText(x, y, text, o = {}) {
   const size = o.size || 48, fill = o.color || '#fff', sw = o.stroke == null ? size * 0.2 : o.stroke;
-  const anchor = o.anchor || 'middle', weight = o.weight || 900, style = o.italic ? 'italic' : 'normal';
-  const lines = String(text).split('\n');
-  return lines.map((ln, i) => `<text x="${f1(x)}" y="${f1(y + i * size * 1.08)}" font-size="${size}" font-weight="${weight}" font-style="${style}" text-anchor="${anchor}" fill="${fill}" stroke="${o.strokeColor || '#111'}" stroke-width="${sw}" stroke-linejoin="round" paint-order="stroke" letter-spacing="${o.spacing || 0}">${esc(ln)}</text>`).join('');
+  const anchor = o.anchor || 'middle', weight = o.font ? (o.weight || 400) : (o.weight || 900), style = o.italic ? 'italic' : 'normal';
+  const lines = String(text).split('\n'); const fam = o.font ? ` font-family="${o.font}"` : '';
+  return lines.map((ln, i) => `<text x="${f1(x)}" y="${f1(y + i * size * 1.08)}"${fam} font-size="${size}" font-weight="${weight}" font-style="${style}" text-anchor="${anchor}" fill="${fill}" stroke="${o.strokeColor || '#111'}" stroke-width="${sw}" stroke-linejoin="round" paint-order="stroke" letter-spacing="${o.spacing || 0}">${esc(ln)}</text>`).join('');
 }
 function wrapText(text, max) {
   const words = String(text).split(/\s+/); const lines = []; let cur = '';
@@ -525,6 +528,13 @@ function drawChar(it, lt) {
   const mood = moodAt(it, lt), talking = talkingAt(it, lt);
   const phase = (hashStr(it.id || it.name || 'c') % 100) / 16;
   y += Math.sin(lt * 2.4 + phase) * 3 + (talking ? -Math.abs(Math.sin(lt * 9)) * 6 : 0);
+  for (const j of [].concat(it.jumps || [])) { const q = (lt - j) / 0.42; if (q > 0 && q < 1) y -= Math.sin(q * Math.PI) * 90; }
+  let spin = 0;
+  if (it.fly && lt >= it.fly.at) {
+    const q = clamp((lt - it.fly.at) / (it.fly.dur || 0.9)), tgt = pt(it.fly.to || { x: 1.3, y: -0.2 });
+    const sx0 = x, sy0 = y; x = lerp(sx0, tgt[0], q); y = lerp(sy0, tgt[1], q) - Math.sin(q * Math.PI) * (it.fly.arc == null ? 500 : it.fly.arc);
+    spin = (it.fly.spin == null ? 540 : it.fly.spin) * q;
+  }
   if (mood === 'angry' || mood === 'furious') x += Math.sin(lt * 70) * (mood === 'furious' ? 7 : 3);
   if (mood === 'shocked' && lt - at < 1.5) y -= Math.abs(Math.sin(lt * 18)) * 10 * (1 - clamp((lt - at) / 1.5));
 
@@ -558,7 +568,8 @@ function drawChar(it, lt) {
   };
   const A1 = arm(f, front, pose.bend), A2 = arm(-f, back, pose.bend);
   g += `<path d="${A2.d}" stroke="#111" stroke-width="8" fill="none" stroke-linecap="round"/><path d="${A1.d}" stroke="#111" stroke-width="8" fill="none" stroke-linecap="round"/>`;
-  if (it.hold) g += holdSVG(it.hold, A1.ex, A1.ey, f);
+  const held = holdAt(it, lt);
+  if (held) g += holdSVG(held, A1.ex, A1.ey, f);
   // head
   const hy = -304, hr = 68;
   g += `<clipPath id="${id}h"><circle cx="0" cy="${hy}" r="${hr}"/></clipPath>`;
@@ -607,9 +618,27 @@ function drawChar(it, lt) {
     if (mood === 'sad') g += `<path d="M${ex - 26},${ey + 12} q-4,${f1(20 + (lt * 30) % 20)} 0,${f1(26 + (lt * 30) % 20)}" stroke="#7cc8ff" stroke-width="6" fill="none" stroke-linecap="round"/>`;
   }
   g += hatSVG(it, hy, hr, f);
+  for (const e of it.emotes || []) {
+    const until = e.until == null ? e.at + 1.6 : e.until; if (lt < e.at || lt >= until) continue;
+    const q = backOut(clamp((lt - e.at) / 0.2)), ex2 = f * 70, ey2 = hy - hr - 70;
+    g += `<g transform="translate(${ex2},${ey2 + Math.sin(lt * 8) * 4}) scale(${f1(q * 100) / 100})">${emoteSVG(e.kind, lt)}</g>`;
+  }
   if (it.tag) g += outlineText(0, 52, it.tag, { size: 34, color: '#fff', stroke: 8 });
 
-  let out = `<g opacity="${f1(alpha * 100) / 100}" transform="translate(${f1(x)},${f1(y)}) scale(${f1(sc * s * 1000) / 1000})">${g}</g>`;
+  let out = `<g opacity="${f1(alpha * 100) / 100}" transform="translate(${f1(x)},${f1(y)}) rotate(${f1(spin)} 0 ${f1(-180 * sc * s)}) scale(${f1(sc * s * 1000) / 1000})">${g}</g>`;
+  // props that leave the hand: thrown along an arc, or dropped to the floor
+  const handX = x + A1.ex * sc * s, handY = y + A1.ey * sc * s;
+  for (const th of it.throws || []) {
+    if (lt < th.at) continue;
+    const q = clamp((lt - th.at) / (th.dur || 0.7)), tgt = pt(th.to || { x: 0.5, y: 0.5 });
+    if (q >= 1 && th.keep !== true) continue;
+    const px = lerp(handX, tgt[0], q), py = lerp(handY, tgt[1], q) - Math.sin(q * Math.PI) * (th.arc == null ? 260 : th.arc);
+    out += `<g transform="translate(${f1(px - handX)},${f1(py - handY)}) rotate(${f1(q * (th.spin == null ? 540 : th.spin))} ${f1(handX)} ${f1(handY)})"><g transform="translate(${f1(x)},${f1(y)}) scale(${f1(sc * s * 1000) / 1000})">${holdSVG(th.item, A1.ex, A1.ey, f)}</g></g>`;
+  }
+  for (const d of droppedAt(it, lt)) {
+    const q = clamp((lt - d.at) / 0.45), fy = y - 10, py = lerp(handY, fy, q * q);
+    out += `<g transform="translate(${f1(handX + f * 40 * q)},${f1(py)}) rotate(${f1(f * 90 * q)}) scale(${f1(sc * s * 100) / 100})"><g transform="translate(${f1(-A1.ex)},${f1(-A1.ey)})">${holdSVG(d.item, A1.ex, A1.ey, f)}</g></g>`;
+  }
   // speech text (outside the scaled group so text stays readable)
   for (let i = 0; i < (it.say || []).length; i++) {
     const sy = it.say[i]; const until = sy.until != null ? sy.until : (it.say[i + 1] ? it.say[i + 1].at : sy.at + 1.2 + sy.text.length * 0.06);
@@ -620,7 +649,7 @@ function drawChar(it, lt) {
     let tx = x + side * (sy.dx == null ? 150 : sy.dx), ty = (y + (hy - hr - 40) * sc) + (sy.dy || 0);
     const txt = wrapText(sy.text, 16); const lines = txt.split('\n').length;
     tx = clamp(tx, 220, W - 220);
-    out += `<g transform="translate(${f1(tx)},${f1(ty - (lines - 1) * 44)}) scale(${f1(pp * 100) / 100})">${outlineText(0, 0, txt, { size: sy.size || 46, weight: 800, stroke: 11 })}</g>`;
+    out += `<g transform="translate(${f1(tx)},${f1(ty - (lines - 1) * 44)}) scale(${f1(pp * 100) / 100})">${outlineText(0, 0, txt, { size: sy.size || 54, font: 'Gochi Hand', stroke: 11 })}</g>`;
     out += `<path d="M${f1(x + side * 30 * sc)},${f1(y + (hy - hr + 10) * sc)} l${side * 26},-34" stroke="#fff" stroke-width="7" stroke-linecap="round" opacity="${f1(pp)}"/>`;
     void headTop;
   }
@@ -642,10 +671,35 @@ function hatSVG(it, hy, hr, f) {
     default: return '';
   }
 }
+function holdAt(it, lt) {
+  let h = it.hold || null;
+  for (const k of it.holds || []) if (lt >= k.at) h = k.item || null;
+  for (const th of it.throws || []) if (lt >= th.at && th.item === h) h = null;
+  return h;
+}
+function droppedAt(it, lt) {
+  const out = []; let h = it.hold || null;
+  for (const k of it.holds || []) { if (lt < k.at) break; if (k.drop && h) out.push({ item: h, at: k.at }); h = k.item || null; }
+  return out;
+}
+function emoteSVG(kind, lt) {
+  switch (kind) {
+    case '!!': case '!': return outlineText(0, 0, kind, { size: 120, font: 'Bangers', color: '#ff3b2f', stroke: 14 });
+    case '?': case '??': return outlineText(0, 0, kind, { size: 120, font: 'Bangers', color: '#fff', stroke: 14 });
+    case 'anger': return `<path d="M-30,-10 q14,-4 18,-22 M30,-10 q-14,-4 -18,-22 M-30,10 q14,4 18,22 M30,10 q-14,4 -18,22" stroke="#e53935" stroke-width="10" fill="none" stroke-linecap="round"/>`;
+    case 'idea': return `<circle cy="-20" r="34" fill="#ffe36b" stroke="#111" stroke-width="5"/><rect x="-15" y="12" width="30" height="18" fill="#999" stroke="#111" stroke-width="4"/>${[0, 1, 2, 3, 4].map(i => { const a = -Math.PI + i * Math.PI / 4; return `<path d="M${f1(Math.cos(a) * 48)},${f1(-20 + Math.sin(a) * 48)} L${f1(Math.cos(a) * 64)},${f1(-20 + Math.sin(a) * 64)}" stroke="#ffb300" stroke-width="7" stroke-linecap="round"/>`; }).join('')}`;
+    case '...': return outlineText(0, 0, '...', { size: 100, font: 'Bangers', stroke: 12 });
+    case 'money': return `<g transform="scale(.8)"><text y="20" font-size="90" font-family="Bangers" text-anchor="middle" fill="#43a047" stroke="#111" stroke-width="10" paint-order="stroke">$$$</text></g>`;
+    case 'sweat': return `<path d="M0,-30 q-22,34 0,44 q22,-10 0,-44Z" fill="#7cc8ff" stroke="#2b7bbf" stroke-width="4"/>`;
+    default: return outlineText(0, 0, kind, { size: 70, font: 'Bangers', stroke: 10 });
+  }
+}
 function holdSVG(what, x, y, f) {
   const [kind, arg] = String(what).split(':');
   switch (kind) {
     case 'paper': return `<g transform="translate(${f1(x)},${f1(y)}) rotate(${f * 12})"><rect x="-28" y="-40" width="56" height="74" fill="#fff" stroke="#111" stroke-width="4"/><path d="M-16,-22 h32 M-16,-8 h32 M-16,6 h22" stroke="#999" stroke-width="4"/></g>`;
+    case 'plan': return `<g transform="translate(${f1(x)},${f1(y)}) rotate(${f * 10})"><rect x="-60" y="-46" width="120" height="92" fill="#f1e6c8" stroke="#111" stroke-width="4"/><path d="M-40,-20 q20,-14 40,0 t40,10 M-30,20 l40,-24" stroke="#c62828" stroke-width="6" fill="none"/><path d="M6,-8 l12,-12 l2,14z" fill="#c62828"/></g>`;
+    case 'telegram': case 'card': return `<g transform="translate(${f1(x)},${f1(y)}) rotate(${f * 14})"><rect x="-40" y="-30" width="80" height="58" fill="${kind === 'card' ? '#bfe3ff' : '#f5efdc'}" stroke="#111" stroke-width="4"/><path d="M-26,-12 h52 M-26,2 h52 M-26,16 h34" stroke="#888" stroke-width="5"/></g>`;
     case 'newspaper': return `<g transform="translate(${f1(x)},${f1(y)}) rotate(${f * 8})"><rect x="-44" y="-56" width="88" height="110" fill="#f1efe6" stroke="#111" stroke-width="4"/><rect x="-34" y="-46" width="68" height="16" fill="#333"/><path d="M-34,-18 h68 M-34,-4 h68 M-34,10 h68 M-34,24 h40" stroke="#999" stroke-width="5"/></g>`;
     case 'bomb': return `<g transform="translate(${f1(x)},${f1(y + 20)})"><ellipse rx="70" ry="30" fill="#6b6f72" stroke="#111" stroke-width="4"/><path d="M${-f * 66},-28 l${-f * 26},-14 v84 l${f * 26},-14" fill="#555" stroke="#111" stroke-width="4"/><circle cx="${f * 20}" r="13" fill="#f4d03f" stroke="#111" stroke-width="3"/></g>`;
     case 'flag': return `<g transform="translate(${f1(x)},${f1(y)})"><line x1="0" y1="20" x2="0" y2="-140" stroke="#5c3b22" stroke-width="7"/>${flagSVG(arg || 'white', f > 0 ? 2 : -92, -140, 90, 60)}</g>`;
@@ -666,7 +720,7 @@ function captionSVG(sc, lt) {
   for (let i = 0; i < sc.words.length; i++) if (sc.words[i].t0 <= lt) idx = i;
   if (idx < 0) return '';
   const w = sc.words[idx]; if (lt > w.t1 + 0.35 && idx === sc.words.length - 1) return '';
-  const y = (cap.y || 0.84) * H, size = cap.size || 92, color = cap.color || '#ffe11a';
+  const y = (cap.y || 0.84) * H, size = cap.size || 104, color = cap.color || '#ffe11a';
   const clean = s => s.replace(/[^\p{L}\p{N}'’,.%$-]/gu, '').replace(/[.,]$/, '').toUpperCase();
   if (cap.mode === 'phrase') {
     const per = cap.words || 3; const start = idx - (idx % per); const group = sc.words.slice(start, start + per);
@@ -674,11 +728,12 @@ function captionSVG(sc, lt) {
     return `<text x="${W / 2}" y="${y}" font-size="${size * 0.8}" font-weight="900" font-style="italic" text-anchor="middle" stroke="#111" stroke-width="${size * 0.16}" stroke-linejoin="round" paint-order="stroke">${txt}</text>`;
   }
   const p = clamp((lt - w.t0) / 0.12); const s = 0.75 + 0.25 * backOut(p);
-  return `<g transform="translate(${W / 2},${f1(y)}) scale(${f1(s * 100) / 100})">${outlineText(0, 0, clean(w.w), { size, color, italic: true, stroke: size * 0.18 })}</g>`;
+  return `<g transform="translate(${W / 2},${f1(y)}) scale(${f1(s * 100) / 100})">${outlineText(0, 0, clean(w.w), { size, color, font: cap.font || 'Bangers', stroke: size * 0.2, spacing: 2 })}</g>`;
 }
 
 // ---------- frame ----------
 const UI_TYPES = new Set(['text']);
+const SELF_TIMED = new Set(['boom', 'plane', 'vehicle', 'bridge', 'mushroom', 'wararrow', 'route', 'flow', 'drawer']);
 window.__init = async (data) => {
   S.data = data;
   const topo = data.topo;
@@ -686,9 +741,10 @@ window.__init = async (data) => {
   S.land = topojson.merge(topo, topo.objects.countries.geometries.filter(g => g.properties.name !== 'Antarctica'));
   S.borders = topojson.mesh(topo, topo.objects.countries, (a, b) => a !== b);
   S.noise = makeNoise();
-  S.defs = `<defs><filter id="ds" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="6" stdDeviation="6" flood-opacity=".35"/></filter><filter id="gray"><feColorMatrix type="saturate" values="0"/></filter></defs>`;
+  S.defs = `<defs><filter id="ds" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="6" stdDeviation="6" flood-opacity=".35"/></filter><filter id="gray"><feColorMatrix type="saturate" values="0"/></filter><filter id="burnt"><feColorMatrix type="matrix" values=".35 0 0 0 0  0 .3 0 0 0  0 0 .28 0 0  0 0 0 1 0"/></filter>${typeof KIT_DEFS === 'string' ? KIT_DEFS : ''}</defs>`;
   // preload images so frames are deterministic
   await Promise.all(Object.values(data.assets || {}).map(src => new Promise(r => { const i = new Image(); i.onload = i.onerror = r; i.src = src; })));
+  try { await document.fonts.load('40px Bangers'); await document.fonts.load('40px "Gochi Hand"'); } catch (e) { /* fall back to Inter */ }
   await document.fonts.ready;
   return true;
 };
@@ -704,14 +760,21 @@ window.__frame = (t) => {
   if (isMap) drawMap(sc, lt); else S.proj = null;
   // camera
   let cam = { zoom: 1, x: 0.5, y: 0.5 };
-  if (sc.camera) cam = keyframes(sc.camera, lt, ['zoom', 'x', 'y'], { at: 0, zoom: 1, x: 0.5, y: 0.5 });
+  if (sc.camera) cam = keyframes(sc.camera, lt, ['zoom', 'x', 'y', 'tx', 'ty'], { at: 0, zoom: 1, x: 0.5, y: 0.5, tx: 0, ty: 0 });
+  else if (!isMap && S.data.autoPush !== false) cam = { zoom: 1 + 0.06 * easeIO(clamp(lt / Math.max(sc.dur, 0.5))), x: 0.5, y: 0.55, tx: 0, ty: 0 };
   let shx = 0, shy = 0;
-  for (const it of sc.items || []) if (it.type === 'boom' && it.shake !== false) { const d = lt - (it.at || 0); if (d >= 0 && d < 0.6) { const a = (1 - d / 0.6) * 22 * (it.size || 1); shx += Math.sin(d * 90) * a; shy += Math.cos(d * 77) * a; } }
-  document.getElementById('cam').style.transform = `translate(${f1(cam.x * W * (1 - cam.zoom) + shx)}px,${f1(cam.y * H * (1 - cam.zoom) + shy)}px) scale(${cam.zoom})`;
+  for (const it of sc.items || []) {
+    if (it.shake === false) continue;
+    const t0 = it.type === 'boom' ? (it.at || 0) : it.blowAt != null ? it.blowAt : it.closeAt != null ? it.closeAt + 0.12 : null;
+    if (t0 == null) continue;
+    const d = lt - t0, amp = it.closeAt != null && it.blowAt == null ? 10 : 22 * (it.size || 1);
+    if (d >= 0 && d < 0.6) { const a = (1 - d / 0.6) * amp; shx += Math.sin(d * 90) * a; shy += Math.cos(d * 77) * a; }
+  }
+  document.getElementById('cam').style.transform = `translate(${f1(cam.x * W * (1 - cam.zoom) + shx - (cam.tx || 0) * W * cam.zoom)}px,${f1(cam.y * H * (1 - cam.zoom) + shy - (cam.ty || 0) * H * cam.zoom)}px) scale(${cam.zoom})`;
   // items
   let fx = S.defs, ui = '';
   for (const it of sc.items || []) {
-    if (!visible(it, lt) && it.type !== 'boom' && it.type !== 'plane') continue;
+    if (!visible(it, lt) && !SELF_TIMED.has(it.type)) continue;
     const fn = ITEM[it.type]; if (!fn) continue;
     const svg = fn(it, lt);
     if (UI_TYPES.has(it.type)) ui += svg; else fx += svg;

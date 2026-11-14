@@ -1,129 +1,1542 @@
 {
-  "name": "why-hitler-never-invaded-switzerland",
-  "title": "Why Hitler Never Invaded Switzerland",
-  "voice": { "name": "Charon" },
-  "captions": { "mode": "word", "color": "#ffe11a", "size": 92, "y": 0.85 },
-  "handle": "@thetimeguests",
-  "scenes": [
+ "name": "why-hitler-never-invaded-switzerland",
+ "title": "Why Hitler Never Invaded Switzerland",
+ "voice": {
+  "name": "Charon"
+ },
+ "captions": {
+  "mode": "word",
+  "color": "#ffe11a",
+  "size": 104,
+  "y": 0.86
+ },
+ "handle": "@thetimeguests",
+ "cast": {
+  "hitler": {
+   "type": "char",
+   "outfit": "military",
+   "color": "#7a7a63",
+   "hair": "side",
+   "mustache": "toothbrush"
+  },
+  "guisan": {
+   "type": "char",
+   "outfit": "military",
+   "color": "#4d5b7a",
+   "hat": "kepi",
+   "hatColor": "#3b4d7a",
+   "hair": "white",
+   "mustache": "walrus",
+   "hairColor": "#ddd",
+   "medals": true
+  },
+  "banker": {
+   "type": "char",
+   "outfit": "suit",
+   "color": "#2b2f36",
+   "tie": "#c0392b",
+   "hair": "bald",
+   "glasses": true
+  },
+  "official": {
+   "type": "char",
+   "outfit": "suit",
+   "color": "#4a4a3a",
+   "tie": "#111",
+   "hair": "slick",
+   "armband": "#c62828"
+  },
+  "mussolini": {
+   "type": "char",
+   "outfit": "military",
+   "color": "#2b2b2b",
+   "hair": "bald",
+   "medals": true
+  }
+ },
+ "scenes": [
+  {
+   "say": "Hitler conquered almost all of Europe. So why did he never invade tiny Switzerland, sitting right in the middle?",
+   "shots": [
     {
-      "say": "Hitler conquered almost all of Europe. So why did he never invade tiny Switzerland, sitting right in the middle?",
-      "bg": {
-        "type": "map",
-        "view": [
-          { "at": 0, "lon": 10, "lat": 50, "span": 34 },
-          { "at": "Switzerland", "lon": 8.3, "lat": 47.2, "span": 14, "dur": 1.2 }
+     "bg": {
+      "type": "map",
+      "view": [
+       {
+        "at": 0,
+        "lon": 11,
+        "lat": 51,
+        "span": 32
+       },
+       {
+        "at": "almost",
+        "lon": 9,
+        "lat": 50,
+        "span": 27,
+        "dur": 1.5
+       }
+      ],
+      "fills": [
+       {
+        "countries": [
+         "Germany",
+         "Austria",
+         "Czechia"
         ],
-        "fills": [
-          { "countries": ["Germany", "Austria", "Czechia"], "color": "#8e44ad", "at": 0 },
-          { "countries": ["Poland", "Denmark", "Norway"], "color": "#8e44ad", "at": "conquered" },
-          { "countries": ["France", "Belgium", "Netherlands", "Luxembourg"], "color": "#8e44ad", "at": "Europe" },
-          { "countries": ["Italy"], "color": "#2e9e5b", "at": "Europe+0.3" },
-          { "countries": ["Switzerland"], "color": "#e53935", "at": "Switzerland" }
-        ]
+        "color": "#8e44ad",
+        "at": 0,
+        "fade": 0
+       },
+       {
+        "countries": [
+         "Poland"
+        ],
+        "color": "#8e44ad",
+        "at": "conquered"
+       },
+       {
+        "countries": [
+         "Denmark",
+         "Norway"
+        ],
+        "color": "#8e44ad",
+        "at": "almost"
+       },
+       {
+        "countries": [
+         "France",
+         "Belgium",
+         "Netherlands",
+         "Luxembourg"
+        ],
+        "color": "#8e44ad",
+        "at": "all"
+       },
+       {
+        "countries": [
+         "Yugoslavia",
+         "Greece"
+        ],
+        "color": "#8e44ad",
+        "at": "Europe"
+       },
+       {
+        "countries": [
+         "Italy"
+        ],
+        "color": "#2e9e5b",
+        "at": 0,
+        "fade": 0
+       }
+      ]
+     },
+     "items": [
+      {
+       "type": "token",
+       "flag": "wehrmacht",
+       "pos": [
+        10.5,
+        51.3
+       ],
+       "at": 0
       },
-      "items": [
-        { "type": "token", "flag": "wehrmacht", "pos": [10.4, 51.2], "at": 0.2, "to": [2.4, 48.9], "moveAt": "Europe", "moveDur": 0.9 },
-        { "type": "arrow", "from": [13.5, 52.4], "to": [20.5, 52.1], "at": "conquered", "color": "#b03ad6" },
-        { "type": "arrow", "from": [9.5, 54.5], "to": [10.5, 60.0], "at": "conquered+0.2", "color": "#b03ad6" },
-        { "type": "arrow", "from": [7.5, 50.5], "to": [2.3, 48.9], "at": "Europe", "color": "#b03ad6" },
-        { "type": "pulse", "pos": [8.2, 46.8], "at": "Switzerland", "r": 150, "color": "#ffef6e" },
-        { "type": "label", "pos": [8.2, 46.2], "text": "?", "size": 160, "at": "middle" }
-      ]
-    },
-    {
-      "say": "It wasn't because he didn't want to. In 1940, the German army even drew up an invasion plan: Operation Tannenbaum.",
-      "bg": { "type": "room", "wall": "#e9dcc0", "floor": "#7b5034", "props": [{ "type": "flag", "flag": "wehrmacht", "x": 0.12 }, { "type": "easelmap", "focus": ["Switzerland"], "highlight": ["Switzerland"], "cities": [{ "name": "Bern", "lon": 7.45, "lat": 46.95 }, { "name": "Zurich", "lon": 8.54, "lat": 47.37 }], "x": 0.55, "y": 0.14, "w": 0.6, "h": 0.28 }, { "type": "window", "x": 0.9 }] },
-      "items": [
-        { "type": "char", "id": "hitler", "x": 0.3, "y": 0.74, "outfit": "military", "color": "#7a7a63", "hair": "side", "mustache": "toothbrush", "face": "right", "mood": "smug", "at": 0, "enter": "left",
-          "poses": [{ "at": 0, "pose": "hips" }, { "at": "army", "pose": "point" }],
-          "say": [{ "text": "Switzerland... how hard can it be?", "at": "want" }] },
-        { "type": "char", "id": "general", "x": 0.74, "y": 0.76, "outfit": "military", "color": "#5d6650", "hat": "cap", "hatColor": "#5d6650", "hair": "short", "glasses": true, "face": "left", "medals": true, "at": "army", "enter": "right", "hold": "paper",
-          "poses": [{ "at": 0, "pose": "hold" }] },
-        { "type": "text", "style": "stamp", "text": "TANNENBAUM", "at": "Tannenbaum", "y": 0.5, "size": 84 },
-        { "type": "text", "style": "date", "text": "Summer 1940", "at": "1940" }
-      ]
-    },
-    {
-      "say": "But the Swiss had a plan of their own. General Henri Guisan pulled the army back into the Alps, a fortress of tunnels, bunkers and bridges packed with explosives.",
-      "bg": {
-        "type": "map", "ocean": "#1f5a6e",
-        "view": [{ "at": 0, "lon": 8.2, "lat": 46.8, "span": 6.5 }, { "at": "Alps", "lon": 8.4, "lat": 46.6, "span": 4.6, "dur": 1 }],
-        "fills": [
-          { "countries": ["Switzerland"], "color": "#e53935", "at": 0, "fade": 0 },
-          { "countries": ["Germany", "France"], "color": "#8e44ad", "at": 0, "fade": 0 },
-          { "countries": ["Italy"], "color": "#2e9e5b", "at": 0, "fade": 0 },
-          { "coords": [[7.0, 46.6], [7.6, 46.85], [8.3, 46.98], [9.2, 46.95], [9.7, 46.6], [9.1, 46.3], [8.4, 46.2], [7.7, 46.05], [7.0, 46.25]], "color": "#ffffff", "opacity": 0.55, "at": "Alps" }
-        ]
+      {
+       "type": "arrow",
+       "from": [
+        13.4,
+        52.5
+       ],
+       "to": [
+        21,
+        52.2
+       ],
+       "at": "conquered",
+       "color": "#b03ad6"
       },
-      "items": [
-        { "type": "arrow", "from": [7.45, 47.35], "to": [7.9, 46.7], "at": "pulled", "color": "#ffffff", "width": 20 },
-        { "type": "arrow", "from": [8.6, 47.4], "to": [8.6, 46.85], "at": "pulled+0.2", "color": "#ffffff", "width": 20 },
-        { "type": "arrow", "from": [9.4, 47.3], "to": [9.2, 46.8], "at": "pulled+0.4", "color": "#ffffff", "width": 20 },
-        { "type": "label", "pos": [8.35, 46.55], "text": "THE REDOUBT", "size": 64, "at": "fortress", "color": "#ffe11a" },
-        { "type": "boom", "pos": [9.3, 46.25], "at": "explosives", "size": 0.5 },
-        { "type": "char", "id": "guisan", "x": 0.25, "y": 0.82, "outfit": "military", "color": "#4d5b7a", "hat": "kepi", "hatColor": "#3b4d7a", "hair": "white", "mustache": "walrus", "hairColor": "#ddd", "face": "right", "at": "Guisan", "enter": "left", "scale": 0.85,
-          "poses": [{ "at": 0, "pose": "down" }, { "at": "pulled", "pose": "point" }], "mood": "smug" }
-      ]
-    },
-    {
-      "say": "The message to Berlin was clear. Invade, and every road and railway you actually want gets blown to pieces.",
-      "bg": { "type": "field", "palette": "grass", "seed": "alps", "craters": 2 },
-      "items": [
-        { "type": "char", "id": "guisan2", "x": 0.3, "y": 0.74, "outfit": "military", "color": "#4d5b7a", "hat": "kepi", "hatColor": "#3b4d7a", "hair": "white", "mustache": "walrus", "hairColor": "#ddd", "face": "right", "at": 0, "enter": "none",
-          "poses": [{ "at": 0, "pose": "point" }, { "at": "blown", "pose": "shrug" }], "mood": "smug",
-          "say": [{ "text": "Go ahead. Try it.", "at": "Invade" }] },
-        { "type": "char", "id": "hitler2", "x": 0.75, "y": 0.75, "outfit": "military", "color": "#7a7a63", "hair": "side", "mustache": "toothbrush", "face": "left", "at": "Berlin", "enter": "right",
-          "moods": [{ "at": 0, "mood": "neutral" }, { "at": "blown", "mood": "shocked" }] },
-        { "type": "boom", "x": 0.5, "y": 0.3, "at": "blown", "size": 1.2 },
-        { "type": "boom", "x": 0.18, "y": 0.26, "at": "pieces", "size": 0.8 },
-        { "type": "boom", "x": 0.84, "y": 0.28, "at": "pieces+0.25", "size": 0.9 }
-      ]
-    },
-    {
-      "say": "And Germany needed those railways. The Gotthard and Simplon tunnels were its fastest link to its ally, Italy.",
-      "bg": {
-        "type": "map",
-        "view": [{ "at": 0, "lon": 9.3, "lat": 47.0, "span": 9 }],
-        "fills": [
-          { "countries": ["Switzerland"], "color": "#e53935", "at": 0, "fade": 0 },
-          { "countries": ["Germany", "Austria", "France"], "color": "#8e44ad", "at": 0, "fade": 0 },
-          { "countries": ["Italy"], "color": "#2e9e5b", "at": "Italy", "opacity": 1 }
-        ]
+      {
+       "type": "fire",
+       "pos": [
+        21,
+        52.2
+       ],
+       "at": "conquered+0.6",
+       "size": 0.8
       },
-      "items": [
-        { "type": "marker", "pos": [8.59, 46.6], "label": "Gotthard", "at": "Gotthard", "color": "#ffe11a" },
-        { "type": "marker", "pos": [8.03, 46.25], "label": "Simplon", "at": "Simplon", "color": "#ffe11a", "dy": 60 },
-        { "type": "arrow", "from": [9.2, 48.8], "to": [9.19, 45.5], "at": "fastest", "bend": 0.08, "color": "#b03ad6", "dur": 1.2 },
-        { "type": "arrow", "from": [7.6, 48.6], "to": [8.0, 45.4], "at": "link", "bend": -0.12, "color": "#b03ad6", "dur": 1.2 },
-        { "type": "token", "flag": "italy", "pos": [9.6, 45.2], "at": "Italy" },
-        { "type": "token", "flag": "wehrmacht", "pos": [9.8, 48.5], "at": "Germany" }
-      ]
+      {
+       "type": "arrow",
+       "from": [
+        9.8,
+        54.3
+       ],
+       "to": [
+        10.7,
+        59.9
+       ],
+       "at": "almost",
+       "color": "#b03ad6"
+      },
+      {
+       "type": "fire",
+       "pos": [
+        10.7,
+        59.9
+       ],
+       "at": "almost+0.6",
+       "size": 0.8
+      },
+      {
+       "type": "arrow",
+       "from": [
+        7.2,
+        50.6
+       ],
+       "to": [
+        2.35,
+        48.86
+       ],
+       "at": "all",
+       "color": "#b03ad6"
+      },
+      {
+       "type": "fire",
+       "pos": [
+        2.35,
+        48.86
+       ],
+       "at": "all+0.5",
+       "size": 0.8
+      },
+      {
+       "type": "arrow",
+       "from": [
+        16.4,
+        48.2
+       ],
+       "to": [
+        20.5,
+        44.8
+       ],
+       "at": "Europe",
+       "color": "#b03ad6"
+      },
+      {
+       "type": "fire",
+       "pos": [
+        20.5,
+        44.8
+       ],
+       "at": "Europe+0.5",
+       "size": 0.8
+      }
+     ]
     },
     {
-      "say": "On top of that, Swiss banks quietly bought German gold, and paid in Swiss francs that Germany used to buy war materials abroad.",
-      "bg": { "type": "room", "wall": "#dfe6dc", "floor": "#6b4a32", "props": ["lamp", { "type": "frame", "x": 0.5, "y": 0.12, "color": "#2f4a3a" }, { "type": "desk", "x": 0.5, "w": 620 }] },
-      "items": [
-        { "type": "char", "id": "banker", "x": 0.7, "y": 0.74, "outfit": "suit", "color": "#2b2f36", "tie": "#c0392b", "hair": "bald", "glasses": true, "face": "left", "hat": "fedora", "at": 0, "enter": "right", "mood": "smug",
-          "poses": [{ "at": 0, "pose": "down" }, { "at": "paid", "pose": "hold" }], "hold": "money" },
-        { "type": "char", "id": "hitler3", "x": 0.28, "y": 0.74, "outfit": "military", "color": "#7a7a63", "hair": "side", "mustache": "toothbrush", "face": "right", "at": "German", "enter": "left", "mood": "happy",
-          "poses": [{ "at": 0, "pose": "hold" }], "hold": "gold" },
-        { "type": "text", "text": "GOLD → FRANCS", "at": "gold", "y": 0.3, "size": 96, "color": "#ffd23f" }
+     "at": "So",
+     "keep": true,
+     "bg": {
+      "same": true,
+      "view": [
+       {
+        "at": 0,
+        "lon": 9,
+        "lat": 50,
+        "span": 27
+       },
+       {
+        "at": 0,
+        "lon": 8.4,
+        "lat": 47.3,
+        "span": 10,
+        "dur": 1.1
+       }
+      ],
+      "fills": [
+       {
+        "countries": [
+         "Switzerland"
+        ],
+        "color": "#e53935",
+        "at": "Switzerland"
+       }
       ]
-    },
-    {
-      "say": "So for Hitler, a neutral Switzerland was worth more than a conquered one. And the invasion plan never left the drawer.",
-      "bg": { "type": "map", "view": [{ "at": 0, "lon": 8.2, "lat": 46.8, "span": 12 }, { "at": "neutral", "lon": 8.2, "lat": 46.8, "span": 7, "dur": 2.5 }],
-        "fills": [
-          { "countries": ["Germany", "Austria", "France"], "color": "#8e44ad", "at": 0, "fade": 0 },
-          { "countries": ["Italy"], "color": "#2e9e5b", "at": 0, "fade": 0 },
-          { "countries": ["Switzerland"], "color": "#ffffff", "at": 0, "fade": 0 },
-          { "countries": ["Switzerland"], "color": "#e53935", "at": "neutral", "fade": 0.6 }
-        ] },
-      "items": [
-        { "type": "flagpole", "pos": [8.2, 46.85], "flag": "white", "at": "neutral", "scale": 1.3 },
-        { "type": "check", "pos": [9.3, 46.35], "at": "worth", "scale": 1.3 },
-        { "type": "text", "style": "stamp", "text": "CANCELLED", "at": "drawer", "y": 0.38, "color": "#e53935" }
-      ]
+     },
+     "items": [
+      {
+       "cast": "hitler",
+       "pos": [
+        10.2,
+        48.75
+       ],
+       "scale": 0.5,
+       "face": "left",
+       "at": 0.6,
+       "enter": "drop",
+       "pose": "think",
+       "emotes": [
+        {
+         "at": "never",
+         "kind": "?",
+         "until": "end"
+        }
+       ]
+      },
+      {
+       "type": "pulse",
+       "pos": [
+        8.2,
+        46.8
+       ],
+       "at": "middle",
+       "r": 130,
+       "color": "#ffef6e"
+      },
+      {
+       "type": "label",
+       "pos": [
+        8.2,
+        46.65
+       ],
+       "text": "Switzerland",
+       "size": 46,
+       "at": "Switzerland"
+      }
+     ]
     }
-  ]
+   ]
+  },
+  {
+   "say": "It wasn't because he didn't want to. In 1940, the German army even drew up an invasion plan: Operation Tannenbaum.",
+   "shots": [
+    {
+     "bg": {
+      "type": "room",
+      "wall": "#e9dcc0",
+      "floor": "#7b5034",
+      "props": [
+       {
+        "type": "flag",
+        "flag": "wehrmacht",
+        "x": 0.1
+       },
+       {
+        "type": "easelmap",
+        "focus": [
+         "Switzerland"
+        ],
+        "highlight": [
+         "Switzerland"
+        ],
+        "color": "#e57373",
+        "cities": [
+         {
+          "name": "Bern",
+          "lon": 7.45,
+          "lat": 46.95
+         },
+         {
+          "name": "Zurich",
+          "lon": 8.54,
+          "lat": 47.37
+         }
+        ],
+        "x": 0.56,
+        "y": 0.13,
+        "w": 0.62,
+        "h": 0.28
+       },
+       {
+        "type": "window",
+        "x": 0.92
+       }
+      ]
+     },
+     "items": [
+      {
+       "cast": "hitler",
+       "x": 0.28,
+       "y": 0.74,
+       "face": "right",
+       "mood": "smug",
+       "at": 0,
+       "enter": "left",
+       "hold": "pointer",
+       "poses": [
+        {
+         "at": 0,
+         "pose": "hips"
+        },
+        {
+         "at": "want",
+         "pose": "point"
+        }
+       ],
+       "say": [
+        {
+         "text": "Switzerland? I could take it with one hand.",
+         "at": 0.3
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "at": "1940",
+     "bg": {
+      "type": "map",
+      "style": "paper",
+      "view": [
+       {
+        "at": 0,
+        "lon": 8.2,
+        "lat": 46.9,
+        "span": 6.5
+       },
+       {
+        "at": "plan",
+        "lon": 8.2,
+        "lat": 46.9,
+        "span": 5.6,
+        "dur": 2
+       }
+      ],
+      "fills": [
+       {
+        "countries": [
+         "Switzerland"
+        ],
+        "color": "#f2b8a8",
+        "at": 0,
+        "fade": 0
+       }
+      ]
+     },
+     "items": [
+      {
+       "type": "text",
+       "style": "date",
+       "text": "Summer 1940",
+       "at": 0,
+       "color": "#5a3b1a"
+      },
+      {
+       "type": "arrow",
+       "from": [
+        8.6,
+        47.95
+       ],
+       "to": [
+        8.45,
+        47.25
+       ],
+       "at": "army",
+       "color": "#b71c1c",
+       "width": 20
+      },
+      {
+       "type": "arrow",
+       "from": [
+        7.7,
+        47.8
+       ],
+       "to": [
+        7.5,
+        47.1
+       ],
+       "at": "army+0.3",
+       "color": "#b71c1c",
+       "width": 20
+      },
+      {
+       "type": "arrow",
+       "from": [
+        6.3,
+        47.2
+       ],
+       "to": [
+        7.05,
+        46.95
+       ],
+       "at": "drew",
+       "color": "#b71c1c",
+       "width": 20
+      },
+      {
+       "type": "arrow",
+       "from": [
+        9.0,
+        45.75
+       ],
+       "to": [
+        8.9,
+        46.35
+       ],
+       "at": "invasion",
+       "color": "#2e7d32",
+       "width": 20
+      },
+      {
+       "type": "text",
+       "style": "stamp",
+       "text": "TANNENBAUM",
+       "at": "Operation",
+       "y": 0.62,
+       "size": 72
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "say": "But the Swiss had a plan of their own. General Henri Guisan pulled the army back into the Alps, a fortress of tunnels, bunkers and bridges packed with explosives.",
+   "shots": [
+    {
+     "bg": {
+      "type": "mountains",
+      "seed": "guisan",
+      "valley": 0.72
+     },
+     "items": [
+      {
+       "cast": "guisan",
+       "x": 0.5,
+       "y": 0.78,
+       "face": "right",
+       "mood": "smug",
+       "at": 0,
+       "enter": "up",
+       "hold": "plan",
+       "pose": "hold",
+       "emotes": [
+        {
+         "at": "plan",
+         "kind": "idea"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "at": "Guisan",
+     "bg": {
+      "type": "map",
+      "view": [
+       {
+        "at": 0,
+        "lon": 8.2,
+        "lat": 46.85,
+        "span": 5.2
+       }
+      ],
+      "fills": [
+       {
+        "countries": [
+         "Switzerland"
+        ],
+        "color": "#e53935",
+        "at": 0,
+        "fade": 0
+       },
+       {
+        "countries": [
+         "Germany",
+         "France",
+         "Austria"
+        ],
+        "color": "#8e44ad",
+        "at": 0,
+        "fade": 0
+       },
+       {
+        "countries": [
+         "Italy"
+        ],
+        "color": "#2e9e5b",
+        "at": 0,
+        "fade": 0
+       },
+       {
+        "coords": [
+         [
+          7.0,
+          46.6
+         ],
+         [
+          7.6,
+          46.85
+         ],
+         [
+          8.3,
+          46.98
+         ],
+         [
+          9.2,
+          46.95
+         ],
+         [
+          9.7,
+          46.6
+         ],
+         [
+          9.1,
+          46.3
+         ],
+         [
+          8.4,
+          46.2
+         ],
+         [
+          7.7,
+          46.05
+         ],
+         [
+          7.0,
+          46.25
+         ]
+        ],
+        "color": "#ffffff",
+        "opacity": 0.6,
+        "at": "back"
+       }
+      ]
+     },
+     "items": [
+      {
+       "type": "token",
+       "flag": "switzerland",
+       "pos": [
+        7.3,
+        47.15
+       ],
+       "at": 0,
+       "to": [
+        7.75,
+        46.55
+       ],
+       "moveAt": "pulled",
+       "moveDur": 1.1
+      },
+      {
+       "type": "token",
+       "flag": "switzerland",
+       "pos": [
+        8.4,
+        47.4
+       ],
+       "at": 0.1,
+       "to": [
+        8.5,
+        46.7
+       ],
+       "moveAt": "pulled+0.15",
+       "moveDur": 1.1
+      },
+      {
+       "type": "token",
+       "flag": "switzerland",
+       "pos": [
+        9.3,
+        47.35
+       ],
+       "at": 0.2,
+       "to": [
+        9.25,
+        46.65
+       ],
+       "moveAt": "pulled+0.3",
+       "moveDur": 1.1
+      },
+      {
+       "type": "label",
+       "pos": [
+        8.4,
+        46.42
+       ],
+       "text": "THE ALPS",
+       "size": 56,
+       "at": "back+0.3",
+       "color": "#ffe11a"
+      },
+      {
+       "cast": "guisan",
+       "pos": [
+        6.75,
+        46.35
+       ],
+       "scale": 0.45,
+       "face": "right",
+       "at": 0,
+       "pose": "point"
+      }
+     ]
+    },
+    {
+     "at": "fortress",
+     "bg": {
+      "type": "mountains",
+      "seed": "fortress",
+      "valley": 0.74,
+      "trees": 10
+     },
+     "items": [
+      {
+       "type": "tunnel",
+       "x": 0.3,
+       "y": 0.72,
+       "scale": 0.9,
+       "at": "tunnels"
+      },
+      {
+       "type": "bunker",
+       "x": 0.74,
+       "y": 0.75,
+       "scale": 0.9,
+       "flag": "switzerland",
+       "face": "left",
+       "at": "bunkers"
+      }
+     ]
+    },
+    {
+     "at": "bridges",
+     "bg": {
+      "type": "mountains",
+      "seed": "gorge",
+      "valley": 0.86,
+      "trees": 6
+     },
+     "items": [
+      {
+       "type": "bridge",
+       "x0": -0.02,
+       "x1": 1.02,
+       "deck": 0.5,
+       "base": 0.92,
+       "arches": 4,
+       "blowSpans": [
+        1,
+        2
+       ],
+       "at": -1,
+       "explosives": "explosives"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "say": "The message to Berlin was clear. Invade, and every road and railway you actually want gets blown to pieces.",
+   "shots": [
+    {
+     "bg": {
+      "type": "room",
+      "wall": "#e9dcc0",
+      "floor": "#7b5034",
+      "props": [
+       {
+        "type": "flag",
+        "flag": "wehrmacht",
+        "x": 0.1
+       },
+       {
+        "type": "window",
+        "x": 0.9
+       },
+       {
+        "type": "desk",
+        "x": 0.5,
+        "w": 560
+       }
+      ]
+     },
+     "items": [
+      {
+       "cast": "hitler",
+       "x": 0.42,
+       "y": 0.74,
+       "face": "right",
+       "at": 0,
+       "enter": "none",
+       "hold": "telegram",
+       "pose": "hold",
+       "moods": [
+        {
+         "at": 0,
+         "mood": "neutral"
+        },
+        {
+         "at": "clear",
+         "mood": "shocked"
+        }
+       ],
+       "emotes": [
+        {
+         "at": "clear",
+         "kind": "!!"
+        }
+       ]
+      },
+      {
+       "type": "text",
+       "style": "title",
+       "text": "FROM: BERN",
+       "at": "Berlin",
+       "y": 0.16,
+       "size": 64
+      }
+     ]
+    },
+    {
+     "at": "Invade",
+     "bg": {
+      "type": "mountains",
+      "seed": "road",
+      "valley": 0.7,
+      "road": 0.8,
+      "trees": 8
+     },
+     "items": [
+      {
+       "type": "vehicle",
+       "kind": "tank",
+       "from": {
+        "x": -0.25,
+        "y": 0.84
+       },
+       "to": {
+        "x": 0.38,
+        "y": 0.84
+       },
+       "at": 0,
+       "dur": 1.6,
+       "ease": "out",
+       "scale": 1.25
+      },
+      {
+       "type": "vehicle",
+       "kind": "tank",
+       "from": {
+        "x": -0.9,
+        "y": 0.84
+       },
+       "to": {
+        "x": -0.05,
+        "y": 0.84
+       },
+       "at": 0.15,
+       "dur": 1.6,
+       "ease": "out",
+       "scale": 1.25
+      },
+      {
+       "type": "boom",
+       "x": 0.74,
+       "y": 0.8,
+       "at": "road",
+       "size": 1.3
+      },
+      {
+       "type": "icon",
+       "kind": "exclaim",
+       "x": 0.35,
+       "y": 0.58,
+       "at": "road+0.3",
+       "until": "end"
+      }
+     ]
+    },
+    {
+     "at": "railway",
+     "bg": {
+      "type": "mountains",
+      "seed": "gorge",
+      "valley": 0.86,
+      "trees": 6
+     },
+     "items": [
+      {
+       "type": "bridge",
+       "x0": -0.02,
+       "x1": 1.02,
+       "deck": 0.5,
+       "base": 0.92,
+       "arches": 4,
+       "blowSpans": [
+        1,
+        2
+       ],
+       "at": -1,
+       "explosives": -1,
+       "blowAt": "blown"
+      },
+      {
+       "type": "vehicle",
+       "kind": "train",
+       "from": {
+        "x": -0.2,
+        "y": 0.484
+       },
+       "to": {
+        "x": 0.3,
+        "y": 0.484
+       },
+       "at": 0,
+       "dur": 1.3,
+       "ease": "out",
+       "scale": 0.9,
+       "cars": [
+        "box",
+        "coal"
+       ]
+      },
+      {
+       "type": "icon",
+       "kind": "exclaim",
+       "x": 0.2,
+       "y": 0.3,
+       "at": "pieces",
+       "until": "end"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "say": "And Germany needed those railways. The Gotthard and Simplon tunnels were its fastest link to its ally, Italy.",
+   "shots": [
+    {
+     "bg": {
+      "type": "map",
+      "view": [
+       {
+        "at": 0,
+        "lon": 8.6,
+        "lat": 47.4,
+        "span": 7.5
+       }
+      ],
+      "fills": [
+       {
+        "countries": [
+         "Switzerland"
+        ],
+        "color": "#e53935",
+        "at": 0,
+        "fade": 0
+       },
+       {
+        "countries": [
+         "Germany",
+         "France",
+         "Austria"
+        ],
+        "color": "#8e44ad",
+        "at": 0,
+        "fade": 0
+       },
+       {
+        "countries": [
+         "Italy"
+        ],
+        "color": "#2e9e5b",
+        "at": 0,
+        "fade": 0
+       }
+      ]
+     },
+     "items": [
+      {
+       "type": "route",
+       "points": [
+        [
+         9.18,
+         48.78
+        ],
+        [
+         7.59,
+         47.56
+        ],
+        [
+         8.31,
+         47.05
+        ],
+        [
+         8.59,
+         46.6
+        ],
+        [
+         9.02,
+         46.19
+        ],
+        [
+         9.19,
+         45.46
+        ]
+       ],
+       "at": 0.1,
+       "dur": 1.2,
+       "vehicle": true,
+       "vehicleDur": 2.6,
+       "id": "gotthard"
+      },
+      {
+       "type": "flow",
+       "from": [
+        10.2,
+        48.6
+       ],
+       "to": [
+        9.6,
+        45.6
+       ],
+       "icon": "coal",
+       "at": 0.5,
+       "every": 0.45,
+       "dur": 1.6,
+       "bend": -0.2,
+       "line": false,
+       "scale": 0.8
+      }
+     ]
+    },
+    {
+     "at": "Gotthard",
+     "keep": [
+      "gotthard"
+     ],
+     "bg": {
+      "same": true,
+      "view": [
+       {
+        "at": 0,
+        "lon": 8.6,
+        "lat": 47.4,
+        "span": 7.5
+       },
+       {
+        "at": 0,
+        "lon": 8.35,
+        "lat": 46.55,
+        "span": 4.2,
+        "dur": 0.8
+       }
+      ]
+     },
+     "items": [
+      {
+       "type": "route",
+       "points": [
+        [
+         7.59,
+         47.56
+        ],
+        [
+         7.45,
+         46.95
+        ],
+        [
+         7.6,
+         46.6
+        ],
+        [
+         7.99,
+         46.32
+        ],
+        [
+         8.03,
+         46.25
+        ],
+        [
+         8.29,
+         46.11
+        ],
+        [
+         9.19,
+         45.46
+        ]
+       ],
+       "at": "Simplon",
+       "dur": 1,
+       "vehicle": true,
+       "vehicleDur": 2.6
+      },
+      {
+       "type": "marker",
+       "pos": [
+        8.59,
+        46.6
+       ],
+       "label": "Gotthard",
+       "at": "Gotthard",
+       "color": "#ffe11a",
+       "size": 44,
+       "dx": 90,
+       "dy": 10
+      },
+      {
+       "type": "marker",
+       "pos": [
+        8.03,
+        46.25
+       ],
+       "label": "Simplon",
+       "at": "Simplon",
+       "color": "#ffe11a",
+       "size": 44,
+       "dx": -90,
+       "dy": 10
+      }
+     ]
+    },
+    {
+     "at": "ally",
+     "keep": true,
+     "bg": {
+      "same": true,
+      "view": [
+       {
+        "at": 0,
+        "lon": 9.6,
+        "lat": 46.0,
+        "span": 6
+       }
+      ]
+     },
+     "items": [
+      {
+       "cast": "mussolini",
+       "pos": [
+        9.9,
+        45.35
+       ],
+       "scale": 0.5,
+       "face": "left",
+       "at": 0,
+       "enter": "up",
+       "pose": "wave",
+       "mood": "happy",
+       "emotes": [
+        {
+         "at": "Italy",
+         "kind": "!!"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "say": "On top of that, Swiss banks quietly bought German gold, and paid in Swiss francs that Germany used to buy war materials abroad.",
+   "shots": [
+    {
+     "bg": {
+      "type": "vault"
+     },
+     "items": [
+      {
+       "cast": "banker",
+       "x": 0.76,
+       "y": 0.8,
+       "face": "left",
+       "at": 0,
+       "enter": "right",
+       "mood": "smug",
+       "say": [
+        {
+         "text": "Shhh...",
+         "at": "quietly"
+        }
+       ]
+      },
+      {
+       "type": "vehicle",
+       "kind": "cart",
+       "load": "gold",
+       "from": {
+        "x": -0.3,
+        "y": 0.82
+       },
+       "to": {
+        "x": 0.47,
+        "y": 0.82
+       },
+       "at": "German",
+       "dur": 1.0,
+       "ease": "out",
+       "scale": 1.4
+      },
+      {
+       "cast": "official",
+       "x": 0.13,
+       "y": 0.8,
+       "face": "right",
+       "at": "German",
+       "enter": "left",
+       "pose": "point"
+      }
+     ]
+    },
+    {
+     "at": "paid",
+     "bg": "same",
+     "items": [
+      {
+       "type": "vehicle",
+       "kind": "cart",
+       "load": "gold",
+       "from": {
+        "x": 0.47,
+        "y": 0.82
+       },
+       "at": -1,
+       "dur": 0.1,
+       "scale": 1.4
+      },
+      {
+       "cast": "banker",
+       "x": 0.76,
+       "y": 0.8,
+       "face": "left",
+       "at": -1,
+       "mood": "smug",
+       "hold": "money",
+       "pose": "hold",
+       "throws": [
+        {
+         "at": "francs",
+         "item": "money",
+         "to": {
+          "x": 0.2,
+          "y": 0.6
+         },
+         "dur": 0.6
+        }
+       ]
+      },
+      {
+       "cast": "official",
+       "x": 0.13,
+       "y": 0.8,
+       "face": "right",
+       "at": -1,
+       "holds": [
+        {
+         "at": "francs+0.6",
+         "item": "money"
+        }
+       ],
+       "poses": [
+        {
+         "at": 0,
+         "pose": "down"
+        },
+        {
+         "at": "francs+0.5",
+         "pose": "hold"
+        }
+       ],
+       "moods": [
+        {
+         "at": 0,
+         "mood": "neutral"
+        },
+        {
+         "at": "francs+0.6",
+         "mood": "happy"
+        }
+       ],
+       "emotes": [
+        {
+         "at": "francs+0.7",
+         "kind": "money",
+         "until": "end"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "at": "war",
+     "bg": {
+      "type": "map",
+      "view": [
+       {
+        "at": 0,
+        "lon": 3,
+        "lat": 51,
+        "span": 40
+       }
+      ],
+      "fills": [
+       {
+        "countries": [
+         "Germany",
+         "Austria",
+         "Czechia",
+         "Poland",
+         "France",
+         "Belgium",
+         "Netherlands",
+         "Denmark",
+         "Norway"
+        ],
+        "color": "#8e44ad",
+        "at": 0,
+        "fade": 0
+       },
+       {
+        "countries": [
+         "Switzerland"
+        ],
+        "color": "#e53935",
+        "at": 0,
+        "fade": 0
+       },
+       {
+        "countries": [
+         "Sweden"
+        ],
+        "color": "#1e88e5",
+        "at": 0,
+        "fade": 0
+       },
+       {
+        "countries": [
+         "Portugal",
+         "Spain"
+        ],
+        "color": "#fb8c00",
+        "at": 0,
+        "fade": 0
+       },
+       {
+        "countries": [
+         "Italy"
+        ],
+        "color": "#2e9e5b",
+        "at": 0,
+        "fade": 0
+       }
+      ]
+     },
+     "items": [
+      {
+       "type": "flow",
+       "from": [
+        9.5,
+        51
+       ],
+       "to": [
+        15.5,
+        61.5
+       ],
+       "icon": "money",
+       "label": "F",
+       "at": 0.05,
+       "every": 0.5,
+       "dur": 1.2,
+       "bend": 0.15,
+       "color": "#c8e6c9",
+       "scale": 0.9
+      },
+      {
+       "type": "flow",
+       "from": [
+        7,
+        50
+       ],
+       "to": [
+        -8,
+        40
+       ],
+       "icon": "money",
+       "label": "F",
+       "at": 0.25,
+       "every": 0.5,
+       "dur": 1.3,
+       "bend": -0.15,
+       "color": "#c8e6c9",
+       "scale": 0.9
+      },
+      {
+       "type": "flow",
+       "from": [
+        16.5,
+        62
+       ],
+       "to": [
+        11,
+        52.5
+       ],
+       "icon": "ore",
+       "at": "materials",
+       "every": 0.45,
+       "dur": 1.2,
+       "bend": 0.15,
+       "line": false,
+       "scale": 0.9
+      },
+      {
+       "type": "flow",
+       "from": [
+        -7,
+        40.5
+       ],
+       "to": [
+        8,
+        50.5
+       ],
+       "icon": "ore",
+       "at": "materials+0.2",
+       "every": 0.45,
+       "dur": 1.3,
+       "bend": -0.15,
+       "line": false,
+       "scale": 0.9
+      },
+      {
+       "type": "label",
+       "pos": [
+        16.5,
+        64.2
+       ],
+       "text": "IRON ORE",
+       "size": 46,
+       "at": "materials",
+       "color": "#ffe11a"
+      },
+      {
+       "type": "label",
+       "pos": [
+        -6,
+        37.3
+       ],
+       "text": "TUNGSTEN",
+       "size": 46,
+       "at": "materials+0.2",
+       "color": "#ffe11a"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "say": "So for Hitler, a neutral Switzerland was worth more than a conquered one. And the invasion plan never left the drawer.",
+   "shots": [
+    {
+     "bg": {
+      "type": "map",
+      "view": [
+       {
+        "at": 0,
+        "lon": 8.4,
+        "lat": 47.6,
+        "span": 9
+       },
+       {
+        "at": "neutral",
+        "lon": 8.4,
+        "lat": 47.2,
+        "span": 7,
+        "dur": 2.5
+       }
+      ],
+      "fills": [
+       {
+        "countries": [
+         "Germany",
+         "France",
+         "Austria"
+        ],
+        "color": "#8e44ad",
+        "at": 0,
+        "fade": 0
+       },
+       {
+        "countries": [
+         "Italy"
+        ],
+        "color": "#2e9e5b",
+        "at": 0,
+        "fade": 0
+       },
+       {
+        "countries": [
+         "Switzerland"
+        ],
+        "color": "#e53935",
+        "at": 0,
+        "fade": 0
+       }
+      ]
+     },
+     "items": [
+      {
+       "cast": "hitler",
+       "pos": [
+        10.0,
+        47.85
+       ],
+       "scale": 0.5,
+       "face": "left",
+       "at": 0,
+       "enter": "drop",
+       "hold": "money",
+       "pose": "hold",
+       "mood": "smug",
+       "emotes": [
+        {
+         "at": "worth",
+         "kind": "money",
+         "until": "end"
+        }
+       ]
+      },
+      {
+       "type": "icon",
+       "kind": "shield",
+       "pos": [
+        8.2,
+        46.75
+       ],
+       "at": "neutral",
+       "scale": 1.1
+      },
+      {
+       "type": "text",
+       "text": "NEUTRAL > CONQUERED",
+       "at": "worth",
+       "y": 0.14,
+       "size": 84,
+       "color": "#ffe11a"
+      }
+     ]
+    },
+    {
+     "at": "invasion",
+     "bg": {
+      "type": "desk"
+     },
+     "items": [
+      {
+       "type": "drawer",
+       "x": 0.5,
+       "y": 0.6,
+       "w": 0.86,
+       "title": "OPERATION TANNENBAUM",
+       "paperAt": "invasion",
+       "closeAt": "drawer"
+      },
+      {
+       "type": "text",
+       "style": "stamp",
+       "text": "SHELVED",
+       "at": "drawer+0.35",
+       "y": 0.3
+      }
+     ]
+    }
+   ]
+  }
+ ]
 }

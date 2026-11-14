@@ -4,11 +4,13 @@
 //   node src/cli.mjs projects/<name> --still 12.5    single PNG at t=12.5s (fast layout check)
 //   node src/cli.mjs projects/<name> --stills 6      contact sheet of 6 evenly spaced frames
 //   options: --fps 30  --preview (half-res, 24fps)  --workers 4  --no-sfx  --out file.mp4
+//   --shots         contact sheet with one frame per shot
+//   --remux         rebuild only the audio mix and swap it into the existing MP4
 import fs from 'node:fs';
 import path from 'node:path';
 import { createRequire } from 'node:module';
 import { narrate, userClip, wordTimings } from './voice.mjs';
-import { resolveAll, sortKeyframes } from './timeline.mjs';
+import { resolveAll, resolveCue, sortKeyframes } from './timeline.mjs';
 import { ensureSfx, sfxEvents, buildAudio } from './audio.mjs';
 import { renderVideo, renderStill } from './render.mjs';
 import { generate, inlineData } from './gemini.mjs';
@@ -56,6 +58,34 @@ function collectAssets(scenes, dir) {
   return assets;
 }
 
+// ---- shot continuity helpers ----
+const TRANSIENT = new Set(['boom', 'plane', 'flow', 'vehicle', 'drawer', 'bridge', 'tunnel', 'dynamite', 'char', 'text', 'image', 'bunker']);
+// Map state at the end of the previous shot, frozen (no re-animation).
+function settledBg(prev) {
+  const bg = JSON.parse(JSON.stringify(prev.bg || {}));
+  if (Array.isArray(bg.view)) bg.view = bg.view.filter(v => (v.at || 0) <= prev.dur).reduce((a, v) => ({ ...a, ...v }), {});
+  if (bg.view) { delete bg.view.at; delete bg.view.dur; }
+  if (bg.fills) bg.fills = bg.fills.filter(f => (f.at || 0) <= prev.dur && !(f.until != null && f.until <= prev.dur)).map(f => ({ ...f, at: -10, fade: 0, until: undefined }));
+  return bg;
+}
+function mergeBg(base, over) {
+  const out = { ...base };
+  for (const [k, v] of Object.entries(over || {})) {
+    if (v === undefined) continue;
+    if (k === 'fills') out.fills = [...(base.fills || []), ...v]; else out[k] = v;
+  }
+  return out;
+}
+// keep:true carries over persistent map items; keep:[ids] carries those exact items.
+function keptItems(prev, keep) {
+  return (prev.items || []).filter(it => {
+    if (Array.isArray(keep)) return keep.includes(it.id);
+    if (TRANSIENT.has(it.type)) return false;
+    return (it.at || 0) <= prev.dur && !(it.until != null && it.until <= prev.dur);
+  }).map(it => ({ ...it, at: -10, until: undefined, enter: 'none', moveAt: it.to ? -10 : it.moveAt }))
+    .map(it => it.to && it.type === 'token' ? { ...it, pos: it.to, to: undefined } : it);
+}
+
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   const dir = path.resolve(args._[0] || '.');
@@ -93,21 +123,38 @@ async function main() {
   if (!fs.existsSync(silent)) await ffmpeg(['-f', 'lavfi', '-i', 'anullsrc=r=44100:cl=mono', '-t', '0.1', silent]);
   clips.forEach(c => { if (!c.file) c.file = silent; });
 
-  // 3. timeline
+  // 3. timeline: each narration scene may be cut into several shots
   let t = 0;
-  const scenes = proj.scenes.map((raw, i) => {
+  const shots = [], narr = [];
+  proj.scenes.forEach((raw, i) => {
     const words = raw.say ? wordTimings(raw.say, clips[i].dur) : [];
     const gap = raw.pause == null ? (proj.pause == null ? 0.2 : proj.pause) : raw.pause;
     const dur = Math.max(raw.dur || 0, clips[i].dur + gap, raw.minDur || 0, 0.5);
-    const sc = sortKeyframes(resolveAll({ ...raw, items: raw.items || [] }, words, dur, `scene ${i + 1}`));
-    Object.assign(sc, { start: t, dur, words, idx: i });
+    narr.push({ dur });
+    const list = raw.shots || [{ bg: raw.bg, items: raw.items, camera: raw.camera, flash: raw.flash }];
+    const starts = list.map((s, k) => (k === 0 ? 0 : Math.min(dur, Math.max(0, resolveCue(s.at, words, dur, `scene ${i + 1} shot ${k + 1}`)))));
+    list.forEach((s, k) => {
+      const st = starts[k], en = k < list.length - 1 ? starts[k + 1] : dur;
+      if (en - st < 0.05) return warn(`scene ${i + 1} shot ${k + 1} has no time (check its "at" cue)`);
+      const sw = words.map(w => ({ ...w, t0: w.t0 - st, t1: w.t1 - st }));
+      const { at, keep, ...body } = s; void at;
+      if (body.items) body.items = body.items.map(it => (it.cast ? { ...(proj.cast || {})[it.cast], id: it.cast, ...it } : it));
+      const same = body.bg === 'same' || (body.bg && body.bg.same);
+      const bgOver = same ? (typeof body.bg === 'object' ? { ...body.bg, same: undefined } : {}) : body.bg;
+      const sh = sortKeyframes(resolveAll({ ...body, bg: bgOver, items: body.items || [] }, sw, en - st, `scene ${i + 1} shot ${k + 1}`));
+      const prev = shots[shots.length - 1];
+      if (same && prev) sh.bg = mergeBg(settledBg(prev), sh.bg);
+      if (keep && prev) sh.items = [...keptItems(prev, keep), ...sh.items];
+      Object.assign(sh, { start: t + st, dur: en - st, words: sw, first: k === 0, idx: shots.length });
+      shots.push(sh);
+    });
     t += dur;
-    return sc;
   });
+  const scenes = shots;
   const total = t;
   const topo = require('world-atlas/countries-50m.json');
-  const data = { scenes, duration: total, topo, assets: collectAssets(scenes, projDir), captions: proj.captions || {}, handle: proj.handle };
-  log(`timeline: ${scenes.length} scenes, ${total.toFixed(1)}s`);
+  const data = { scenes, duration: total, topo, assets: collectAssets(scenes, projDir), captions: proj.captions || {}, handle: proj.handle, autoPush: proj.autoPush };
+  log(`timeline: ${narr.length} scenes, ${shots.length} shots, ${total.toFixed(1)}s (avg ${(total / shots.length).toFixed(1)}s/shot)`);
 
   // stills for quick checks
   if (args.still != null) {
@@ -115,14 +162,15 @@ async function main() {
     await renderStill(data, parseFloat(args.still), out, parseFloat(args.scale || 0.5));
     return log(`wrote ${out}`);
   }
-  if (args.stills != null) {
-    const n = parseInt(args.stills) || 8; const files = [];
+  if (args.stills != null || args.shots) {
+    const times = args.shots ? shots.map(s => s.start + s.dur * parseFloat(args.shots === true ? 0.8 : args.shots)) : null;
+    const n = times ? times.length : parseInt(args.stills) || 8; const files = [];
     for (let k = 0; k < n; k++) {
-      const tt = (k + 0.5) * total / n, f = path.join(cache, `sheet-${k}.png`);
+      const tt = times ? times[k] : (k + 0.5) * total / n, f = path.join(cache, `sheet-${k}.png`);
       await renderStill(data, tt, f, 0.25); files.push(f);
     }
     const out = path.join(outDir, 'contact-sheet.png');
-    await ffmpeg([...files.flatMap(f => ['-i', f]), '-filter_complex', `${files.map((_, k) => `[${k}]`).join('')}xstack=inputs=${n}:layout=${files.map((_, k) => `${(k % 4) * 270}_${Math.floor(k / 4) * 480}`).join('|')}:fill=black`, out]);
+    await ffmpeg([...files.flatMap(f => ['-i', f]), '-filter_complex', `${files.map((_, k) => `[${k}]`).join('')}xstack=inputs=${n}:layout=${files.map((_, k) => `${(k % 5) * 270}_${Math.floor(k / 5) * 480}`).join('|')}:fill=black`, out]);
     return log(`wrote ${out}`);
   }
 
@@ -130,8 +178,15 @@ async function main() {
   const sfx = await ensureSfx(path.join(cache, 'sfx'));
   const events = args['no-sfx'] ? [] : sfxEvents(scenes, proj.sfx || {});
   const audio = path.join(cache, 'mix.m4a');
-  await buildAudio({ scenes, clips, sfx, events, music: proj.music && path.resolve(projDir, proj.music), musicVolume: proj.musicVolume, total, outFile: audio, workDir: cache });
+  await buildAudio({ scenes: narr, clips, sfx, events, music: proj.music && path.resolve(projDir, proj.music), musicVolume: proj.musicVolume, total, outFile: audio, workDir: cache });
   log(`audio mixed (${events.length} sound effects)`);
+
+  if (args.remux) {
+    const outFile = path.resolve(args.out || path.join(outDir, `${name}.mp4`)), tmp = outFile.replace(/\.mp4$/, '.remux.mp4');
+    await ffmpeg(['-i', outFile, '-i', audio, '-map', '0:v', '-map', '1:a', '-c', 'copy', '-movflags', '+faststart', tmp]);
+    fs.renameSync(tmp, outFile);
+    return log(`replaced audio in ${outFile}`);
+  }
 
   // 5. video
   const preview = !!args.preview;
