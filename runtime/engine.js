@@ -649,7 +649,8 @@ function drawChar(it, lt) {
     let tx = x + side * (sy.dx == null ? 150 : sy.dx), ty = (y + (hy - hr - 40) * sc) + (sy.dy || 0);
     const txt = wrapText(sy.text, 16); const lines = txt.split('\n').length;
     tx = clamp(tx, 220, W - 220);
-    out += `<g transform="translate(${f1(tx)},${f1(ty - (lines - 1) * 44)}) scale(${f1(pp * 100) / 100})">${outlineText(0, 0, txt, { size: sy.size || 54, font: 'Gochi Hand', stroke: 11 })}</g>`;
+    const fs = sy.size || 58, longest = Math.max(...txt.split('\n').map(l => l.length)), bw = longest * fs * 0.5 + 50, bh = lines * fs * 1.08 + 28;
+    out += `<g transform="translate(${f1(tx)},${f1(ty - (lines - 1) * fs * 1.08)}) scale(${f1(pp * 100) / 100})"><rect x="${f1(-bw / 2)}" y="${f1(-fs * 0.95)}" width="${f1(bw)}" height="${f1(bh)}" rx="22" fill="rgba(20,20,24,.62)"/>${outlineText(0, 0, txt, { size: fs, font: 'Gochi Hand', stroke: 9 })}</g>`;
     out += `<path d="M${f1(x + side * 30 * sc)},${f1(y + (hy - hr + 10) * sc)} l${side * 26},-34" stroke="#fff" stroke-width="7" stroke-linecap="round" opacity="${f1(pp)}"/>`;
     void headTop;
   }

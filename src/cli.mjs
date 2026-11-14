@@ -9,7 +9,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { createRequire } from 'node:module';
-import { narrate, userClip, wordTimings } from './voice.mjs';
+import { narrate, userClip, alignedTimings } from './voice.mjs';
 import { resolveAll, resolveCue, sortKeyframes } from './timeline.mjs';
 import { ensureSfx, sfxEvents, buildAudio } from './audio.mjs';
 import { renderVideo, renderStill } from './render.mjs';
@@ -126,8 +126,15 @@ async function main() {
   // 3. timeline: each narration scene may be cut into several shots
   let t = 0;
   const shots = [], narr = [];
+  const aligned = [];
+  for (let i = 0; i < proj.scenes.length; i++) {
+    const raw = proj.scenes[i];
+    aligned.push(raw.say && clips[i].file !== silent && !clips[i].silent ? await alignedTimings(raw.say, clips[i].file, clips[i].dur) : raw.say ? (await import('./voice.mjs')).wordTimings(raw.say, clips[i].dur) : []);
+  }
+  const anchored = aligned.reduce((a, w) => a + (w.anchors || 0), 0);
+  if (clips.some(c => c.silent)) warn('some narration is a SILENT PLACEHOLDER (TTS failed) — do not publish this render');
   proj.scenes.forEach((raw, i) => {
-    const words = raw.say ? wordTimings(raw.say, clips[i].dur) : [];
+    const words = aligned[i];
     const gap = raw.pause == null ? (proj.pause == null ? 0.2 : proj.pause) : raw.pause;
     const dur = Math.max(raw.dur || 0, clips[i].dur + gap, raw.minDur || 0, 0.5);
     narr.push({ dur });
@@ -154,7 +161,7 @@ async function main() {
   const total = t;
   const topo = require('world-atlas/countries-50m.json');
   const data = { scenes, duration: total, topo, assets: collectAssets(scenes, projDir), captions: proj.captions || {}, handle: proj.handle, autoPush: proj.autoPush };
-  log(`timeline: ${narr.length} scenes, ${shots.length} shots, ${total.toFixed(1)}s (avg ${(total / shots.length).toFixed(1)}s/shot)`);
+  log(`timeline: ${narr.length} scenes, ${anchored} pause anchors, ${shots.length} shots, ${total.toFixed(1)}s (avg ${(total / shots.length).toFixed(1)}s/shot)`);
 
   // stills for quick checks
   if (args.still != null) {

@@ -46,7 +46,7 @@ export function sfxEvents(scenes, opts = {}) {
         case 'arrow': add('whoosh', t, 0.45); break;
         case 'plane': add('drone', t, 0.6); break;
         case 'check': case 'cross': add('tick', t, 0.8); break;
-        case 'text': add(it.style === 'stamp' ? 'thud' : it.style === 'date' ? 'tick' : 'pop', t, 0.7); break;
+        case 'text': add(it.style === 'stamp' ? 'thud' : it.style === 'date' ? 'tick' : 'pop', t, it.style === 'stamp' ? 0.5 : 0.7); break;
         case 'marker': case 'token': case 'image': case 'label': case 'flagpole': add('pop', t, 0.45); break;
         case 'char':
           if ((it.at || 0) >= 0 && (it.enter || 'pop') !== 'none') add(it.enter === 'pop' || !it.enter ? 'pop' : 'whoosh', t, 0.4);
@@ -61,9 +61,9 @@ export function sfxEvents(scenes, opts = {}) {
         case 'route': if ((it.at || 0) >= 0) add('whoosh', t, 0.35); break;
         case 'mushroom': add('boom', t, 1); break;
         case 'icon': case 'fire': case 'bunker': case 'tunnel': case 'bridge': if ((it.at || 0) >= 0) add('pop', t, 0.4); break;
-        case 'drawer': if (it.closeAt != null) add('slam', sc.start + it.closeAt + 0.1, 1); break;
+        case 'drawer': if (it.closeAt != null) add('slam', sc.start + it.closeAt + 0.1, 0.45); break;
       }
-      if (it.blowAt != null) { add('boom', sc.start + it.blowAt, 0.65); if (it.type === 'bridge' || it.type === 'tunnel') add('crumble', sc.start + it.blowAt + 0.3, 0.8); }
+      if (it.blowAt != null) { add('boom', sc.start + it.blowAt, 0.45); if (it.type === 'bridge' || it.type === 'tunnel') add('crumble', sc.start + it.blowAt + 0.3, 0.45); }
       if (it.explosives != null && it.explosives >= 0) add('tick', sc.start + it.explosives, 0.7);
     }
   });

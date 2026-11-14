@@ -353,7 +353,7 @@
      "items": [
       {
        "cast": "hitler",
-       "x": 0.28,
+       "x": 0.2,
        "y": 0.74,
        "face": "right",
        "mood": "smug",
@@ -373,7 +373,10 @@
        "say": [
         {
          "text": "Switzerland? I could take it with one hand.",
-         "at": 0.3
+         "at": 0.3,
+         "dx": 400,
+         "dy": 420,
+         "side": "right"
         }
        ]
       }
@@ -649,7 +652,7 @@
        "type": "label",
        "pos": [
         8.4,
-        46.42
+        46.15
        ],
        "text": "THE ALPS",
        "size": 56,
@@ -683,7 +686,7 @@
        "x": 0.3,
        "y": 0.72,
        "scale": 0.9,
-       "at": "tunnels"
+       "at": 0
       },
       {
        "type": "bunker",
@@ -901,7 +904,7 @@
    ]
   },
   {
-   "say": "And Germany needed those railways. The Gotthard and Simplon tunnels were its fastest link to its ally, Italy.",
+   "say": "And Germany needed those railways. The Gotthard and Simplon tunnels were a vital rail link to its ally, Italy.",
    "shots": [
     {
      "bg": {
@@ -1507,7 +1510,7 @@
        "text": "NEUTRAL > CONQUERED",
        "at": "worth",
        "y": 0.14,
-       "size": 84,
+       "size": 72,
        "color": "#ffe11a"
       }
      ]
@@ -1536,7 +1539,8 @@
       }
      ]
     }
-   ]
+   ],
+   "pause": 1.1
   }
  ]
 }
