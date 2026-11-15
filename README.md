@@ -77,7 +77,7 @@ Any `at`, `until`, `moveAt`, `blowAt`, `closeAt`, `explosives`, `paperAt` takes 
 | `"atomic bomb"` | a phrase |
 | `"bomb+0.4"`, `"end-0.5"`, `"start+1"` | offsets |
 
-Word timing is estimated from word length inside each clip. It's usually within about 0.2s, so keep scenes short.
+Word timing starts as an estimate from word lengths, then snaps to real pauses in the voice clip: each sentence or comma break is matched to a detected silence of at least 0.1s, but only when one is close. Breaks with no matching pause keep the estimate. Expect within about 0.2s; keep scenes short.
 
 ### Points
 

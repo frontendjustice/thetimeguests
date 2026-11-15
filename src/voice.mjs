@@ -83,7 +83,7 @@ export async function alignedTimings(text, file, dur, { maxErr = 0.7, missCost =
   const est = wordTimings(text, dur);
   let out = '';
   try { out = await run('bash', ['-c', `ffmpeg -hide_banner -i '${file.replace(/'/g, "'\\''")}' -af silencedetect=n=-35dB:d=0.06 -f null - 2>&1`]); } catch { return est; }
-  const sil = [...out.matchAll(/silence_start: ([\d.]+)[\s\S]*?silence_end: ([\d.]+)/g)].map(m => [+m[1], +m[2]]).filter(s => s[0] > 0.05 && s[1] < dur - 0.05);
+  const sil = [...out.matchAll(/silence_start: ([\d.]+)[\s\S]*?silence_end: ([\d.]+)/g)].map(m => [+m[1], +m[2]]).filter(s => s[0] > 0.05 && s[1] < dur - 0.05 && s[1] - s[0] >= 0.1);
   const breaks = est.map((w, k) => k).filter(k => k < est.length - 1 && /[.,?!:;—–]["')]?$/.test(est[k].w));
   if (!breaks.length || !sil.length) return est;
   // DP: best monotonic assignment of breaks -> silences (or none)
