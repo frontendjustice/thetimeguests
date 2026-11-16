@@ -31,3 +31,7 @@ export const sleep = ms => new Promise(r => setTimeout(r, ms));
 export const ensureDir = d => fs.mkdirSync(d, { recursive: true });
 export const log = (...a) => console.log('›', ...a);
 export const warn = (...a) => console.warn('⚠', ...a);
+
+// rough English syllable count (vowel groups); 4-digit years count as spoken ("nineteen forty-five")
+export const syllables = s => String(s).toLowerCase().replace(/\d{4}/g, ' nineteen forty five ').split(/[^a-zäöüı]+/).filter(Boolean)
+  .reduce((a, w) => a + Math.max(1, (w.replace(/e$/, '').match(/[aeiouyäöüı]+/g) || []).length), 0);

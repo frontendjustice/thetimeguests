@@ -9,7 +9,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { createRequire } from 'node:module';
-import { narrate, userClip, alignedTimings } from './voice.mjs';
+import { narrate, userClip, alignedTimings, loudness, pauses } from './voice.mjs';
+import { speechReport } from './speech.mjs';
 import { resolveAll, resolveCue, sortKeyframes } from './timeline.mjs';
 import { ensureSfx, sfxEvents, buildAudio } from './audio.mjs';
 import { renderVideo, renderStill } from './render.mjs';
@@ -113,7 +114,7 @@ async function main() {
   for (let i = 0; i < proj.scenes.length; i++) {
     const sc = proj.scenes[i];
     if (sc.audio) clips.push(await userClip(path.resolve(projDir, sc.audio), path.join(cache, 'tts'), proj.voice?.speed || 1));
-    else if (sc.say) clips.push(await narrate(sc.say, proj.voice, path.join(cache, 'tts'), projDir));
+    else if (sc.say) clips.push(await narrate(sc.tts || sc.say, { ...(proj.voice || {}), ...(sc.voice || {}) }, path.join(cache, 'tts'), { direction: sc.direction, raw: sc.rawAudio && path.resolve(projDir, sc.rawAudio) }));
     else clips.push({ file: null, dur: 0 });
     process.stdout.write(`\r› voice ${i + 1}/${proj.scenes.length}${clips[i].cached ? ' (cached)' : ''}   `);
   }
@@ -122,6 +123,8 @@ async function main() {
   const silent = path.join(cache, 'silence.wav');
   if (!fs.existsSync(silent)) await ffmpeg(['-f', 'lavfi', '-i', 'anullsrc=r=44100:cl=mono', '-t', '0.1', silent]);
   clips.forEach(c => { if (!c.file) c.file = silent; });
+
+  if (args.audio) return speechReport({ proj, clips, outDir, cache, silent });
 
   // 3. timeline: each narration scene may be cut into several shots
   let t = 0;
@@ -152,7 +155,7 @@ async function main() {
       const prev = shots[shots.length - 1];
       if (same && prev) sh.bg = mergeBg(settledBg(prev), sh.bg);
       if (keep && prev) sh.items = [...keptItems(prev, keep), ...sh.items];
-      Object.assign(sh, { start: t + st, dur: en - st, words: sw, first: k === 0, idx: shots.length });
+      Object.assign(sh, { start: t + st, dur: en - st, words: sw, first: k === 0, idx: shots.length, noCaptions: raw.captions === false });
       shots.push(sh);
     });
     t += dur;

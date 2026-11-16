@@ -2,26 +2,37 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { generate, inlineData } from './gemini.mjs';
-import { ffmpeg, duration, sha1, warn, ensureDir, run } from './util.mjs';
+import { ffmpeg, duration, sha1, warn, ensureDir, run, syllables } from './util.mjs';
 
 const TTS_MODELS = ['gemini-3.1-flash-tts-preview', 'gemini-2.5-flash-preview-tts', 'gemini-3.8-flash-tts'];
 const DEFAULT_STYLE = 'Voice only, no music or sound effects. Read this at a brisk pace, about 170 words per minute, like a punchy, slightly witty YouTube Shorts history narrator. Confident and energetic, with only tiny pauses between sentences';
 
-export async function narrate(text, voice, cacheDir, projectDir) {
+// voice: { name, style, speed, maxPause (false = keep natural pauses), lufs (loudness target), model }
+// direction: per-line delivery note appended to the style (not spoken).
+export async function narrate(text, voice, cacheDir, { direction, raw: rawIn } = {}) {
   ensureDir(cacheDir);
   const v = Object.assign({ name: 'Charon', speed: 1.0, maxPause: 0.18, style: DEFAULT_STYLE }, voice || {});
-  const key = sha1(JSON.stringify([text, v.name, v.style, v.speed, v.maxPause, v.model || '']));
+  // keep prompts short: long instructions get read aloud by the TTS model
+  const style = direction ? `${v.style}, ${direction}` : v.style;
+  // extra fields only enter the key when used, so older projects keep their cached clips
+  const extra = [direction, v.lufs, v.sps, rawIn].some(x => x != null) ? [direction || '', v.lufs || '', v.sps || '', rawIn ? rawIn + fs.statSync(rawIn).size : '', 'p2'] : [];
+  const key = sha1(JSON.stringify([text, v.name, v.style, v.speed, v.maxPause, v.model || '', ...extra]));
   const final = path.join(cacheDir, `${key}.wav`);
   if (fs.existsSync(final)) return { file: final, dur: await duration(final), cached: true };
 
   // raw TTS is cached separately so tweaking speed/pauses doesn't call the API again
-  const raw = path.join(cacheDir, `${sha1(JSON.stringify([text, v.name, v.style, v.model || '']))}.tts.wav`);
-  const models = v.model ? [v.model, ...TTS_MODELS.filter(m => m !== v.model)] : TTS_MODELS;
+  // an approved take (scene.rawAudio) skips TTS entirely and only goes through post-processing
+  const raw = rawIn || path.join(cacheDir, `${sha1(JSON.stringify([text, v.name, style, v.model || '']))}.tts.wav`);
+  // a pinned model is used alone: silently falling back to another model changes the voice and delivery
+  const models = v.model ? [v.model] : TTS_MODELS;
   let ok = fs.existsSync(raw), lastErr;
-  for (const model of ok ? [] : models) {
+  // attempts: full prompt, then style only, then bare text; reject clips far longer than the text allows
+  const prompts = [`${style}:\n${text}`];
+  const maxDur = Math.max(2.5, syllables(text) / 2.2);
+  for (const [model, prompt] of ok ? [] : models.flatMap(m => prompts.map(p => [m, p]))) {
     try {
       const json = await generate(model, {
-        contents: [{ parts: [{ text: `${v.style}:\n${text}` }] }],
+        contents: [{ parts: [{ text: prompt }] }],
         generationConfig: { responseModalities: ['AUDIO'], speechConfig: { voiceConfig: { prebuiltVoiceConfig: { voiceName: v.name } } } },
       });
       const d = inlineData(json);
@@ -34,11 +45,13 @@ export async function narrate(text, voice, cacheDir, projectDir) {
         await ffmpeg(['-f', 's16le', '-ar', String(rate), '-ac', '1', '-i', pcm, raw]);
         fs.unlinkSync(pcm);
       }
+      const rd = await duration(raw);
+      if (rd > maxDur) warn(`${model}: ${rd.toFixed(1)}s clip for a line of ~${maxDur.toFixed(1)}s max (instructions read aloud?) — check the transcript`);
       ok = true; break;
     } catch (e) { lastErr = e; }
   }
   if (!ok) {
-    if (v.allowSilent === false) throw lastErr;
+    if (v.allowSilent === false || v.model) throw new Error(`TTS failed for "${text.slice(0, 40)}…": ${lastErr?.message?.split('\n')[0]}`);
     warn(`TTS failed (${lastErr?.message?.split('\n')[0]}). Using silent placeholder.`);
     const est = Math.max(1, text.split(/\s+/).length / 2.9);
     const tmp = path.join(cacheDir, `silent-${key}.wav`);
@@ -47,9 +60,19 @@ export async function narrate(text, voice, cacheDir, projectDir) {
   }
   // trim leading/trailing silence, shorten long pauses, apply speed
   const sil = 'silenceremove=start_periods=1:start_threshold=-42dB:start_silence=0.05';
-  const gaps = `silenceremove=stop_periods=-1:stop_duration=${v.maxPause}:stop_threshold=-34dB:stop_silence=${v.maxPause}`;
-  await ffmpeg(['-i', raw, '-af', `${sil},areverse,${sil},areverse,${gaps},atempo=${v.speed}`, '-ar', '44100', '-ac', '1', final]);
-  return { file: final, dur: await duration(final) };
+  const half = v.maxPause / 2; // silenceremove keeps stop_duration + stop_silence, so each gets half the budget
+  const gaps = v.maxPause ? `,silenceremove=stop_periods=-1:stop_duration=${half}:stop_threshold=-34dB:stop_silence=${half}` : '';
+  await ffmpeg(['-i', raw, '-af', `${sil},areverse,${sil},areverse${gaps},atempo=${v.speed}`, '-ar', '44100', '-ac', '1', final]);
+  if (v.sps) { // nudge speaking rate (syllables/s, pauses excluded) toward the target; pitch-preserving, capped
+    const d = await duration(final), ps = await pauses(final, 0.1);
+    const speech = d - ps.reduce((a, p) => a + p[1] - p[0], 0), f = Math.min(1.2, Math.max(0.9, v.sps / (syllables(text) / Math.max(speech, 0.5))));
+    if (Math.abs(f - 1) > 0.03) { const tmp = final + '.tmp.wav'; await ffmpeg(['-i', final, '-af', `atempo=${f.toFixed(3)}`, tmp]); fs.renameSync(tmp, final); }
+  }
+  if (v.lufs) { // static gain so every clip sits at the same loudness
+    const I = await loudness(final);
+    if (isFinite(I)) { const tmp = final + '.tmp.wav'; await ffmpeg(['-i', final, '-af', `volume=${(v.lufs - I).toFixed(2)}dB,alimiter=limit=0.97`, tmp]); fs.renameSync(tmp, final); }
+  }
+  return { file: final, dur: await duration(final), model: rawIn ? 'approved take' : undefined };
 }
 
 // User-supplied recording for a scene.
@@ -117,4 +140,15 @@ export async function alignedTimings(text, file, dur, { maxErr = 0.7, missCost =
   }
   res.anchors = anchors.length;
   return res;
+}
+
+// Integrated loudness (LUFS) of a file.
+export async function loudness(file) {
+  const out = await run('bash', ['-c', `ffmpeg -hide_banner -nostats -i '${file.replace(/'/g, "'\\''")}' -af ebur128 -f null - 2>&1`]);
+  const m = [...out.matchAll(/I:\s+(-?[\d.]+) LUFS/g)].pop();
+  return m ? parseFloat(m[1]) : NaN;
+}
+export async function pauses(file, min = 0.1) {
+  const out = await run('bash', ['-c', `ffmpeg -hide_banner -i '${file.replace(/'/g, "'\\''")}' -af silencedetect=n=-35dB:d=${min} -f null - 2>&1`]);
+  return [...out.matchAll(/silence_start: ([\d.]+)[\s\S]*?silence_end: ([\d.]+)/g)].map(m => [+m[1], +m[2]]);
 }

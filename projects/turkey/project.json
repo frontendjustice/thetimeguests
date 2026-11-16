@@ -1,0 +1,133 @@
+{
+ "name": "how-turkey-survived-ww2",
+ "title": "How Turkey Survived WW2 Without Firing a Shot",
+ "voice": {
+  "name": "Charon",
+  "style": "Read briskly and punchily, like an energetic YouTube Shorts history narrator",
+  "maxPause": 0.3,
+  "lufs": -18,
+  "sps": 5.3,
+  "model": "gemini-3.1-flash-tts-preview"
+ },
+ "pause": 0.15,
+ "captions": {
+  "mode": "word",
+  "color": "#ffe11a",
+  "size": 104,
+  "y": 0.86
+ },
+ "handle": "@thetimeguests",
+ "scenes": [
+  {
+   "say": "For six years, Turkey sat between Hitler, Stalin and the British Empire.",
+   "direction": "intrigued",
+   "pause": 0.2,
+   "rawAudio": "assets/voice/line01.wav"
+  },
+  {
+   "say": "And it never fired a single shot. How?",
+   "direction": "firm, then a curious 'How?'",
+   "pause": 0.35,
+   "voice": {
+    "maxPause": 0.5
+   },
+   "rawAudio": "assets/voice/line02.wav"
+  },
+  {
+   "say": "Turkey remembered the last war. Picking the losing side in World War One had cost the Ottomans their entire empire.",
+   "direction": "grave and matter-of-fact",
+   "pause": 0.25,
+   "rawAudio": "assets/voice/line03.wav"
+  },
+  {
+   "say": "So President \u0130smet \u0130n\u00f6n\u00fc played everyone.",
+   "tts": "So President Ismet In\u00f6n\u00fc played everyone.",
+   "direction": "sly and amused",
+   "pause": 0.2,
+   "rawAudio": "assets/voice/line04.wav"
+  },
+  {
+   "say": "In 1939, he signed a defense pact with Britain and France.",
+   "tts": "In nineteen thirty-nine, he signed a defense pact with Britain and France.",
+   "direction": "brisk and factual",
+   "pause": 0.12,
+   "rawAudio": "assets/voice/line05.wav"
+  },
+  {
+   "say": "In 1941, he signed a friendship treaty with Germany.",
+   "tts": "In nineteen forty-one, he signed a friendship treaty with Germany.",
+   "direction": "deadpan",
+   "pause": 0.3,
+   "rawAudio": "assets/voice/line06.wav"
+  },
+  {
+   "say": "And he sold chrome, a key metal for armour steel, to both sides.",
+   "direction": "wry, stressing 'both sides'",
+   "pause": 0.3,
+   "rawAudio": "assets/voice/line07.wav"
+  },
+  {
+   "say": "In 1943, Churchill flew to Turkey himself to drag \u0130n\u00f6n\u00fc into the war.",
+   "tts": "In nineteen forty-three, Churchill flew to Turkey himself to drag In\u00f6n\u00fc into the war.",
+   "direction": "building excitement",
+   "pause": 0.2,
+   "rawAudio": "assets/voice/line08.wav"
+  },
+  {
+   "say": "Join us, and we'll send you planes and tanks!",
+   "voice": {
+    "name": "Algenib",
+    "style": "Say in the gruff, booming voice of an elderly British statesman",
+    "sps": 4.4
+   },
+   "direction": "selling a big deal",
+   "captions": false,
+   "pause": 0.2,
+   "rawAudio": "assets/voice/line09.wav"
+  },
+  {
+   "say": "Wonderful. Send them first.",
+   "voice": {
+    "name": "Iapetus",
+    "style": "Say in a calm, polite, quietly amused diplomat's voice",
+    "maxPause": 0.5,
+    "sps": 4.0
+   },
+   "direction": "with a short pause after 'Wonderful'",
+   "captions": false,
+   "pause": 0.35,
+   "rawAudio": "assets/voice/line10.wav"
+  },
+  {
+   "say": "Some weapons came. Turkey still stayed home.",
+   "direction": "with dry comic timing",
+   "pause": 0.3,
+   "voice": {
+    "maxPause": 0.5
+   },
+   "rawAudio": "assets/voice/line11.wav"
+  },
+  {
+   "say": "Then, in February 1945, with Germany already collapsing, Turkey finally declared war.",
+   "tts": "Then, in February nineteen forty-five, with Germany already collapsing, Turkey finally declared war.",
+   "direction": "a little ironic",
+   "pause": 0.2,
+   "rawAudio": "assets/voice/line12.wav"
+  },
+  {
+   "say": "Why then? Only countries at war with the Axis were invited to found the United Nations.",
+   "direction": "knowing and conspiratorial",
+   "pause": 0.2,
+   "rawAudio": "assets/voice/line13.wav"
+  },
+  {
+   "say": "Turkey joined the winning side, with ten weeks to spare.",
+   "direction": "wry and satisfied",
+   "pause": 1.0,
+   "voice": {
+    "sps": 4.6
+   },
+   "rawAudio": "assets/voice/line14.wav"
+  }
+ ]
+}

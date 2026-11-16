@@ -716,7 +716,7 @@ function holdSVG(what, x, y, f) {
 // ---------- captions ----------
 function captionSVG(sc, lt) {
   const cap = S.data.captions || {};
-  if (cap.enabled === false || !sc.words || !sc.words.length) return '';
+  if (cap.enabled === false || sc.noCaptions || !sc.words || !sc.words.length) return '';
   let idx = -1;
   for (let i = 0; i < sc.words.length; i++) if (sc.words[i].t0 <= lt) idx = i;
   if (idx < 0) return '';
