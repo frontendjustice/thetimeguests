@@ -150,13 +150,14 @@ function iconSVG(kind, label) {
     case 'coal': return `<path d="M-50,30 Q-40,-20 -10,-24 Q10,-46 30,-20 Q56,-14 50,30Z" fill="#2a2a2a" stroke="#000" stroke-width="4"/><circle cx="-12" cy="0" r="6" fill="#555"/><circle cx="16" cy="-10" r="5" fill="#555"/>`;
     case 'ore': return `<path d="M-48,30 L-40,-6 L-14,-26 L16,-18 L42,-2 L48,30Z" fill="#8d5a3b" stroke="#3e2516" stroke-width="4"/><path d="M-20,-8 l10,10 M10,-6 l12,6 M-30,14 l14,-4" stroke="#c98a5a" stroke-width="5"/>`;
     case 'factory': return `<path d="M-50,40 V-6 L-25,-22 V-6 L0,-22 V-6 L25,-22 V40Z" fill="#8a8f96" stroke="#333" stroke-width="4"/><rect x="28" y="-46" width="16" height="86" fill="#6b6f75" stroke="#333" stroke-width="4"/><rect x="-38" y="10" width="14" height="14" fill="#ffd54a"/><rect x="-12" y="10" width="14" height="14" fill="#ffd54a"/>`;
-    case 'tank': return `<g transform="scale(.32)">${tankSVG(0, '#6b6f5a', 1, 0)}</g>`;
+    case 'tank': return `<g transform="translate(34,30) scale(.32)">${tankSVG(1, '#6b6f5a', 1, 0)}</g>`;
     case 'train': return `<g transform="scale(.3)">${locoSVG(1, 0, 0)}</g>`;
     case 'skull': return `<path d="M-38,0 A38,38 0 1 1 38,0 V18 H20 V34 H-20 V18 H-38Z" fill="#f4f1ea" stroke="#111" stroke-width="5"/><circle cx="-15" cy="0" r="10"/><circle cx="15" cy="0" r="10"/>`;
     case 'dynamite': return dynamiteSVG(0);
     case 'bulb': return `<circle cy="-10" r="34" fill="#ffe36b" stroke="#111" stroke-width="5"/><rect x="-16" y="22" width="32" height="20" fill="#999" stroke="#111" stroke-width="4"/>`;
     case 'shield': return `<path d="M0,-50 L42,-34 Q42,20 0,50 Q-42,20 -42,-34Z" fill="#e53935" stroke="#111" stroke-width="5"/><path d="M-9,-26 h18 v18 h18 v18 h-18 v18 h-18 v-18 h-18 v-18 h18z" fill="#fff"/>`;
-    case 'flag': return flagSVG(label || 'white', -45, -30, 90, 60);
+    case 'flag': return flagSVG(label || 'white', -45, -30, 90, 60) + '<rect x="-45" y="-30" width="90" height="60" fill="none" stroke="#111" stroke-width="4"/>';
+    case 'calendar': return `<rect x="-50" y="-46" width="100" height="96" rx="10" fill="#fff" stroke="#111" stroke-width="5"/><rect x="-50" y="-46" width="100" height="28" rx="10" fill="#e53935"/><text y="34" font-size="50" font-weight="900" text-anchor="middle" fill="#111">${esc(label || '')}</text>`;
     default: return outlineText(0, 20, label || kind, { size: 60 });
   }
 }
@@ -224,7 +225,7 @@ ITEM.plane = (it, lt) => {
   const P = screenPath(it), L = pathLen(P), dur = it.dur || 2, total = L[L.length - 1];
   const u = clamp(t / dur); if (u >= 1 && it.stay !== true) return '';
   const n = it.count || 1, sc = it.scale || 1;
-  let o = '';
+  let o = it.trail ? `<path d="${partialD(P, L, u)}" stroke="#fff" stroke-width="7" stroke-dasharray="18 14" fill="none" opacity=".9"/>` : '';
   for (let k = 0; k < n; k++) {
     const row = Math.ceil(k / 2), side = k % 2 ? -1 : 1;
     const e = alongLen(P, L, u * total - row * 90 * sc);

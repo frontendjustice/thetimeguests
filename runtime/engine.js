@@ -135,6 +135,7 @@ function flagInner(name) {
     case 'netherlands': return '<rect width="30" height="7" fill="#ae1c28"/><rect y="6.6" width="30" height="7" fill="#fff"/><rect y="13.3" width="30" height="6.7" fill="#21468b"/>';
     case 'australia': return '<rect width="30" height="20" fill="#012169"/><circle cx="7.5" cy="15" r="1.6" fill="#fff"/><circle cx="22" cy="5" r=".9" fill="#fff"/><circle cx="25" cy="10" r=".9" fill="#fff"/><circle cx="22" cy="16" r=".9" fill="#fff"/><path d="M0,0 L15,10 M15,0 L0,10" stroke="#fff" stroke-width="2"/><path d="M7.5,0 V10 M0,5 H15" stroke="#fff" stroke-width="3"/><path d="M7.5,0 V10 M0,5 H15" stroke="#c8102e" stroke-width="1.6"/>';
     case 'switzerland': case 'swiss': return '<rect width="30" height="20" fill="#da291c"/><path d="M13.4,4 h3.2 v4.4 h4.4 v3.2 h-4.4 v4.4 h-3.2 v-4.4 h-4.4 v-3.2 h4.4z" fill="#fff"/>';
+    case 'turkey': return '<rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.25" cy="10" r="4" fill="#e30a17"/><path d="M15.2,10 l3.4,-1.1 l-2.1,2.9 v-3.6 l2.1,2.9z" fill="#fff"/>';
     case 'white': return '<rect width="30" height="20" fill="#fff"/>';
     default: return `<rect width="30" height="20" fill="${esc(name || '#888')}"/>`;
   }
@@ -648,7 +649,7 @@ function drawChar(it, lt) {
     const side = sy.side === 'left' ? -1 : sy.side === 'right' ? 1 : f;
     let tx = x + side * (sy.dx == null ? 150 : sy.dx), ty = (y + (hy - hr - 40) * sc) + (sy.dy || 0);
     const txt = wrapText(sy.text, 16); const lines = txt.split('\n').length;
-    tx = clamp(tx, 220, W - 220);
+    { const fs0 = sy.size || 58, lw = Math.max(...txt.split('\n').map(l => l.length)) * fs0 * 0.5 + 50; tx = clamp(tx, lw / 2 + 24, W - lw / 2 - 24); }
     const fs = sy.size || 58, longest = Math.max(...txt.split('\n').map(l => l.length)), bw = longest * fs * 0.5 + 50, bh = lines * fs * 1.08 + 28;
     out += `<g transform="translate(${f1(tx)},${f1(ty - (lines - 1) * fs * 1.08)}) scale(${f1(pp * 100) / 100})"><rect x="${f1(-bw / 2)}" y="${f1(-fs * 0.95)}" width="${f1(bw)}" height="${f1(bh)}" rx="22" fill="rgba(20,20,24,.62)"/>${outlineText(0, 0, txt, { size: fs, font: 'Gochi Hand', stroke: 9 })}</g>`;
     out += `<path d="M${f1(x + side * 30 * sc)},${f1(y + (hy - hr + 10) * sc)} l${side * 26},-34" stroke="#fff" stroke-width="7" stroke-linecap="round" opacity="${f1(pp)}"/>`;
@@ -704,6 +705,8 @@ function holdSVG(what, x, y, f) {
     case 'newspaper': return `<g transform="translate(${f1(x)},${f1(y)}) rotate(${f * 8})"><rect x="-44" y="-56" width="88" height="110" fill="#f1efe6" stroke="#111" stroke-width="4"/><rect x="-34" y="-46" width="68" height="16" fill="#333"/><path d="M-34,-18 h68 M-34,-4 h68 M-34,10 h68 M-34,24 h40" stroke="#999" stroke-width="5"/></g>`;
     case 'bomb': return `<g transform="translate(${f1(x)},${f1(y + 20)})"><ellipse rx="70" ry="30" fill="#6b6f72" stroke="#111" stroke-width="4"/><path d="M${-f * 66},-28 l${-f * 26},-14 v84 l${f * 26},-14" fill="#555" stroke="#111" stroke-width="4"/><circle cx="${f * 20}" r="13" fill="#f4d03f" stroke="#111" stroke-width="3"/></g>`;
     case 'flag': return `<g transform="translate(${f1(x)},${f1(y)})"><line x1="0" y1="20" x2="0" y2="-140" stroke="#5c3b22" stroke-width="7"/>${flagSVG(arg || 'white', f > 0 ? 2 : -92, -140, 90, 60)}</g>`;
+    case 'rifle': return `<g transform="translate(${f1(x)},${f1(y)}) rotate(${f * -55}) scale(${f},1)"><rect x="-20" y="-6" width="150" height="10" rx="3" fill="#3b2a1a"/><rect x="-60" y="-8" width="60" height="18" rx="4" fill="#6d4c41"/><rect x="100" y="-4" width="40" height="6" fill="#222"/></g>`;
+    case 'cigar': return `<g transform="translate(${f1(x)},${f1(y)})"><rect x="-6" y="-8" width="46" height="13" rx="6" fill="#6d4325" stroke="#111" stroke-width="3"/><circle cx="42" cy="-1" r="5" fill="#ff7043"/><path d="M44,-8 q8,-14 0,-26 q-8,-12 2,-24" stroke="#bbb" stroke-width="4" fill="none" opacity=".7"/></g>`;
     case 'gold': return `<g transform="translate(${f1(x)},${f1(y + 10)})">${[[-40, 0], [10, 0], [-15, -26]].map(([gx, gy]) => `<path d="M${gx},${gy} l8,-20 h40 l8,20z" fill="#f2c230" stroke="#8a6a12" stroke-width="3"/><path d="M${gx + 10},${gy - 16} h30" stroke="#fff3b0" stroke-width="3"/>`).join('')}</g>`;
     case 'money': return `<g transform="translate(${f1(x)},${f1(y)}) rotate(${f * -8})">${[0, 1, 2].map(k => `<rect x="${-40 + k * 4}" y="${-24 - k * 8}" width="80" height="40" rx="4" fill="#7fb77e" stroke="#2f5d2e" stroke-width="3"/><circle cx="${k * 4}" cy="${-4 - k * 8}" r="9" fill="none" stroke="#2f5d2e" stroke-width="3"/>`).join('')}</g>`;
     case 'phone': return `<g transform="translate(${f1(x)},${f1(y)})"><path d="M-30,-20 q30,-30 60,0 l-10,10 q-20,-14 -40,0z" fill="#222"/></g>`;

@@ -22,7 +22,144 @@
    "say": "For six years, Turkey sat between Hitler, Stalin and the British Empire.",
    "direction": "intrigued",
    "pause": 0.2,
-   "rawAudio": "assets/voice/line01.wav"
+   "rawAudio": "assets/voice/line01.wav",
+   "shots": [
+    {
+     "bg": {
+      "type": "map",
+      "view": [
+       {
+        "at": 0,
+        "lon": 27,
+        "lat": 42,
+        "span": 50
+       },
+       {
+        "at": "Turkey",
+        "lon": 28,
+        "lat": 41,
+        "span": 46,
+        "dur": 1.2
+       }
+      ],
+      "fills": [
+       {
+        "countries": [
+         "Turkey"
+        ],
+        "color": "#ffd23f",
+        "at": 0,
+        "fade": 0
+       },
+       {
+        "countries": [
+         "Germany",
+         "Austria",
+         "Czechia",
+         "Poland",
+         "France",
+         "Belgium",
+         "Netherlands",
+         "Denmark",
+         "Norway",
+         "Yugoslavia",
+         "Greece"
+        ],
+        "color": "#8e44ad",
+        "at": "Hitler"
+       },
+       {
+        "countries": [
+         "USSR"
+        ],
+        "color": "#b71c1c",
+        "at": "Stalin"
+       },
+       {
+        "countries": [
+         "United Kingdom",
+         "Egypt",
+         "Iraq",
+         "Israel",
+         "Palestine",
+         "Jordan",
+         "Cyprus"
+        ],
+        "color": "#1e88e5",
+        "at": "British"
+       }
+      ]
+     },
+     "items": [
+      {
+       "type": "token",
+       "flag": "turkey",
+       "pos": [
+        35,
+        39
+       ],
+       "at": 0.15,
+       "r": 44
+      },
+      {
+       "cast": "hitler",
+       "pos": [
+        13,
+        50
+       ],
+       "scale": 0.55,
+       "face": "right",
+       "at": "Hitler",
+       "enter": "drop",
+       "mood": "angry"
+      },
+      {
+       "cast": "stalin",
+       "pos": [
+        41,
+        52
+       ],
+       "scale": 0.55,
+       "face": "left",
+       "at": "Stalin",
+       "enter": "drop",
+       "mood": "smug"
+      },
+      {
+       "cast": "churchill",
+       "pos": [
+        30,
+        31.5
+       ],
+       "scale": 0.55,
+       "face": "right",
+       "at": "British",
+       "enter": "drop"
+      },
+      {
+       "type": "pulse",
+       "pos": [
+        35,
+        39
+       ],
+       "at": 0.2,
+       "r": 120,
+       "color": "#ffef6e",
+       "until": "Hitler"
+      },
+      {
+       "type": "pulse",
+       "pos": [
+        35,
+        39
+       ],
+       "at": "Empire",
+       "r": 120,
+       "color": "#ffef6e"
+      }
+     ]
+    }
+   ]
   },
   {
    "say": "And it never fired a single shot. How?",
@@ -31,47 +168,776 @@
    "voice": {
     "maxPause": 0.5
    },
-   "rawAudio": "assets/voice/line02.wav"
+   "rawAudio": "assets/voice/line02.wav",
+   "shots": [
+    {
+     "bg": {
+      "type": "field",
+      "palette": "desert",
+      "seed": "anatolia"
+     },
+     "items": [
+      {
+       "cast": "soldier",
+       "x": 0.5,
+       "y": 0.78,
+       "face": "right",
+       "at": -1,
+       "hold": "rifle",
+       "pose": "hold",
+       "mood": "neutral",
+       "moods": [
+        {
+         "at": 0,
+         "mood": "neutral"
+        },
+        {
+         "at": "How",
+         "mood": "smug"
+        }
+       ],
+       "emotes": [
+        {
+         "at": "shot",
+         "kind": "...",
+         "until": "How"
+        },
+        {
+         "at": "How",
+         "kind": "?",
+         "until": "end"
+        }
+       ]
+      },
+      {
+       "type": "icon",
+       "kind": "flag",
+       "label": "turkey",
+       "x": 0.82,
+       "y": 0.5,
+       "at": -1,
+       "scale": 1.9
+      },
+      {
+       "type": "text",
+       "text": "0 SHOTS",
+       "at": "single",
+       "y": 0.22,
+       "size": 130,
+       "color": "#ffe11a"
+      }
+     ]
+    }
+   ]
   },
   {
    "say": "Turkey remembered the last war. Picking the losing side in World War One had cost the Ottomans their entire empire.",
    "direction": "grave and matter-of-fact",
    "pause": 0.25,
-   "rawAudio": "assets/voice/line03.wav"
+   "rawAudio": "assets/voice/line03.wav",
+   "shots": [
+    {
+     "bg": {
+      "type": "field",
+      "palette": "mud",
+      "seed": "ww1",
+      "craters": 3
+     },
+     "items": [
+      {
+       "type": "text",
+       "style": "date",
+       "text": "1914\u20131918",
+       "at": 0
+      },
+      {
+       "cast": "soldier",
+       "x": 0.5,
+       "y": 0.8,
+       "face": "right",
+       "at": -1,
+       "hat": "helmet",
+       "hatColor": "#6d5d3c",
+       "mood": "sad",
+       "hold": "rifle",
+       "pose": "hold"
+      },
+      {
+       "type": "boom",
+       "x": 0.2,
+       "y": 0.55,
+       "at": 0.3,
+       "size": 0.8
+      },
+      {
+       "type": "boom",
+       "x": 0.82,
+       "y": 0.5,
+       "at": 1.0,
+       "size": 0.7
+      }
+     ]
+    },
+    {
+     "bg": {
+      "type": "map",
+      "view": [
+       {
+        "at": 0,
+        "lon": 38,
+        "lat": 35,
+        "span": 30
+       }
+      ],
+      "fills": [
+       {
+        "countries": [
+         "Turkey"
+        ],
+        "color": "#ffd23f",
+        "at": 0,
+        "fade": 0
+       },
+       {
+        "countries": [
+         "Syria",
+         "Iraq",
+         "Jordan",
+         "Israel",
+         "Palestine",
+         "Lebanon"
+        ],
+        "color": "#ffd23f",
+        "at": 0,
+        "fade": 0.5,
+        "until": "cost"
+       }
+      ],
+      "style": "paper"
+     },
+     "items": [
+      {
+       "type": "text",
+       "style": "date",
+       "text": "1914\u20131918",
+       "at": 0,
+       "color": "#5a3b1a"
+      },
+      {
+       "type": "label",
+       "pos": [
+        37,
+        35.5
+       ],
+       "text": "OTTOMAN EMPIRE",
+       "size": 58,
+       "at": 0,
+       "until": "cost",
+       "color": "#fff"
+      },
+      {
+       "type": "cross",
+       "pos": [
+        37,
+        36
+       ],
+       "at": "losing",
+       "scale": 1.6
+      },
+      {
+       "type": "fire",
+       "pos": [
+        36.3,
+        33.5
+       ],
+       "at": "cost",
+       "size": 1
+      },
+      {
+       "type": "fire",
+       "pos": [
+        44.4,
+        33.3
+       ],
+       "at": "cost+0.2",
+       "size": 1
+      },
+      {
+       "type": "fire",
+       "pos": [
+        35.9,
+        31.9
+       ],
+       "at": "cost+0.4",
+       "size": 1
+      },
+      {
+       "type": "text",
+       "style": "stamp",
+       "text": "GONE",
+       "at": "empire",
+       "y": 0.6
+      }
+     ],
+     "at": "Picking"
+    }
+   ]
   },
   {
    "say": "So President \u0130smet \u0130n\u00f6n\u00fc played everyone.",
    "tts": "So President Ismet In\u00f6n\u00fc played everyone.",
    "direction": "sly and amused",
    "pause": 0.2,
-   "rawAudio": "assets/voice/line04.wav"
+   "rawAudio": "assets/voice/line04.wav",
+   "shots": [
+    {
+     "bg": {
+      "type": "room",
+      "wall": "#efe4cc",
+      "floor": "#7b5034",
+      "props": [
+       {
+        "type": "flag",
+        "flag": "turkey",
+        "x": 0.12
+       },
+       {
+        "type": "window",
+        "x": 0.88
+       },
+       {
+        "type": "frame",
+        "x": 0.5,
+        "y": 0.1,
+        "color": "#3d2b1f"
+       }
+      ]
+     },
+     "items": [
+      {
+       "cast": "inonu",
+       "x": 0.5,
+       "y": 0.76,
+       "face": "right",
+       "at": 0,
+       "enter": "up",
+       "mood": "smug",
+       "pose": "hips"
+      },
+      {
+       "type": "icon",
+       "kind": "flag",
+       "label": "uk",
+       "x": 0.22,
+       "y": 0.32,
+       "at": "played",
+       "scale": 1.9
+      },
+      {
+       "type": "icon",
+       "kind": "flag",
+       "label": "wehrmacht",
+       "x": 0.5,
+       "y": 0.32,
+       "at": "played+0.15",
+       "scale": 1.9
+      },
+      {
+       "type": "icon",
+       "kind": "flag",
+       "label": "ussr",
+       "x": 0.78,
+       "y": 0.32,
+       "at": "played+0.3",
+       "scale": 1.9
+      },
+      {
+       "type": "text",
+       "style": "title",
+       "text": "\u0130SMET \u0130N\u00d6N\u00dc",
+       "at": "President",
+       "y": 0.12,
+       "size": 64
+      }
+     ]
+    }
+   ]
   },
   {
    "say": "In 1939, he signed a defense pact with Britain and France.",
    "tts": "In nineteen thirty-nine, he signed a defense pact with Britain and France.",
    "direction": "brisk and factual",
    "pause": 0.12,
-   "rawAudio": "assets/voice/line05.wav"
+   "rawAudio": "assets/voice/line05.wav",
+   "shots": [
+    {
+     "bg": {
+      "type": "room",
+      "wall": "#efe4cc",
+      "floor": "#7b5034",
+      "props": [
+       {
+        "type": "desk",
+        "x": 0.5,
+        "w": 620
+       },
+       {
+        "type": "window",
+        "x": 0.9
+       }
+      ]
+     },
+     "items": [
+      {
+       "type": "text",
+       "style": "date",
+       "text": "1939",
+       "at": 0
+      },
+      {
+       "cast": "inonu",
+       "x": 0.28,
+       "y": 0.76,
+       "face": "right",
+       "at": -1,
+       "hold": "paper",
+       "pose": "hold",
+       "mood": "happy"
+      },
+      {
+       "cast": "brit",
+       "x": 0.72,
+       "y": 0.76,
+       "face": "left",
+       "at": "signed",
+       "enter": "right",
+       "hold": "paper",
+       "pose": "hold",
+       "mood": "happy"
+      },
+      {
+       "type": "icon",
+       "kind": "flag",
+       "label": "uk",
+       "x": 0.6,
+       "y": 0.3,
+       "at": "Britain",
+       "scale": 1.9
+      },
+      {
+       "type": "icon",
+       "kind": "flag",
+       "label": "france",
+       "x": 0.84,
+       "y": 0.3,
+       "at": "France",
+       "scale": 1.9
+      },
+      {
+       "type": "text",
+       "style": "title",
+       "text": "DEFENSE PACT",
+       "at": "pact",
+       "y": 0.13,
+       "size": 60
+      }
+     ]
+    }
+   ]
   },
   {
    "say": "In 1941, he signed a friendship treaty with Germany.",
    "tts": "In nineteen forty-one, he signed a friendship treaty with Germany.",
    "direction": "deadpan",
    "pause": 0.3,
-   "rawAudio": "assets/voice/line06.wav"
+   "rawAudio": "assets/voice/line06.wav",
+   "shots": [
+    {
+     "bg": {
+      "type": "room",
+      "wall": "#efe4cc",
+      "floor": "#7b5034",
+      "props": [
+       {
+        "type": "desk",
+        "x": 0.5,
+        "w": 620
+       },
+       {
+        "type": "window",
+        "x": 0.9
+       }
+      ]
+     },
+     "items": [
+      {
+       "type": "text",
+       "style": "date",
+       "text": "1941",
+       "at": 0
+      },
+      {
+       "cast": "inonu",
+       "x": 0.28,
+       "y": 0.76,
+       "face": "right",
+       "at": -1,
+       "hold": "paper",
+       "pose": "hold",
+       "mood": "happy",
+       "emotes": [
+        {
+         "at": "Germany",
+         "kind": "sweat"
+        }
+       ]
+      },
+      {
+       "cast": "german",
+       "x": 0.72,
+       "y": 0.76,
+       "face": "left",
+       "at": "signed",
+       "enter": "right",
+       "hold": "paper",
+       "pose": "hold",
+       "mood": "happy"
+      },
+      {
+       "type": "icon",
+       "kind": "flag",
+       "label": "wehrmacht",
+       "x": 0.72,
+       "y": 0.3,
+       "at": "Germany",
+       "scale": 1.9
+      },
+      {
+       "type": "text",
+       "style": "title",
+       "text": "FRIENDSHIP TREATY",
+       "at": "friendship",
+       "y": 0.13,
+       "size": 60
+      }
+     ]
+    }
+   ]
   },
   {
    "say": "And he sold chrome, a key metal for armour steel, to both sides.",
    "direction": "wry, stressing 'both sides'",
    "pause": 0.3,
-   "rawAudio": "assets/voice/line07.wav"
+   "rawAudio": "assets/voice/line07.wav",
+   "shots": [
+    {
+     "bg": {
+      "type": "plain",
+      "color": "#2b2f36"
+     },
+     "items": [
+      {
+       "type": "icon",
+       "kind": "ore",
+       "x": 0.5,
+       "y": 0.42,
+       "at": -1,
+       "scale": 4.5
+      },
+      {
+       "type": "text",
+       "text": "CHROME",
+       "at": 0,
+       "y": 0.22,
+       "size": 120,
+       "color": "#cfd8dc"
+      },
+      {
+       "type": "icon",
+       "kind": "tank",
+       "x": 0.5,
+       "y": 0.66,
+       "at": "armour",
+       "scale": 4.5
+      },
+      {
+       "type": "text",
+       "text": "= ARMOUR",
+       "at": "armour",
+       "y": 0.8,
+       "size": 80,
+       "color": "#ffe11a"
+      }
+     ],
+     "camera": [
+      {
+       "at": 0,
+       "zoom": 1
+      },
+      {
+       "at": 0,
+       "zoom": 1.12,
+       "dur": 3
+      }
+     ]
+    },
+    {
+     "bg": {
+      "type": "map",
+      "view": [
+       {
+        "at": 0,
+        "lon": 20,
+        "lat": 47,
+        "span": 44
+       }
+      ],
+      "fills": [
+       {
+        "countries": [
+         "Turkey"
+        ],
+        "color": "#ffd23f",
+        "at": 0,
+        "fade": 0
+       },
+       {
+        "countries": [
+         "Germany",
+         "Austria",
+         "Czechia",
+         "Poland",
+         "France",
+         "Belgium",
+         "Netherlands",
+         "Denmark",
+         "Norway",
+         "Yugoslavia",
+         "Greece"
+        ],
+        "color": "#8e44ad",
+        "at": 0,
+        "fade": 0
+       },
+       {
+        "countries": [
+         "United Kingdom"
+        ],
+        "color": "#1e88e5",
+        "at": 0,
+        "fade": 0
+       },
+       {
+        "countries": [
+         "USSR"
+        ],
+        "color": "#b71c1c",
+        "at": 0,
+        "fade": 0
+       }
+      ]
+     },
+     "items": [
+      {
+       "type": "flow",
+       "from": [
+        33,
+        40.5
+       ],
+       "to": [
+        12,
+        51
+       ],
+       "icon": "ore",
+       "at": "both",
+       "every": 0.4,
+       "dur": 1.1,
+       "bend": 0.12,
+       "scale": 1.0
+      },
+      {
+       "type": "flow",
+       "from": [
+        32,
+        40
+       ],
+       "to": [
+        -1.5,
+        52.5
+       ],
+       "icon": "ore",
+       "at": "both+0.1",
+       "every": 0.4,
+       "dur": 1.3,
+       "bend": 0.2,
+       "scale": 1.0
+      }
+     ],
+     "at": "to"
+    }
+   ]
   },
   {
    "say": "In 1943, Churchill flew to Turkey himself to drag \u0130n\u00f6n\u00fc into the war.",
    "tts": "In nineteen forty-three, Churchill flew to Turkey himself to drag In\u00f6n\u00fc into the war.",
    "direction": "building excitement",
    "pause": 0.2,
-   "rawAudio": "assets/voice/line08.wav"
+   "rawAudio": "assets/voice/line08.wav",
+   "shots": [
+    {
+     "bg": {
+      "type": "map",
+      "view": [
+       {
+        "at": 0,
+        "lon": 18,
+        "lat": 45,
+        "span": 50
+       }
+      ],
+      "fills": [
+       {
+        "countries": [
+         "Turkey"
+        ],
+        "color": "#ffd23f",
+        "at": 0,
+        "fade": 0
+       },
+       {
+        "countries": [
+         "Germany",
+         "Austria",
+         "Czechia",
+         "Poland",
+         "France",
+         "Belgium",
+         "Netherlands",
+         "Denmark",
+         "Norway",
+         "Yugoslavia",
+         "Greece"
+        ],
+        "color": "#8e44ad",
+        "at": 0,
+        "fade": 0
+       },
+       {
+        "countries": [
+         "United Kingdom"
+        ],
+        "color": "#1e88e5",
+        "at": 0,
+        "fade": 0
+       }
+      ]
+     },
+     "items": [
+      {
+       "type": "text",
+       "style": "date",
+       "text": "January 1943",
+       "at": 0
+      },
+      {
+       "type": "plane",
+       "from": [
+        -0.1,
+        51.5
+       ],
+       "to": [
+        35.3,
+        37
+       ],
+       "at": "flew",
+       "dur": 2.2,
+       "scale": 1.15,
+       "stay": true,
+       "trail": true
+      },
+      {
+       "type": "marker",
+       "pos": [
+        35.3,
+        37
+       ],
+       "label": "Adana",
+       "at": "Turkey",
+       "color": "#ffe11a"
+      },
+      {
+       "cast": "churchill",
+       "pos": [
+        33.6,
+        37.9
+       ],
+       "scale": 0.55,
+       "face": "right",
+       "at": "drag",
+       "enter": "drop",
+       "pose": "point",
+       "until": "drag"
+      },
+      {
+       "cast": "inonu",
+       "pos": [
+        37.4,
+        38.1
+       ],
+       "scale": 0.55,
+       "face": "left",
+       "at": "drag+0.2",
+       "enter": "drop",
+       "mood": "worried",
+       "until": "drag"
+      }
+     ]
+    },
+    {
+     "at": "drag",
+     "bg": {
+      "type": "plain",
+      "color": "#f5f1e8"
+     },
+     "items": [
+      {
+       "cast": "churchill",
+       "x": 0.38,
+       "y": 0.78,
+       "face": "right",
+       "at": -1,
+       "pose": "point",
+       "mood": "happy",
+       "hold": "cigar"
+      },
+      {
+       "cast": "inonu",
+       "x": 0.72,
+       "y": 0.78,
+       "face": "left",
+       "at": -1,
+       "mood": "worried",
+       "fly": {
+        "at": "war",
+        "to": {
+         "x": 0.48,
+         "y": 0.8
+        },
+        "dur": 0.5,
+        "arc": 60,
+        "spin": -20
+       },
+       "emotes": [
+        {
+         "at": "drag+0.2",
+         "kind": "sweat",
+         "until": "end"
+        }
+       ]
+      }
+     ]
+    }
+   ]
   },
   {
    "say": "Join us, and we'll send you planes and tanks!",
@@ -83,7 +949,87 @@
    "direction": "selling a big deal",
    "captions": false,
    "pause": 0.2,
-   "rawAudio": "assets/voice/line09.wav"
+   "rawAudio": "assets/voice/line09.wav",
+   "shots": [
+    {
+     "bg": {
+      "type": "room",
+      "wall": "#e9dcc0",
+      "floor": "#6b4a32",
+      "props": [
+       {
+        "type": "window",
+        "x": 0.5
+       },
+       {
+        "type": "lamp",
+        "x": 0.5
+       }
+      ]
+     },
+     "items": [
+      {
+       "cast": "churchill",
+       "x": 0.3,
+       "y": 0.78,
+       "face": "right",
+       "at": 0,
+       "enter": "left",
+       "mood": "happy",
+       "poses": [
+        {
+         "at": 0,
+         "pose": "cheer"
+        },
+        {
+         "at": "planes",
+         "pose": "point"
+        }
+       ],
+       "say": [
+        {
+         "text": "Join us, and we'll send you planes and tanks!",
+         "at": 0,
+         "until": "end",
+         "dx": 200,
+         "dy": -30
+        }
+       ]
+      },
+      {
+       "cast": "inonu",
+       "x": 0.74,
+       "y": 0.78,
+       "face": "left",
+       "at": -1,
+       "mood": "neutral"
+      },
+      {
+       "type": "icon",
+       "kind": "tank",
+       "x": 0.62,
+       "y": 0.18,
+       "at": "tanks",
+       "scale": 1.3
+      },
+      {
+       "type": "plane",
+       "from": {
+        "x": -0.2,
+        "y": 0.16
+       },
+       "to": {
+        "x": 1.2,
+        "y": 0.12
+       },
+       "at": "planes",
+       "dur": 1.6,
+       "scale": 0.8,
+       "sfx": false
+      }
+     ]
+    }
+   ]
   },
   {
    "say": "Wonderful. Send them first.",
@@ -96,7 +1042,65 @@
    "direction": "with a short pause after 'Wonderful'",
    "captions": false,
    "pause": 0.35,
-   "rawAudio": "assets/voice/line10.wav"
+   "rawAudio": "assets/voice/line10.wav",
+   "shots": [
+    {
+     "bg": "same",
+     "items": [
+      {
+       "cast": "churchill",
+       "x": 0.3,
+       "y": 0.78,
+       "face": "right",
+       "at": -1,
+       "moods": [
+        {
+         "at": 0,
+         "mood": "happy"
+        },
+        {
+         "at": "first",
+         "mood": "shocked"
+        }
+       ],
+       "emotes": [
+        {
+         "at": "first+0.2",
+         "kind": "!!",
+         "until": "end"
+        }
+       ]
+      },
+      {
+       "cast": "inonu",
+       "x": 0.74,
+       "y": 0.78,
+       "face": "left",
+       "at": -1,
+       "mood": "smug",
+       "poses": [
+        {
+         "at": 0,
+         "pose": "down"
+        },
+        {
+         "at": "Send",
+         "pose": "point"
+        }
+       ],
+       "say": [
+        {
+         "text": "Wonderful. Send them first.",
+         "at": 0,
+         "until": "end",
+         "dx": -180,
+         "dy": -30
+        }
+       ]
+      }
+     ]
+    }
+   ]
   },
   {
    "say": "Some weapons came. Turkey still stayed home.",
@@ -105,20 +1109,373 @@
    "voice": {
     "maxPause": 0.5
    },
-   "rawAudio": "assets/voice/line11.wav"
+   "rawAudio": "assets/voice/line11.wav",
+   "shots": [
+    {
+     "bg": {
+      "type": "field",
+      "palette": "desert",
+      "seed": "depot"
+     },
+     "items": [
+      {
+       "type": "vehicle",
+       "kind": "truck",
+       "from": {
+        "x": -0.3,
+        "y": 0.82
+       },
+       "to": {
+        "x": 0.55,
+        "y": 0.82
+       },
+       "at": 0,
+       "dur": 1.0,
+       "ease": "out",
+       "scale": 1.7,
+       "sfx": false
+      },
+      {
+       "type": "icon",
+       "kind": "tank",
+       "x": 0.4,
+       "y": 0.55,
+       "at": "came",
+       "scale": 1.6
+      }
+     ]
+    },
+    {
+     "at": "Turkey",
+     "bg": {
+      "type": "room",
+      "wall": "#efe4cc",
+      "floor": "#7b5034",
+      "props": [
+       {
+        "type": "flag",
+        "flag": "turkey",
+        "x": 0.12
+       },
+       {
+        "type": "window",
+        "x": 0.88
+       },
+       {
+        "type": "frame",
+        "x": 0.5,
+        "y": 0.1,
+        "color": "#3d2b1f"
+       }
+      ]
+     },
+     "items": [
+      {
+       "cast": "inonu",
+       "x": 0.5,
+       "y": 0.76,
+       "face": "right",
+       "at": -1,
+       "mood": "smug",
+       "pose": "hips",
+       "emotes": [
+        {
+         "at": "home",
+         "kind": "...",
+         "until": "end"
+        }
+       ]
+      },
+      {
+       "type": "text",
+       "style": "stamp",
+       "text": "STILL NEUTRAL",
+       "at": "stayed",
+       "y": 0.3,
+       "size": 70
+      }
+     ]
+    }
+   ]
   },
   {
    "say": "Then, in February 1945, with Germany already collapsing, Turkey finally declared war.",
    "tts": "Then, in February nineteen forty-five, with Germany already collapsing, Turkey finally declared war.",
    "direction": "a little ironic",
    "pause": 0.2,
-   "rawAudio": "assets/voice/line12.wav"
+   "rawAudio": "assets/voice/line12.wav",
+   "shots": [
+    {
+     "bg": {
+      "type": "map",
+      "view": [
+       {
+        "at": 0,
+        "lon": 18,
+        "lat": 50,
+        "span": 40
+       }
+      ],
+      "fills": [
+       {
+        "countries": [
+         "Germany",
+         "Austria",
+         "Czechia",
+         "Netherlands",
+         "Norway",
+         "Denmark"
+        ],
+        "color": "#8e44ad",
+        "at": 0,
+        "fade": 0
+       },
+       {
+        "countries": [
+         "Turkey"
+        ],
+        "color": "#ffd23f",
+        "at": 0,
+        "fade": 0
+       },
+       {
+        "countries": [
+         "USSR"
+        ],
+        "color": "#b71c1c",
+        "at": 0,
+        "fade": 0
+       },
+       {
+        "countries": [
+         "Poland"
+        ],
+        "color": "#b71c1c",
+        "at": "collapsing"
+       },
+       {
+        "countries": [
+         "France",
+         "Belgium"
+        ],
+        "color": "#1e88e5",
+        "at": "collapsing"
+       }
+      ]
+     },
+     "items": [
+      {
+       "type": "text",
+       "style": "date",
+       "text": "February 1945",
+       "at": "February"
+      },
+      {
+       "type": "arrow",
+       "from": [
+        22,
+        52
+       ],
+       "to": [
+        15,
+        52.3
+       ],
+       "at": "collapsing",
+       "color": "#b71c1c"
+      },
+      {
+       "type": "arrow",
+       "from": [
+        2,
+        49
+       ],
+       "to": [
+        8,
+        50.5
+       ],
+       "at": "collapsing+0.2",
+       "color": "#1e88e5"
+      },
+      {
+       "type": "fire",
+       "pos": [
+        13.4,
+        52.5
+       ],
+       "at": "already",
+       "size": 1
+      }
+     ]
+    },
+    {
+     "at": "Turkey",
+     "bg": {
+      "type": "room",
+      "wall": "#efe4cc",
+      "floor": "#7b5034",
+      "props": [
+       {
+        "type": "flag",
+        "flag": "turkey",
+        "x": 0.12
+       },
+       {
+        "type": "window",
+        "x": 0.88
+       },
+       {
+        "type": "frame",
+        "x": 0.5,
+        "y": 0.1,
+        "color": "#3d2b1f"
+       }
+      ]
+     },
+     "items": [
+      {
+       "cast": "inonu",
+       "x": 0.5,
+       "y": 0.76,
+       "face": "right",
+       "at": -1,
+       "mood": "smug",
+       "poses": [
+        {
+         "at": 0,
+         "pose": "down"
+        },
+        {
+         "at": "declared",
+         "pose": "fist"
+        }
+       ]
+      },
+      {
+       "type": "text",
+       "style": "stamp",
+       "text": "WAR!",
+       "at": "declared",
+       "y": 0.3,
+       "size": 110
+      }
+     ]
+    }
+   ]
   },
   {
    "say": "Why then? Only countries at war with the Axis were invited to found the United Nations.",
    "direction": "knowing and conspiratorial",
    "pause": 0.2,
-   "rawAudio": "assets/voice/line13.wav"
+   "rawAudio": "assets/voice/line13.wav",
+   "shots": [
+    {
+     "bg": {
+      "type": "room",
+      "wall": "#efe4cc",
+      "floor": "#7b5034",
+      "props": [
+       {
+        "type": "flag",
+        "flag": "turkey",
+        "x": 0.12
+       },
+       {
+        "type": "window",
+        "x": 0.88
+       },
+       {
+        "type": "frame",
+        "x": 0.5,
+        "y": 0.1,
+        "color": "#3d2b1f"
+       }
+      ]
+     },
+     "items": [
+      {
+       "cast": "inonu",
+       "x": 0.5,
+       "y": 0.76,
+       "face": "right",
+       "at": -1,
+       "mood": "smug"
+      },
+      {
+       "type": "icon",
+       "kind": "question",
+       "x": 0.5,
+       "y": 0.25,
+       "at": 0,
+       "scale": 1.6
+      }
+     ]
+    },
+    {
+     "at": "Only",
+     "bg": {
+      "type": "plain",
+      "color": "#5b92e5"
+     },
+     "items": [
+      {
+       "type": "text",
+       "style": "title",
+       "text": "UNITED NATIONS\nSan Francisco 1945",
+       "at": 0,
+       "y": 0.12,
+       "size": 64,
+       "bg": "rgba(0,0,0,.35)"
+      },
+      {
+       "type": "token",
+       "flag": "usa",
+       "x": 0.2,
+       "y": 0.45,
+       "at": "countries+0.00",
+       "r": 70
+      },
+      {
+       "type": "token",
+       "flag": "uk",
+       "x": 0.4,
+       "y": 0.45,
+       "at": "countries+0.18",
+       "r": 70
+      },
+      {
+       "type": "token",
+       "flag": "ussr",
+       "x": 0.6,
+       "y": 0.45,
+       "at": "countries+0.36",
+       "r": 70
+      },
+      {
+       "type": "token",
+       "flag": "china",
+       "x": 0.8,
+       "y": 0.45,
+       "at": "countries+0.54",
+       "r": 70
+      },
+      {
+       "type": "token",
+       "flag": "turkey",
+       "x": 0.5,
+       "y": 0.66,
+       "at": "invited",
+       "r": 80
+      },
+      {
+       "type": "check",
+       "x": 0.66,
+       "y": 0.66,
+       "at": "found",
+       "scale": 1.2
+      }
+     ]
+    }
+   ]
   },
   {
    "say": "Turkey joined the winning side, with ten weeks to spare.",
@@ -127,7 +1484,172 @@
    "voice": {
     "sps": 4.6
    },
-   "rawAudio": "assets/voice/line14.wav"
+   "rawAudio": "assets/voice/line14.wav",
+   "shots": [
+    {
+     "bg": {
+      "type": "map",
+      "view": [
+       {
+        "at": 0,
+        "lon": 24,
+        "lat": 45,
+        "span": 38
+       }
+      ],
+      "fills": [
+       {
+        "countries": [
+         "Germany",
+         "Austria"
+        ],
+        "color": "#8e44ad",
+        "at": 0,
+        "fade": 0
+       },
+       {
+        "countries": [
+         "Turkey"
+        ],
+        "color": "#ffd23f",
+        "at": 0,
+        "fade": 0
+       },
+       {
+        "countries": [
+         "USSR",
+         "Poland"
+        ],
+        "color": "#b71c1c",
+        "at": 0,
+        "fade": 0
+       },
+       {
+        "countries": [
+         "France",
+         "United Kingdom",
+         "Belgium"
+        ],
+        "color": "#1e88e5",
+        "at": 0,
+        "fade": 0
+       }
+      ]
+     },
+     "items": [
+      {
+       "type": "icon",
+       "kind": "calendar",
+       "label": "23",
+       "pos": [
+        33,
+        47
+       ],
+       "at": 0,
+       "scale": 1.4,
+       "until": "ten"
+      },
+      {
+       "type": "text",
+       "style": "date",
+       "text": "Feb 23 \u2192 May 8, 1945",
+       "at": "ten"
+      },
+      {
+       "type": "text",
+       "text": "10 WEEKS",
+       "at": "ten",
+       "y": 0.24,
+       "size": 140,
+       "color": "#ffe11a"
+      },
+      {
+       "cast": "inonu",
+       "pos": [
+        35,
+        40
+       ],
+       "scale": 0.55,
+       "face": "left",
+       "at": "winning",
+       "enter": "drop",
+       "mood": "smug",
+       "pose": "cheer"
+      },
+      {
+       "type": "check",
+       "pos": [
+        38.5,
+        38.2
+       ],
+       "at": "spare",
+       "scale": 1.3
+      }
+     ]
+    }
+   ]
   }
- ]
+ ],
+ "cast": {
+  "inonu": {
+   "type": "char",
+   "outfit": "suit",
+   "color": "#2f3b4c",
+   "tie": "#8b1d1d",
+   "hair": "bald",
+   "hat": "fedora",
+   "hatColor": "#222",
+   "glasses": false
+  },
+  "churchill": {
+   "type": "char",
+   "outfit": "suit",
+   "color": "#1f2833",
+   "tie": "#c62828",
+   "hair": "bald",
+   "wide": true,
+   "hold": "cigar"
+  },
+  "hitler": {
+   "type": "char",
+   "outfit": "military",
+   "color": "#7a7a63",
+   "hair": "side",
+   "mustache": "toothbrush"
+  },
+  "stalin": {
+   "type": "char",
+   "outfit": "military",
+   "color": "#6b6b3c",
+   "hair": "short",
+   "hairColor": "#3e2f22",
+   "mustache": "walrus",
+   "medals": true
+  },
+  "soldier": {
+   "type": "char",
+   "outfit": "soldier",
+   "color": "#7a7a52",
+   "hat": "helmet",
+   "hatColor": "#6d6d45",
+   "hair": "short"
+  },
+  "brit": {
+   "type": "char",
+   "outfit": "suit",
+   "color": "#3a3a3a",
+   "tie": "#1565c0",
+   "hair": "short",
+   "hairColor": "#777",
+   "mustache": "thin"
+  },
+  "german": {
+   "type": "char",
+   "outfit": "suit",
+   "color": "#4a4a3a",
+   "tie": "#111",
+   "hair": "slick",
+   "armband": "#c62828"
+  }
+ }
 }
