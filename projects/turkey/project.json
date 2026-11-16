@@ -7,7 +7,8 @@
   "maxPause": 0.3,
   "lufs": -18,
   "sps": 5.3,
-  "model": "gemini-3.1-flash-tts-preview"
+  "model": "gemini-3.1-flash-tts-preview",
+  "postVersion": 2
  },
  "pause": 0.15,
  "captions": {
@@ -128,7 +129,7 @@
       {
        "cast": "churchill",
        "pos": [
-        30,
+        21.5,
         31.5
        ],
        "scale": 0.55,
@@ -656,7 +657,7 @@
        "type": "icon",
        "kind": "tank",
        "x": 0.5,
-       "y": 0.66,
+       "y": 0.6,
        "at": "armour",
        "scale": 4.5
       },
@@ -664,7 +665,7 @@
        "type": "text",
        "text": "= ARMOUR",
        "at": "armour",
-       "y": 0.8,
+       "y": 0.74,
        "size": 80,
        "color": "#ffe11a"
       }
@@ -790,9 +791,9 @@
       "view": [
        {
         "at": 0,
-        "lon": 18,
-        "lat": 45,
-        "span": 50
+        "lon": 31,
+        "lat": 37,
+        "span": 24
        }
       ],
       "fills": [
@@ -842,8 +843,8 @@
       {
        "type": "plane",
        "from": [
-        -0.1,
-        51.5
+        31.24,
+        30.04
        ],
        "to": [
         35.3,
@@ -890,6 +891,17 @@
        "enter": "drop",
        "mood": "worried",
        "until": "drag"
+      },
+      {
+       "type": "marker",
+       "pos": [
+        31.24,
+        30.04
+       ],
+       "label": "Cairo",
+       "at": 0.2,
+       "color": "#fff",
+       "dy": 50
       }
      ]
     },
@@ -920,7 +932,7 @@
        "fly": {
         "at": "war",
         "to": {
-         "x": 0.48,
+         "x": 0.6,
          "y": 0.8
         },
         "dur": 0.5,

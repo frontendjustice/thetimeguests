@@ -47,6 +47,33 @@ Options: `--fps 30`, `--workers 4`, `--no-sfx`, `--out file.mp4`.
 
 A scene can use `"audio": "assets/line3.wav"` instead of TTS (your own recording), or have no `say` and a fixed `"dur": 2`.
 
+### Speech: lock the voice before building visuals
+
+Run `node src/cli.mjs projects/<name> --audio` first. It voices every line and writes `out/narration-preview.m4a` (listen to it) and `out/speech-report.md`. For each line, the report shows:
+- duration
+- syllables per second, with pauses excluded
+- loudness (LUFS)
+- every real pause
+- a round-trip transcript compared with `say`
+
+Fix the flagged lines before you build any shots.
+
+| field | where | does |
+|---|---|---|
+| `voice.model` | project | pins one TTS model (no silent fallback to another voice) |
+| `voice.style` | project or line | short delivery cue. Keep it short: long instructions get read aloud |
+| `direction` | line | a few words of delivery for that line ("deadpan", "sly and amused") |
+| `voice.name` | line | a different voice, e.g. for character lines |
+| `voice.sps` | project or line | target syllables/second. Clips are nudged toward it (0.9–1.25×, pitch kept). The proven narrator runs about 5.3 |
+| `voice.maxPause` | project or line | longest pause kept inside a line. Raise it on lines with a deliberate beat |
+| `voice.lufs` | project | loudness target. Every clip is gain-matched to it |
+| `tts` | line | what the voice reads, when it differs from the captions (years spelled out, names respelled) |
+| `rawAudio` | line | an approved raw take (e.g. `assets/voice/line03.wav`). It skips TTS and survives prompt edits |
+| `captions: false` | line | for voiced character lines. The line shows at the speaker instead |
+| `pause` | line | silence after the line |
+
+The free Gemini tier allows about 10 voice requests per model per day, so lock a good take with `rawAudio`.
+
 ### Shots: several pictures per narration line
 
 ```jsonc

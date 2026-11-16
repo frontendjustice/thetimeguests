@@ -15,7 +15,7 @@ export async function narrate(text, voice, cacheDir, { direction, raw: rawIn } =
   // keep prompts short: long instructions get read aloud by the TTS model
   const style = direction ? `${v.style}, ${direction}` : v.style;
   // extra fields only enter the key when used, so older projects keep their cached clips
-  const extra = [direction, v.lufs, v.sps, rawIn].some(x => x != null) ? [direction || '', v.lufs || '', v.sps || '', rawIn ? rawIn + fs.statSync(rawIn).size : '', 'p2'] : [];
+  const extra = [direction, v.lufs, v.sps, rawIn].some(x => x != null) ? [direction || '', v.lufs || '', v.sps || '', rawIn ? rawIn + fs.statSync(rawIn).size : '', 'p2', v.postVersion || ''] : [];
   const key = sha1(JSON.stringify([text, v.name, v.style, v.speed, v.maxPause, v.model || '', ...extra]));
   const final = path.join(cacheDir, `${key}.wav`);
   if (fs.existsSync(final)) return { file: final, dur: await duration(final), cached: true };
@@ -65,7 +65,7 @@ export async function narrate(text, voice, cacheDir, { direction, raw: rawIn } =
   await ffmpeg(['-i', raw, '-af', `${sil},areverse,${sil},areverse${gaps},atempo=${v.speed}`, '-ar', '44100', '-ac', '1', final]);
   if (v.sps) { // nudge speaking rate (syllables/s, pauses excluded) toward the target; pitch-preserving, capped
     const d = await duration(final), ps = await pauses(final, 0.1);
-    const speech = d - ps.reduce((a, p) => a + p[1] - p[0], 0), f = Math.min(1.2, Math.max(0.9, v.sps / (syllables(text) / Math.max(speech, 0.5))));
+    const speech = d - ps.reduce((a, p) => a + p[1] - p[0], 0), f = Math.min(1.25, Math.max(0.9, v.sps / (syllables(text) / Math.max(speech, 0.5))));
     if (Math.abs(f - 1) > 0.03) { const tmp = final + '.tmp.wav'; await ffmpeg(['-i', final, '-af', `atempo=${f.toFixed(3)}`, tmp]); fs.renameSync(tmp, final); }
   }
   if (v.lufs) { // static gain so every clip sits at the same loudness
