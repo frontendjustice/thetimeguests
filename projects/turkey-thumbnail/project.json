@@ -1,0 +1,257 @@
+{
+ "name": "turkey-thumbnail",
+ "captions": {
+  "enabled": false
+ },
+ "autoPush": false,
+ "cast": {
+  "inonu": {
+   "type": "char",
+   "outfit": "suit",
+   "color": "#2f3b4c",
+   "tie": "#8b1d1d",
+   "hair": "bald",
+   "hat": "fedora",
+   "hatColor": "#222",
+   "glasses": false
+  },
+  "churchill": {
+   "type": "char",
+   "outfit": "suit",
+   "color": "#1f2833",
+   "tie": "#c62828",
+   "hair": "bald",
+   "wide": true,
+   "hold": "cigar"
+  },
+  "hitler": {
+   "type": "char",
+   "outfit": "military",
+   "color": "#7a7a63",
+   "hair": "side",
+   "mustache": "toothbrush"
+  },
+  "stalin": {
+   "type": "char",
+   "outfit": "military",
+   "color": "#6b6b3c",
+   "hair": "short",
+   "hairColor": "#3e2f22",
+   "mustache": "walrus",
+   "medals": true
+  },
+  "soldier": {
+   "type": "char",
+   "outfit": "soldier",
+   "color": "#7a7a52",
+   "hat": "helmet",
+   "hatColor": "#6d6d45",
+   "hair": "short"
+  },
+  "brit": {
+   "type": "char",
+   "outfit": "suit",
+   "color": "#3a3a3a",
+   "tie": "#1565c0",
+   "hair": "short",
+   "hairColor": "#777",
+   "mustache": "thin"
+  },
+  "german": {
+   "type": "char",
+   "outfit": "suit",
+   "color": "#4a4a3a",
+   "tie": "#111",
+   "hair": "slick",
+   "armband": "#c62828"
+  }
+ },
+ "scenes": [
+  {
+   "dur": 2,
+   "shots": [
+    {
+     "bg": {
+      "type": "map",
+      "ocean": "#123a4a",
+      "view": [
+       {
+        "at": 0,
+        "lon": 35,
+        "lat": 40.5,
+        "span": 21
+       }
+      ],
+      "fills": [
+       {
+        "countries": [
+         "Turkey"
+        ],
+        "color": "#ffd23f",
+        "at": -5
+       },
+       {
+        "countries": [
+         "Germany",
+         "Austria",
+         "Czechia",
+         "Poland",
+         "France",
+         "Belgium",
+         "Netherlands",
+         "Denmark",
+         "Norway",
+         "Yugoslavia",
+         "Greece",
+         "Hungary",
+         "Romania",
+         "Bulgaria"
+        ],
+        "color": "#8e44ad",
+        "at": -5
+       },
+       {
+        "countries": [
+         "USSR"
+        ],
+        "color": "#b71c1c",
+        "at": -5
+       },
+       {
+        "countries": [
+         "Egypt",
+         "Iraq",
+         "Israel",
+         "Palestine",
+         "Jordan",
+         "Cyprus"
+        ],
+        "color": "#1e88e5",
+        "at": -5
+       }
+      ]
+     },
+     "items": [
+      {
+       "type": "pulse",
+       "pos": [
+        35,
+        39.2
+       ],
+       "at": -0.6,
+       "r": 420,
+       "color": "#fff3a0"
+      },
+      {
+       "cast": "hitler",
+       "x": 0.2,
+       "y": 0.5,
+       "scale": 0.62,
+       "face": "right",
+       "at": -5,
+       "enter": "none",
+       "pose": "point",
+       "mood": "furious",
+       "emotes": [
+        {
+         "at": -5,
+         "kind": "anger",
+         "until": 9
+        }
+       ]
+      },
+      {
+       "cast": "stalin",
+       "x": 0.8,
+       "y": 0.5,
+       "scale": 0.62,
+       "face": "left",
+       "at": -5,
+       "enter": "none",
+       "pose": "point",
+       "mood": "angry",
+       "emotes": [
+        {
+         "at": -5,
+         "kind": "!!",
+         "until": 9
+        }
+       ]
+      },
+      {
+       "cast": "churchill",
+       "x": 0.19,
+       "y": 0.97,
+       "scale": 0.6,
+       "face": "right",
+       "at": -5,
+       "enter": "none",
+       "pose": "point",
+       "mood": "worried",
+       "emotes": [
+        {
+         "at": -5,
+         "kind": "?",
+         "until": 9
+        }
+       ]
+      },
+      {
+       "cast": "inonu",
+       "x": 0.52,
+       "y": 0.8,
+       "scale": 1.0,
+       "face": "right",
+       "at": -5,
+       "enter": "none",
+       "pose": "hips",
+       "mood": "smug"
+      },
+      {
+       "type": "icon",
+       "kind": "flag",
+       "label": "turkey",
+       "x": 0.8,
+       "y": 0.86,
+       "at": -5,
+       "scale": 2.0,
+       "bob": false
+      },
+      {
+       "type": "text",
+       "text": "0 SHOTS",
+       "font": "Bangers",
+       "at": -5,
+       "y": 0.128,
+       "size": 270,
+       "color": "#ffe11a",
+       "strokeW": 34,
+       "spacing": 4
+      },
+      {
+       "type": "text",
+       "text": "FIRED IN WW2",
+       "font": "Bangers",
+       "at": -5,
+       "y": 0.2,
+       "size": 128,
+       "color": "#ffffff",
+       "strokeW": 22,
+       "spacing": 3
+      },
+      {
+       "type": "text",
+       "style": "stamp",
+       "text": "HOW?!",
+       "at": -5,
+       "x": 0.79,
+       "y": 0.6,
+       "size": 96,
+       "rotate": 10
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

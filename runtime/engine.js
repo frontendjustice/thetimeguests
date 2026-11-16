@@ -460,14 +460,14 @@ const ITEM = {
     if (style === 'stamp') {
       const x = (it.x == null ? 0.5 : it.x) * W, y = (it.y == null ? 0.4 : it.y) * H; const c = it.color || '#d62828';
       const sc = 1 + (1 - easeOut(appear(it, lt, 0.25))) * 1.5;
-      return `<g transform="translate(${f1(x)},${f1(y)}) rotate(${it.rotate == null ? -12 : it.rotate}) scale(${f1(sc * 100) / 100})" opacity="${f1(appear(it, lt, 0.15) * 100) / 100}"><rect x="-300" y="-80" width="600" height="140" fill="none" stroke="${c}" stroke-width="14" rx="12"/><text y="20" font-size="${it.size || 92}" font-weight="900" fill="${c}" text-anchor="middle" letter-spacing="6">${esc(it.text)}</text></g>`;
+      return `<g transform="translate(${f1(x)},${f1(y)}) rotate(${it.rotate == null ? -12 : it.rotate}) scale(${f1(sc * 100) / 100})" opacity="${f1(appear(it, lt, 0.15) * 100) / 100}"><rect x="${f1(-(String(it.text).length * (it.size || 92) * 0.36 + 40))}" y="${f1(-(it.size || 92) * 0.87)}" width="${f1(2 * (String(it.text).length * (it.size || 92) * 0.36 + 40))}" height="${f1((it.size || 92) * 1.52)}" fill="none" stroke="${c}" stroke-width="14" rx="12"/><text y="${f1((it.size || 92) * 0.22)}" font-size="${it.size || 92}" font-weight="900" fill="${c}" text-anchor="middle" letter-spacing="6">${esc(it.text)}</text></g>`;
     }
     if (style === 'title') {
       const y = (it.y == null ? 0.12 : it.y) * H;
       return `<g transform="translate(${W / 2},${f1(y)}) scale(${f1(s * 100) / 100})"><rect x="-470" y="-80" width="940" height="${80 + 90 * (String(it.text).split('\n').length)}" rx="24" fill="${it.bg || 'rgba(0,0,0,.72)'}"/>${outlineText(0, 20, it.text, { size: it.size || 72, color: it.color || '#fff', stroke: 0 })}</g>`;
     }
     const x = (it.x == null ? 0.5 : it.x) * W, y = (it.y == null ? 0.42 : it.y) * H;
-    return `<g transform="translate(${f1(x)},${f1(y)}) scale(${f1(s * 100) / 100})">${outlineText(0, 0, it.text, { size: it.size || 150, color: it.color || '#fff', italic: it.italic, stroke: (it.size || 150) * 0.16 })}</g>`;
+    return `<g transform="translate(${f1(x)},${f1(y)}) scale(${f1(s * 100) / 100})">${outlineText(0, 0, it.text, { size: it.size || 150, color: it.color || '#fff', italic: it.italic, font: it.font, stroke: it.strokeW || (it.size || 150) * 0.16, strokeColor: it.strokeColor, spacing: it.spacing })}</g>`;
   },
   image(it, lt) {
     const src = S.data.assets[it.src]; if (!src) return '';
