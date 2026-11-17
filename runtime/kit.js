@@ -486,7 +486,7 @@ ITEM.boat = (it, lt) => {
   let o = `<g transform="translate(${f1(x)},${f1(y + bob)}) rotate(${f1(tilt)}) scale(${f1(f * s * 100) / 100},${f1(s * 100) / 100})">`;
   o += `<line x1="-40" y1="-60" x2="-40" y2="-330" stroke="#5d4037" stroke-width="10"/><path d="M-36,-320 L120,-110 H-36Z" fill="#f1e3c3" stroke="#8d7a5a" stroke-width="4"/>`;
   o += `<g transform="translate(70,-60) scale(.38)">${drawChar({ x: 0, y: 0, outfit: 'civil', color: '#c0573a', hair: 'short', hairColor: '#222', mustache: 'thin', face: 'right', mood: it.mood || 'shocked', pose: it.pose || 'point', enter: 'none', at: -9 }, lt).replace(/translate\([^)]*\) rotate/, 'translate(0,0) rotate')}</g>`;
-  o += `<path d="M-230,-70 H240 L190,30 H-190Z" fill="#c62828" stroke="#5a1010" stroke-width="7" stroke-linejoin="round"/><path d="M-220,-50 H230" stroke="#fff" stroke-width="10"/><text x="-60" y="2" font-size="34" font-weight="900" fill="#fff" font-family="Inter">HUELVA</text>`;
+  o += `<path d="M-230,-70 H240 L190,30 H-190Z" fill="#c62828" stroke="#5a1010" stroke-width="7" stroke-linejoin="round"/><path d="M-220,-50 H230" stroke="#fff" stroke-width="10"/><text x="0" y="2" transform="scale(${f},1)" text-anchor="middle" font-size="34" font-weight="900" fill="#fff" font-family="Inter">HUELVA</text>`;
   return o + '</g>';
 };
 // documents: id | photo | letter | ticket | bank | plans

@@ -102,9 +102,9 @@
       "view": [
        {
         "at": 0,
-        "lon": 12,
-        "lat": 38,
-        "span": 30
+        "lon": 12.5,
+        "lat": 37.5,
+        "span": 20
        }
       ],
       "fills": [
@@ -164,7 +164,7 @@
        ],
        "at": "invade",
        "text": "ALLIES",
-       "width": 90
+       "width": 120
       },
       {
        "type": "pulse",
@@ -240,7 +240,7 @@
         36.3
        ],
        "text": "OBVIOUS TARGET",
-       "size": 50,
+       "size": 64,
        "at": "coming",
        "color": "#ffe11a"
       }
@@ -355,9 +355,9 @@
          "Italy"
         ],
         "x": 0.5,
-        "y": 0.1,
+        "y": 0.06,
         "w": 0.6,
-        "h": 0.22
+        "h": 0.18
        }
       ]
      },
@@ -375,8 +375,8 @@
          "text": "We find a dead body...",
          "at": 0,
          "until": "end",
-         "dx": 220,
-         "dy": -40
+         "dx": 200,
+         "dy": 60
         }
        ]
       },
@@ -387,12 +387,9 @@
        "face": "left",
        "at": -1,
        "mood": "shocked",
-       "emotes": [
-        {
-         "at": 0.3,
-         "kind": "!!",
-         "until": "end"
-        }
+       "emotes": [],
+       "jumps": [
+        0.35
        ]
       }
      ]
@@ -446,7 +443,7 @@
       },
       {
        "cast": "cholmondeley",
-       "x": 0.84,
+       "x": 0.86,
        "y": 0.8,
        "face": "left",
        "at": -1,
@@ -523,7 +520,7 @@
          "at": 0,
          "until": "end",
          "dx": 250,
-         "dy": -40
+         "dy": -10
         }
        ]
       },
@@ -532,7 +529,7 @@
        "style": "stamp",
        "text": "TOP SECRET",
        "at": "wrist",
-       "y": 0.25,
+       "y": 0.13,
        "size": 80
       }
      ]
@@ -550,9 +547,9 @@
       "view": [
        {
         "at": 0,
-        "lon": 16,
-        "lat": 39,
-        "span": 24
+        "lon": 16.2,
+        "lat": 38.5,
+        "span": 19
        }
       ],
       "fills": [
@@ -591,9 +588,9 @@
        "type": "doc",
        "kind": "plans",
        "x": 0.5,
-       "y": 0.16,
+       "y": 0.14,
        "at": 0,
-       "scale": 0.55,
+       "scale": 0.6,
        "rotate": -4
       },
       {
@@ -617,7 +614,7 @@
        ],
        "at": "Greece",
        "color": "#c62828",
-       "width": 24
+       "width": 34
       },
       {
        "type": "arrow",
@@ -631,16 +628,16 @@
        ],
        "at": "Sardinia",
        "color": "#c62828",
-       "width": 24
+       "width": 34
       },
       {
        "type": "label",
        "pos": [
-        22.5,
-        40
+        21.5,
+        40.6
        ],
        "text": "GREECE?",
-       "size": 56,
+       "size": 70,
        "at": "Greece",
        "color": "#c62828"
       },
@@ -651,7 +648,7 @@
         41.4
        ],
        "text": "SARDINIA?",
-       "size": 56,
+       "size": 70,
        "at": "Sardinia",
        "color": "#c62828"
       }
@@ -704,7 +701,7 @@
    "rawAudio": "assets/voice/line06.wav"
   },
   {
-   "say": "Major William Martin. A fiancée named Pam, with love letters. Theatre tickets. Even an angry letter from his bank.",
+   "say": "Major William Martin. A fianc\u00e9e named Pam, with love letters. Theatre tickets. Even an angry letter from his bank.",
    "direction": "a quick list, with a comic beat before 'Even an angry letter from his bank'",
    "pause": 0.3,
    "shots": [
@@ -734,7 +731,7 @@
      ]
     },
     {
-     "at": "fiancée",
+     "at": "fianc\u00e9e",
      "bg": {
       "type": "desk"
      },
@@ -894,16 +891,16 @@
      "items": [
       {
        "type": "submarine",
-       "x": 0.72,
+       "x": 0.74,
        "y": 0.56,
        "at": -5,
-       "scale": 0.7,
+       "scale": 0.75,
        "label": "HMS SERAPH"
       },
       {
        "cast": "martin",
-       "x": 0.42,
-       "y": 0.72,
+       "x": 0.3,
+       "y": 0.74,
        "at": 0,
        "enter": "drop",
        "lying": true,
@@ -912,7 +909,7 @@
        "hold": "briefcase",
        "pose": "hold",
        "shadow": false,
-       "scale": 0.9
+       "scale": 0.6
       },
       {
        "type": "label",
@@ -935,9 +932,9 @@
      "items": [
       {
        "type": "boat",
-       "x": 0.62,
-       "y": 0.6,
-       "scale": 1.5,
+       "x": 0.66,
+       "y": 0.62,
+       "scale": 1.4,
        "at": 0,
        "face": "left",
        "mood": "shocked",
@@ -945,8 +942,8 @@
       },
       {
        "cast": "martin",
-       "x": 0.24,
-       "y": 0.74,
+       "x": 0.22,
+       "y": 0.8,
        "at": -1,
        "lying": true,
        "float": true,
@@ -954,7 +951,7 @@
        "hold": "briefcase",
        "pose": "hold",
        "shadow": false,
-       "scale": 0.9
+       "scale": 0.6
       },
       {
        "type": "icon",
@@ -1005,17 +1002,17 @@
       },
       {
        "type": "flash",
-       "x": 0.35,
-       "y": 0.4,
+       "x": 0.4,
+       "y": 0.42,
        "at": "copies",
-       "scale": 0.9
+       "scale": 0.7
       },
       {
        "type": "flash",
-       "x": 0.35,
-       "y": 0.4,
+       "x": 0.4,
+       "y": 0.42,
        "at": "copies+0.6",
-       "scale": 0.9
+       "scale": 0.7
       }
      ]
     }
@@ -1298,8 +1295,8 @@
       {
        "type": "grave",
        "x": 0.5,
-       "y": 0.86,
-       "scale": 1.15,
+       "y": 0.74,
+       "scale": 1.1,
        "lines": [
         "MAJOR",
         "WILLIAM MARTIN",
@@ -1321,9 +1318,9 @@
       },
       {
        "at": "Glyndwr",
-       "zoom": 1.25,
+       "zoom": 1.2,
        "x": 0.5,
-       "y": 0.55,
+       "y": 0.42,
        "dur": 1.2
       }
      ],
@@ -1331,8 +1328,8 @@
       {
        "type": "grave",
        "x": 0.5,
-       "y": 0.86,
-       "scale": 1.15,
+       "y": 0.74,
+       "scale": 1.1,
        "lines": [
         "MAJOR",
         "WILLIAM MARTIN",
@@ -1352,7 +1349,7 @@
        "text": "GLYNDWR MICHAEL",
        "font": "Bangers",
        "at": "Michael+0.2",
-       "y": 0.14,
+       "y": 0.12,
        "size": 120,
        "color": "#ffffff"
       }
