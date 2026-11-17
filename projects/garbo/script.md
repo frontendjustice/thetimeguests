@@ -10,9 +10,9 @@ Target: about 70–75s, about 215 words (Mincemeat: 165 words in 58s). Narrator:
 | 4 | Narrator | He wasn't even in Britain. From Lisbon, he faked it all with a guidebook, train timetables and newsreels. | brisk, amused | "LONDON" label crossed out over a Lisbon café; guidebook, timetable and a cinema screen pop up around his typewriter |
 | 5 | Narrator | His lies were so good, Germany's navy chased a convoy he'd made up. Suddenly, Britain wanted him after all. | building, then a wry turn | night sea: German ships sweep searchlights over empty water; then a British officer's phone rings |
 | 6 | Narrator | MI5, Britain's spy-catchers, named him Garbo, the best actor in the world, and together they invented a whole spy network. | admiring, conspiratorial | "MI5: Britain's spy-catchers" label over a magnifying glass on a London building; codename card typed "GARBO" under a film-star spotlight; a corkboard map of Britain fills with pins and string |
-| 7 | Garbo | My man in Liverpool missed a whole fleet! | panicked, comic | Garbo at the corkboard; ships sail past a sleeping agent card in Liverpool. Captions off |
+| 7 | Garbo | My man in Liverpool missed the whole fleet! | panicked, comic | Garbo at the corkboard; ships sail past a sleeping agent card in Liverpool. Captions off |
 | 8 | Handler | Then he got sick. | calm, dry | the handler draws a thermometer on the card |
-| 9 | Garbo | And died! Put it in the papers. | delighted | the card gets a black border; a newspaper obituary slides in |
+| 9 | Garbo | And died! Put it in the paper. | delighted | the card gets a black border; a newspaper obituary slides in |
 | 10 | Narrator | Germany paid all their salaries. | wry | money envelopes fly from Berlin to every pin on the map |
 | 11 | Narrator | Three days after D-Day, Garbo told Berlin: Normandy is a trick. The real invasion is coming at Calais. | tense, urgent, as if whispering the secret | landing craft on Normandy; a radio key taps; a big arrow swings to Calais |
 | 12 | Narrator | For weeks, a German army sat at Calais, waiting for an invasion that never came. | slower, triumphant | German tokens at Calais; a calendar flips through June, July, August; empty sea |

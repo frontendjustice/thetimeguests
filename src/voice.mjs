@@ -51,7 +51,7 @@ export async function narrate(text, voice, cacheDir, { direction, raw: rawIn } =
     } catch (e) { lastErr = e; }
   }
   if (!ok) {
-    if (v.allowSilent === false || v.model) throw new Error(`TTS failed for "${text.slice(0, 40)}…": ${lastErr?.message?.split('\n')[0]}`);
+    if (v.allowSilent === false || v.model) throw new Error(`TTS failed for "${text.slice(0, 40)}…": ${lastErr?.message?.replace(/\s+/g, " ").slice(0, 600)}`);
     warn(`TTS failed (${lastErr?.message?.split('\n')[0]}). Using silent placeholder.`);
     const est = Math.max(1, text.split(/\s+/).length / 2.9);
     const tmp = path.join(cacheDir, `silent-${key}.wav`);

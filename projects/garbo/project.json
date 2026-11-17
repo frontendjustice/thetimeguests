@@ -1,0 +1,111 @@
+{
+ "name": "garbo",
+ "title": "Garbo: The Spy Whose Agents Didn't Exist",
+ "voice": {
+  "name": "Charon",
+  "model": "gemini-3.1-flash-tts-preview",
+  "style": "Voice only, no music or sound effects. Read this at a brisk pace, about 170 words per minute, like a punchy, slightly witty YouTube Shorts history narrator. Confident and energetic, with only tiny pauses between sentences",
+  "maxPause": 0.3,
+  "lufs": -18,
+  "sps": 5.3
+ },
+ "pause": 0.2,
+ "captions": {
+  "mode": "word",
+  "color": "#ffe11a",
+  "size": 104,
+  "y": 0.86
+ },
+ "handle": "@thetimeguest",
+ "vignette": true,
+ "scenes": [
+  {
+   "say": "In 1944, Hitler's top spy in Britain ran twenty-seven agents. Not one of them was real.",
+   "tts": "In nineteen forty-four, Hitler's top spy in Britain ran twenty-seven agents. Not one of them was real.",
+   "direction": "with a dramatic beat before 'Not one'",
+   "voice": {
+    "maxPause": 0.4
+   },
+   "pause": 0.3,
+   "rawAudio": "assets/voice/line01.wav"
+  },
+  {
+   "say": "Juan Pujol, a Spanish chicken farmer, hated the Nazis. He offered to spy for Britain. They said no. So he came up with a better plan. Spy for Germany... and feed them lies.",
+   "tts": "Juan Poo-HOLE, a Spanish chicken farmer, hated the Nazis. He offered to spy for Britain. They said no. So he came up with a better plan. Spy for Germany... and feed them lies.",
+   "direction": "deadpan on 'They said no', sly at the end",
+   "voice": {
+    "maxPause": 0.4
+   },
+   "pause": 0.25,
+   "rawAudio": "assets/voice/line02.wav"
+  },
+  {
+   "say": "He wasn't even in Britain. From Lisbon, he faked it all with a guidebook, train timetables and newsreels. His lies were so good, Germany's navy chased a convoy he'd made up. Suddenly, Britain wanted him after all.",
+   "direction": "amused",
+   "pause": 0.25,
+   "rawAudio": "assets/voice/line03.wav"
+  },
+  {
+   "say": "MI5, Britain's spy-catchers, named him Garbo, the best actor in the world, and together they invented a whole spy network.",
+   "tts": "M-I-5, Britain's spy-catchers, named him Garbo, the best actor in the world, and together they invented a whole spy network.",
+   "pause": 0.25,
+   "rawAudio": "assets/voice/line04.wav"
+  },
+  {
+   "say": "My man in Liverpool missed the whole fleet!",
+   "voice": {
+    "name": "Puck",
+    "model": "gemini-2.5-flash-preview-tts",
+    "style": "Say it like a panicked Spanish spy in 1943, with a light Spanish accent, quick and comic",
+    "sps": 4.6
+   },
+   "captions": false,
+   "pause": 0.1,
+   "rawAudio": "assets/voice/line05.wav"
+  },
+  {
+   "say": "Then he got sick.",
+   "voice": {
+    "name": "Orus",
+    "model": "gemini-2.5-flash-preview-tts",
+    "style": "Say it like a calm, dry British intelligence officer in 1943",
+    "sps": 4.6
+   },
+   "captions": false,
+   "pause": 0.1,
+   "rawAudio": "assets/voice/line06.wav"
+  },
+  {
+   "say": "And died! Put it in the paper.",
+   "voice": {
+    "name": "Puck",
+    "model": "gemini-2.5-flash-preview-tts",
+    "style": "Say it like a delighted Spanish spy in 1943, with a light Spanish accent, quick and comic",
+    "sps": 4.6
+   },
+   "captions": false,
+   "pause": 0.3,
+   "rawAudio": "assets/voice/line07.wav"
+  },
+  {
+   "say": "Germany paid all their salaries. Three days after D-Day, Garbo told Berlin: Normandy is a trick. The real invasion is coming at Calais.",
+   "direction": "wry, then tense and urgent",
+   "pause": 0.25,
+   "rawAudio": "assets/voice/line08.wav"
+  },
+  {
+   "say": "For weeks, a German army sat at Calais, waiting for an invasion that never came. Hitler approved an Iron Cross for him. Britain gave him a medal too... for the same lies.",
+   "direction": "deadpan beat before 'for the same lies'",
+   "voice": {
+    "maxPause": 0.4
+   },
+   "pause": 0.35,
+   "rawAudio": "assets/voice/line09.wav"
+  },
+  {
+   "say": "After the war, he faked his own death, and vanished. Forty years later, a historian found him alive, in Venezuela. That June, he walked Normandy's beaches, as veterans lined up to thank him.",
+   "direction": "quieter and warmer, slower at the very end",
+   "pause": 1.2
+  }
+ ]
+}

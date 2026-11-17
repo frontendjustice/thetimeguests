@@ -21,7 +21,7 @@ export async function generate(model, body, { retries = 3 } = {}) {
     const res = await post(`${BASE}/${model}:generateContent`, body);
     if (res.ok) return JSON.parse(res.text);
     const text = res.text;
-    lastErr = new Error(`${model}: HTTP ${res.status} ${text.slice(0, 240)}`);
+    lastErr = new Error(`${model}: HTTP ${res.status} ${text.slice(0, 1500)}`);
     lastErr.status = res.status;
     // quota errors for a model don't recover quickly; transient ones do
     const daily = /PerDay|per day/i.test(text);
