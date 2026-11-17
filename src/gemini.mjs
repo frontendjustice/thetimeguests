@@ -26,7 +26,9 @@ export async function generate(model, body, { retries = 3 } = {}) {
     // quota errors for a model don't recover quickly; transient ones do
     const daily = /PerDay|per day/i.test(text);
     if (res.status === 404 || res.status === 400 || res.status === 403 || daily) break;
-    if (attempt < retries) await sleep(1500 * Math.pow(2, attempt));
+    // a per-minute 429 needs a real wait; quick retries only burn requests
+    if (res.status === 429 && attempt >= 1) break;
+    if (attempt < retries) await sleep(res.status === 429 ? 62000 : 1500 * Math.pow(2, attempt));
   }
   throw lastErr;
 }

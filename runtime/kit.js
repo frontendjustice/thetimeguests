@@ -55,6 +55,7 @@ function screenPath(it) {
 
 // ---------- gradients used by VFX ----------
 const KIT_DEFS = `
+<linearGradient id="beam" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff8d0" stop-opacity=".85"/><stop offset="1" stop-color="#fff8d0" stop-opacity="0"/></linearGradient>
 <radialGradient id="gFire"><stop offset="0" stop-color="#fffbe6"/><stop offset=".25" stop-color="#ffe066"/><stop offset=".55" stop-color="#ff8a1e"/><stop offset=".85" stop-color="#d9381e" stop-opacity=".85"/><stop offset="1" stop-color="#7a1a0a" stop-opacity="0"/></radialGradient>
 <radialGradient id="gFire2"><stop offset="0" stop-color="#ffd23f"/><stop offset=".5" stop-color="#ff7a1a"/><stop offset="1" stop-color="#b8260f" stop-opacity="0"/></radialGradient>
 <radialGradient id="gSmoke"><stop offset="0" stop-color="#5b5550" stop-opacity=".95"/><stop offset=".6" stop-color="#3f3a36" stop-opacity=".75"/><stop offset="1" stop-color="#2e2a27" stop-opacity="0"/></radialGradient>
@@ -533,4 +534,206 @@ ITEM.grave = (it, lt) => {
   }
   o += `<rect x="-300" y="-10" width="600" height="40" rx="10" fill="#cfc8b8" stroke="#8d8676" stroke-width="6"/>`;
   return o + '</g>';
+};
+
+// ================= Garbo kit: chickens, embassy, Lisbon, typewriter, papers, warship, radio, medals, beach =================
+// cartoon hen that pecks; `seed` desyncs a flock
+ITEM.chicken = (it, lt) => {
+  const [x, y] = posOf(it); const s = (it.scale || 1) * popT(it, lt), f = it.face === 'left' ? -1 : 1, sd = it.seed || 0;
+  const peck = Math.max(0, Math.sin(lt * 5 + sd * 1.7)) ** 6, hop = Math.abs(Math.sin(lt * 2.4 + sd)) * 6;
+  let o = `<g transform="translate(${f1(x)},${f1(y - hop)}) scale(${f1(f * s * 100) / 100},${f1(s * 100) / 100})">`;
+  o += `<ellipse cx="0" cy="${f1(6 + hop)}" rx="70" ry="12" fill="#000" opacity=".15"/>`;
+  o += `<path d="M-20,-30 l-6,36 M14,-30 l6,36" stroke="#e7a52a" stroke-width="7" stroke-linecap="round"/><path d="M-36,6 h22 M8,6 h22" stroke="#e7a52a" stroke-width="6" stroke-linecap="round"/>`;
+  o += `<path d="M-80,-80 Q-110,-130 -70,-140 Q-60,-110 -50,-100 Q-60,-150 -20,-140 Q-30,-110 -20,-95 Z" fill="${it.color || '#fbfaf5'}" stroke="#333" stroke-width="5" stroke-linejoin="round"/>`;
+  o += `<ellipse cx="-4" cy="-62" rx="72" ry="50" fill="${it.color || '#fbfaf5'}" stroke="#333" stroke-width="5"/><path d="M-30,-70 q24,24 50,4" stroke="#d8d2c4" stroke-width="6" fill="none"/>`;
+  o += `<g transform="translate(46,-96) rotate(${f1(peck * 70)})"><path d="M0,0 Q-4,-56 22,-62 Q48,-60 46,-26 Q44,10 14,20 Z" fill="${it.color || '#fbfaf5'}" stroke="#333" stroke-width="5"/>`;
+  o += `<path d="M12,-58 q4,-18 12,-6 q6,-16 12,0 q8,-10 8,8" fill="#e53935" stroke="#9c1c1c" stroke-width="3"/><path d="M44,-38 l24,8 l-24,8z" fill="#f2b632" stroke="#9a6a10" stroke-width="3"/><path d="M40,-20 q6,16 -4,18 q-6,-8 4,-18z" fill="#e53935"/><circle cx="30" cy="-38" r="5" fill="#111"/></g>`;
+  return o + '</g>';
+};
+
+// the British embassy front: stone facade, plaque, Union Jack, and a door item that opens and slams
+BGX.embassy = (bg) => {
+  let o = `<rect width="${W}" height="${H}" fill="#d8cdb7"/>`;
+  for (let y = 0; y < 1400; y += 70) o += `<path d="M0,${y} H${W}" stroke="#c4b79c" stroke-width="3"/>` + Array.from({ length: 8 }, (_, k) => `<path d="M${(k * 150 + (y / 70 % 2) * 75) % W},${y} v70" stroke="#c4b79c" stroke-width="3"/>`).join('');
+  o += `<rect x="${W / 2 - 330}" y="180" width="660" height="80" fill="#efe7d6" stroke="#9c8f72" stroke-width="5"/><text x="${W / 2}" y="238" font-size="46" font-weight="900" text-anchor="middle" fill="#2f3b52" font-family="Inter" letter-spacing="4">BRITISH EMBASSY</text>`;
+  o += `<line x1="${W - 140}" y1="120" x2="${W - 140}" y2="560" stroke="#5c3b22" stroke-width="12"/>` + flagSVG('uk', W - 134, 130, 240, 160);
+  for (const cx of [W / 2 - 330, W / 2 + 330]) o += `<rect x="${cx - 45}" y="320" width="90" height="1000" fill="#ebe2cf" stroke="#9c8f72" stroke-width="5"/><rect x="${cx - 60}" y="300" width="120" height="40" fill="#e3d8c0" stroke="#9c8f72" stroke-width="5"/><rect x="${cx - 60}" y="1300" width="120" height="40" fill="#e3d8c0" stroke="#9c8f72" stroke-width="5"/>`;
+  o += `<rect y="1340" width="${W}" height="${H - 1340}" fill="#9b958a"/><rect x="${W / 2 - 300}" y="1340" width="600" height="40" fill="#b9b2a4"/><rect x="${W / 2 - 340}" y="1380" width="680" height="40" fill="#aaa397"/>`;
+  return o;
+};
+ITEM.door = (it, lt) => {
+  const [x, y] = posOf(it); const s = it.scale || 1, w = 420, h = 760;
+  const open = it.openAt != null && lt >= it.openAt ? easeOut(clamp((lt - it.openAt) / 0.3)) : 0;
+  const shut = it.closeAt != null && lt >= it.closeAt ? clamp((lt - it.closeAt) / 0.12) : 0;
+  const k = Math.max(0, open - shut), shake = shut > 0 && lt - it.closeAt < 0.35 ? Math.sin(lt * 90) * 6 : 0;
+  let o = `<g transform="translate(${f1(x + shake)},${f1(y)}) scale(${s})">`;
+  o += `<path d="M${-w / 2 - 30},0 V${-h + 40} Q0,${-h - 120} ${w / 2 + 30},${-h + 40} V0Z" fill="#7d6a4c"/><rect x="${-w / 2}" y="${-h}" width="${w}" height="${h}" fill="#1a1410"/>`;
+  if (it.inside) o += `<g transform="translate(0,0)">${it.inside}</g>`;
+  const dw = w * (1 - 0.85 * k);
+  o += `<g transform="translate(${-w / 2},0)"><rect x="0" y="${-h}" width="${f1(dw)}" height="${h}" fill="#1f3a2c" stroke="#0e1d15" stroke-width="6"/>`;
+  if (k < 0.6) o += `<rect x="${f1(dw * 0.12)}" y="${-h + 60}" width="${f1(dw * 0.76)}" height="260" fill="none" stroke="#2d5240" stroke-width="10"/><rect x="${f1(dw * 0.12)}" y="${-h + 380}" width="${f1(dw * 0.76)}" height="320" fill="none" stroke="#2d5240" stroke-width="10"/><circle cx="${f1(dw * 0.86)}" cy="${-h / 2}" r="16" fill="#d9b44a" stroke="#8a6a12" stroke-width="4"/><rect x="${f1(dw * 0.5 - 40)}" y="${-h + 330}" width="80" height="22" rx="4" fill="#d9b44a"/>`;
+  return o + '</g></g>';
+};
+
+// Lisbon street: pastel tiled houses, a yellow tram, cafe awning and table in front
+BGX.lisbon = (bg) => {
+  const r = rng(hashStr('lisboa'));
+  let o = `<defs><linearGradient id="lbsk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7cc3ef"/><stop offset="1" stop-color="#e6f4fb"/></linearGradient><pattern id="azu" width="40" height="40" patternUnits="userSpaceOnUse"><rect width="40" height="40" fill="#f3f6fb"/><path d="M20,4 L36,20 L20,36 L4,20Z" fill="none" stroke="#2b62b0" stroke-width="3"/><circle cx="20" cy="20" r="5" fill="#2b62b0"/></pattern></defs>`;
+  o += `<rect width="${W}" height="${H}" fill="url(#lbsk)"/>${cloud(240, 200, 0.6)}${cloud(820, 300, 0.5)}`;
+  const cols = ['#f2c14e', '#e88b6a', '#f4e1c1', '#9fc7a6', '#e9a3b1'];
+  let x = -30;
+  while (x < W) {
+    const w = 210 + r() * 90, top = 330 + r() * 160, col = cols[Math.floor(r() * cols.length)];
+    o += `<rect x="${f1(x)}" y="${f1(top)}" width="${f1(w)}" height="${f1(1250 - top)}" fill="${col}" stroke="#7a5a3a" stroke-width="4"/><path d="M${f1(x - 10)},${f1(top)} L${f1(x + w / 2)},${f1(top - 70)} L${f1(x + w + 10)},${f1(top)}Z" fill="#c4553a" stroke="#7a2f1c" stroke-width="4"/>`;
+    if (r() > 0.55) o += `<rect x="${f1(x)}" y="${f1(top + 40)}" width="${f1(w)}" height="${f1(1210 - top)}" fill="url(#azu)" opacity=".55"/>`;
+    for (let wy = top + 80; wy < 1050; wy += 190) for (let wx = x + 30; wx < x + w - 70; wx += 90) o += `<rect x="${f1(wx)}" y="${f1(wy)}" width="56" height="110" rx="26" fill="#3b4c63" stroke="#fff" stroke-width="6"/><rect x="${f1(wx - 8)}" y="${f1(wy + 104)}" width="72" height="12" fill="#2c2c2c"/>`;
+    x += w;
+  }
+  // tram
+  o += `<g transform="translate(140,1080)"><rect x="0" y="-210" width="520" height="210" rx="22" fill="#f5c518" stroke="#5a4500" stroke-width="7"/><rect x="0" y="-60" width="520" height="40" fill="#fff4c2"/>${[0, 1, 2, 3].map(k => `<rect x="${30 + k * 120}" y="-180" width="90" height="90" rx="10" fill="#cfe7f5" stroke="#5a4500" stroke-width="5"/>`).join('')}<line x1="260" y1="-210" x2="300" y2="-340" stroke="#333" stroke-width="6"/><circle cx="110" cy="10" r="30" fill="#333"/><circle cx="410" cy="10" r="30" fill="#333"/><text x="440" y="-28" font-size="34" font-weight="900" fill="#5a4500" font-family="Inter">28</text></g>`;
+  o += `<rect y="1110" width="${W}" height="${H - 1110}" fill="#d9cfbf"/>`;
+  for (let k = 0; k < 7; k++) o += `<path d="M0,${1130 + k * 22} H${W}" stroke="#bfb3a0" stroke-width="3" stroke-dasharray="30 18"/>`;
+  o += `<path d="M0,1108 H${W}" stroke="#777" stroke-width="10"/>`;
+  // cafe awning (foreground, top) and pavement
+  o += `<rect y="1290" width="${W}" height="${H - 1290}" fill="#efe6d6"/>`;
+  for (let i = 0; i < 18; i++) for (let j = 0; j < 8; j++) o += `<path d="M${(i * 70 + (j % 2) * 35) % (W + 70) - 35},${1310 + j * 80} q35,-30 70,0" stroke="#d6cab3" stroke-width="4" fill="none"/>`;
+  o += `<path d="M0,0 H${W} V120 H0Z" fill="#b8332b"/>${Array.from({ length: 9 }, (_, k) => `<rect x="${k * 130}" y="0" width="65" height="120" fill="#f6efe2"/>`).join('')}${Array.from({ length: 18 }, (_, k) => `<path d="M${k * 65},120 q32,40 65,0" fill="${k % 2 ? '#f6efe2' : '#b8332b'}"/>`).join('')}`;
+  return o;
+};
+// cafe table (foreground prop)
+ITEM.cafetable = (it, lt) => {
+  const [x, y] = posOf(it); const s = it.scale || 1;
+  return `<g transform="translate(${f1(x)},${f1(y)}) scale(${s})"><ellipse cx="0" cy="0" rx="260" ry="50" fill="#f6f3ee" stroke="#555" stroke-width="6"/><rect x="-14" y="10" width="28" height="300" fill="#444"/><path d="M-120,320 Q0,280 120,320" stroke="#444" stroke-width="16" fill="none"/>${it.cup === false ? '' : `<g transform="translate(150,-40)"><path d="M-30,0 h60 l-8,40 h-44z" fill="#fff" stroke="#555" stroke-width="4"/><path d="M28,8 q20,4 4,22" stroke="#555" stroke-width="4" fill="none"/><path d="M-10,-12 q8,-16 0,-30 M8,-12 q8,-16 0,-30" stroke="#bbb" stroke-width="4" fill="none" opacity="${f1(0.5 + 0.5 * Math.sin(lt * 3))}"/></g>`}</g>`;
+};
+
+// typewriter with a sheet that types `text` from `at` over `dur`; keys bounce while typing
+ITEM.typewriter = (it, lt) => {
+  const [x, y] = posOf(it); const s = (it.scale || 1) * popT(it, lt);
+  const txt = String(it.text || ''), t0 = it.typeAt == null ? (it.at || 0) : it.typeAt, q = clamp((lt - t0) / (it.dur || 1.5)), n = Math.floor(q * txt.length), typing = q > 0 && q < 1;
+  const lines = txt.slice(0, n).split('\n');
+  let o = `<g transform="translate(${f1(x)},${f1(y)}) scale(${f1(s * 100) / 100})" filter="url(#ds)">`;
+  o += `<g transform="translate(0,${typing ? f1(Math.sin(lt * 50) * 1.5) : 0})"><rect x="-150" y="-330" width="300" height="230" fill="#fffdf5" stroke="#999" stroke-width="3"/>`;
+  lines.slice(-5).forEach((l, i) => { o += `<text x="-128" y="${-290 + i * 40}" font-size="28" font-family="Courier New, monospace" font-weight="700" fill="#222">${esc(l)}</text>`; });
+  o += `</g><rect x="-230" y="-120" width="460" height="40" rx="18" fill="#222"/><circle cx="-238" cy="-100" r="22" fill="#333"/><circle cx="238" cy="-100" r="22" fill="#333"/>`;
+  o += `<path d="M-250,-80 H250 L290,60 H-290Z" fill="#2b2f33" stroke="#111" stroke-width="6"/><path d="M-200,-60 H200" stroke="#d9b44a" stroke-width="4"/>`;
+  for (let row = 0; row < 3; row++) for (let k = 0; k < 9 - row; k++) { const kx = -200 + row * 20 + k * 48, ky = -30 + row * 32, down = typing && ((Math.floor(lt * 14) + k * 3 + row) % 9 === 0) ? 4 : 0; o += `<circle cx="${kx}" cy="${ky + down}" r="15" fill="#f1ede2" stroke="#111" stroke-width="3"/>`; }
+  o += `<rect x="-120" y="70" width="240" height="20" rx="8" fill="#f1ede2" stroke="#111" stroke-width="3"/>`;
+  return o + '</g>';
+};
+
+// more documents for the Garbo story
+const _docSVG = docSVG;
+docSVG = function (kind, text) {
+  switch (kind) {
+    case 'guidebook': return `<path d="M-150,-200 H140 Q160,-200 160,-180 V200 H-150Z" fill="#1f4e8c" stroke="#0f2a4e" stroke-width="6"/><rect x="-150" y="-200" width="28" height="400" fill="#163a68"/><rect x="-100" y="-150" width="230" height="300" fill="none" stroke="#e6c76a" stroke-width="5"/><text x="15" y="-70" font-size="40" font-weight="900" text-anchor="middle" fill="#f3e3a8" font-family="Inter">GUIDE</text><text x="15" y="-25" font-size="28" font-weight="800" text-anchor="middle" fill="#f3e3a8" font-family="Inter">TO</text><text x="15" y="25" font-size="40" font-weight="900" text-anchor="middle" fill="#f3e3a8" font-family="Inter">ENGLAND</text><path d="M-40,80 q55,-50 110,0 q-55,30 -110,0z" fill="none" stroke="#e6c76a" stroke-width="5"/>`;
+    case 'timetable': return `<rect x="-160" y="-190" width="320" height="380" fill="#fbf6e6" stroke="#6b5a3a" stroke-width="5"/><rect x="-160" y="-190" width="320" height="70" fill="#7a1f1f"/><text y="-142" font-size="30" font-weight="900" text-anchor="middle" fill="#fff" font-family="Inter">RAILWAY TIMES</text>${[0, 1, 2, 3, 4, 5, 6].map(k => `<text x="-135" y="${-80 + k * 40}" font-size="24" font-family="Courier New, monospace" font-weight="700" fill="#333">${['LONDON', 'CREWE', 'L\'POOL', 'GLASGOW', 'LEEDS', 'YORK', 'BRISTOL'][k]}</text><text x="135" y="${-80 + k * 40}" font-size="24" text-anchor="end" font-family="Courier New, monospace" font-weight="700" fill="#333">${['08.15', '11.02', '12.40', '17.55', '09.30', '10.45', '13.20'][k]}</text>`).join('')}`;
+    case 'newsreel': return `<rect x="-200" y="-150" width="400" height="300" rx="10" fill="#222" stroke="#111" stroke-width="6"/><rect x="-170" y="-120" width="340" height="200" fill="#d8d8d0"/><path d="M-170,40 L-90,-30 L-30,20 L40,-60 L170,40 V80 H-170Z" fill="#8f9399"/><circle cx="110" cy="-70" r="22" fill="#f4f4ee"/><text y="120" font-size="34" font-weight="900" text-anchor="middle" fill="#f3e3a8" font-family="Bangers" letter-spacing="3">NEWSREEL</text>${[-1, 1].map(sx => [-90, -30, 30, 90].map(yy => `<rect x="${sx * 188 - 7}" y="${yy - 10}" width="14" height="20" rx="3" fill="#555"/>`).join('')).join('')}`;
+    case 'obituary': return `<rect x="-170" y="-220" width="340" height="440" fill="#f3efe4" stroke="#777" stroke-width="4"/><text y="-170" font-size="38" font-weight="900" text-anchor="middle" fill="#222" font-family="Georgia, serif">THE DAILY POST</text><path d="M-150,-150 H150" stroke="#222" stroke-width="4"/><text y="-110" font-size="28" font-weight="800" text-anchor="middle" fill="#444" font-family="Georgia, serif">OBITUARIES</text><rect x="-130" y="-80" width="260" height="190" fill="none" stroke="#111" stroke-width="10"/><path d="M-0,-60 v40 M-16,-46 h32" stroke="#111" stroke-width="6"/>${[0, 1, 2, 3].map(k => `<path d="M-100,${10 + k * 24} H${100 - (k % 2) * 40}" stroke="#777" stroke-width="7"/>`).join('')}${[0, 1, 2].map(k => `<path d="M-150,${140 + k * 26} H150" stroke="#aaa" stroke-width="7"/>`).join('')}`;
+    case 'deceased': return `<rect x="-150" y="-190" width="300" height="380" fill="#f5efdc" stroke="#6b5a3a" stroke-width="5"/><text y="-130" font-size="30" font-weight="900" text-anchor="middle" fill="#333" font-family="Inter">CERTIFICATE</text>${[0, 1, 2, 3].map(k => `<path d="M-110,${-80 + k * 36} H${110 - (k % 2) * 50}" stroke="#aaa" stroke-width="8"/>`).join('')}<g transform="translate(0,110) rotate(-10)"><rect x="-130" y="-40" width="260" height="80" fill="none" stroke="#b71c1c" stroke-width="7"/><text y="18" font-size="48" font-weight="900" text-anchor="middle" fill="#b71c1c" font-family="Inter" letter-spacing="2">DECEASED</text></g>`;
+    case 'lies': return `<rect x="-150" y="-190" width="300" height="380" fill="#fdfdf8" stroke="#555" stroke-width="4"/><text y="-130" font-size="30" font-weight="900" text-anchor="middle" fill="#8b0000" font-family="Inter">SECRET REPORT</text>${[0, 1, 2, 3, 4].map(k => `<path d="M-110,${-80 + k * 36} H${110 - (k % 2) * 50}" stroke="#aaa" stroke-width="8"/>`).join('')}<g transform="translate(0,120) rotate(-8)"><text y="18" font-size="64" text-anchor="middle" fill="#d62828" font-family="Bangers" letter-spacing="3">100% FAKE</text></g>`;
+    default: return _docSVG(kind, text);
+  }
+};
+
+// agent index card; `sickAt` adds a thermometer, `deadAt` gives it a black mourning border
+ITEM.agentcard = (it, lt) => {
+  const [x, y] = posOf(it); const s = (it.scale || 1) * popT(it, lt), rot = it.rotate || 0;
+  const sick = it.sickAt != null && lt >= it.sickAt, dead = it.deadAt != null && lt >= it.deadAt;
+  let o = `<g transform="translate(${f1(x)},${f1(y)}) rotate(${rot}) scale(${f1(s * 100) / 100})" filter="url(#ds)">`;
+  o += `<rect x="-170" y="-120" width="340" height="240" fill="#fffef6" stroke="#999" stroke-width="4"/><path d="M-170,-70 H170" stroke="#e57373" stroke-width="3"/>${[0, 1, 2].map(k => `<path d="M-170,${-30 + k * 40} H170" stroke="#90caf9" stroke-width="2"/>`).join('')}`;
+  o += `<text x="-150" y="-84" font-size="30" font-weight="900" fill="#333" font-family="Inter">AGENT</text><text x="150" y="-84" font-size="30" text-anchor="end" fill="#333" font-family="Gochi Hand">${esc(it.label || '')}</text>`;
+  o += `<rect x="-150" y="-55" width="110" height="140" fill="#d9d4c7" stroke="#777" stroke-width="3"/><circle cx="-95" cy="-10" r="26" fill="#9a9488"/><path d="M-140,80 q45,-70 90,0" fill="#9a9488"/>`;
+  o += `<text x="-20" y="0" font-size="44" fill="#1a3a7a" font-family="Gochi Hand">???</text>`;
+  if (sick) { const p = popT({ at: it.sickAt }, lt); o += `<g transform="translate(90,30) rotate(30) scale(${f1(p)})"><rect x="-12" y="-80" width="24" height="120" rx="12" fill="#fff" stroke="#333" stroke-width="4"/><rect x="-5" y="-50" width="10" height="80" fill="#e53935"/><circle cy="50" r="22" fill="#e53935" stroke="#333" stroke-width="4"/></g>`; }
+  if (dead) { const p = clamp((lt - it.deadAt) / 0.3); o += `<rect x="-170" y="-120" width="340" height="240" fill="none" stroke="#111" stroke-width="${f1(26 * p)}" opacity="${f1(p)}"/><path d="M-150,-55 L-40,85 M-40,-55 L-150,85" stroke="#111" stroke-width="10" opacity="${f1(p)}"/>`; }
+  return o + '</g>';
+};
+
+// red strings from a hub to many points, drawn one after another, with a pin at each end
+ITEM.web = (it, lt) => {
+  const hub = pt(it.hub), pts = it.points || [], at = it.at || 0, every = it.every == null ? 0.06 : it.every, d = it.dur || 0.25;
+  const ghost = it.ghostAt != null ? clamp((lt - it.ghostAt) / (it.ghostDur || 0.8)) : 0;
+  let o = `<g opacity="${f1((1 - ghost) * 100) / 100}">`;
+  pts.forEach((p, i) => {
+    const q = clamp((lt - at - i * every) / d); if (q <= 0) return;
+    const b = pt(p), mx = lerp(hub[0], b[0], q), my = lerp(hub[1], b[1], q) + Math.sin(q * Math.PI) * 20;
+    if (it.strings !== false) o += `<path d="M${f1(hub[0])},${f1(hub[1])} Q${f1((hub[0] + mx) / 2)},${f1((hub[1] + my) / 2 + 25)} ${f1(mx)},${f1(my)}" stroke="${it.color || '#c62828'}" stroke-width="4" fill="none"/>`;
+    if (q >= 1) {
+      const pop = backOut(clamp((lt - at - i * every - d) / 0.2)), gi = it.ghostAt != null && lt >= it.ghostAt + i * 0.015;
+      o += gi ? `<circle cx="${f1(b[0])}" cy="${f1(b[1])}" r="13" fill="none" stroke="#fff" stroke-width="4" stroke-dasharray="6 5"/>`
+        : `<g transform="translate(${f1(b[0])},${f1(b[1])}) scale(${f1(pop)})"><circle r="13" fill="${it.pin || '#e0262b'}" stroke="#fff" stroke-width="4"/><circle cx="-4" cy="-4" r="4" fill="#fff" opacity=".7"/></g>`;
+    }
+  });
+  if (it.hubPin !== false) o += `<circle cx="${f1(hub[0])}" cy="${f1(hub[1])}" r="18" fill="#222" stroke="#fff" stroke-width="5"/>`;
+  return o + '</g>';
+};
+
+// German warship (side view) with a sweeping searchlight; optional move from x to `toX`
+ITEM.warship = (it, lt) => {
+  let [x, y] = posOf(it); const s = it.scale || 1, f = it.face === 'left' ? -1 : 1;
+  if (it.toX != null) x = lerp(x, it.toX * W, clamp((lt - (it.at || 0)) / (it.dur || 4)));
+  const bob = Math.sin(lt * 1.5 + x) * 5, a = (it.beamAngle == null ? -20 : it.beamAngle) + Math.sin(lt * (it.sweep || 1.1) + (it.seed || 0)) * 22;
+  let o = `<g transform="translate(${f1(x)},${f1(y + bob)}) scale(${f1(f * s * 100) / 100},${f1(s * 100) / 100})">`;
+  if (it.beam !== false) o += `<g transform="translate(60,-190) rotate(${f1(a)})"><path d="M0,-10 L1100,-150 L1100,150 L0,10Z" fill="url(#beam)"/></g>`;
+  o += `<path d="M-380,-40 H400 L330,40 H-330Z" fill="#3a3f47" stroke="#15181c" stroke-width="6"/><path d="M-380,-40 L-420,-70 H-330" fill="#3a3f47" stroke="#15181c" stroke-width="6"/>`;
+  o += `<rect x="-120" y="-150" width="220" height="110" fill="#454b54" stroke="#15181c" stroke-width="6"/><rect x="-60" y="-230" width="110" height="80" fill="#4c535d" stroke="#15181c" stroke-width="6"/>${[0, 1, 2].map(k => `<rect x="${-100 + k * 60}" y="-130" width="34" height="20" fill="#ffe28a" opacity=".85"/>`).join('')}`;
+  o += `<rect x="-200" y="-110" width="50" height="70" fill="#454b54" stroke="#15181c" stroke-width="5"/><rect x="-195" y="-130" width="40" height="22" fill="#2a2e34"/><path d="M150,-70 h120 v-26 h-120z M250,-84 h110" stroke="#15181c" stroke-width="8" fill="#454b54"/><path d="M-300,-70 h-80" stroke="#15181c" stroke-width="10"/>`;
+  o += `<line x1="0" y1="-230" x2="0" y2="-330" stroke="#15181c" stroke-width="7"/><circle cx="60" cy="-190" r="16" fill="#fff8d0" stroke="#15181c" stroke-width="4"/>`;
+  if (it.flag !== false) o += `<g transform="translate(-380,-130)"><line x1="0" y1="0" x2="0" y2="90" stroke="#15181c" stroke-width="5"/>${flagSVG('wehrmacht', 0, 0, 60, 40)}</g>`;
+  o += `<path d="M-420,34 q40,-14 80,0 t80,0 t80,0 t80,0 t80,0 t80,0 t80,0 t80,0 t80,0 t80,0" stroke="#9fb8e8" stroke-width="4" fill="none" opacity=".6"/>`;
+  return o + '</g>';
+};
+// a dotted "ghost" convoy (ships that don't exist)
+ITEM.ghostconvoy = (it, lt) => {
+  const [x, y] = posOf(it); const s = it.scale || 1, p = appear(it, lt, 0.5), blink = 0.55 + 0.35 * Math.sin(lt * 5);
+  let o = `<g transform="translate(${f1(x)},${f1(y)}) scale(${s})" opacity="${f1(p * blink)}">`;
+  [[-260, 0, 0.8], [0, -40, 1], [260, 10, 0.75]].forEach(([dx, dy, k]) => { o += `<g transform="translate(${dx},${dy}) scale(${k})"><path d="M-160,0 H160 L130,50 H-130Z M-60,0 V-70 H40 V0 M-10,-70 v-60" fill="none" stroke="#e8f0ff" stroke-width="6" stroke-dasharray="14 10"/></g>`; });
+  o += outlineText(0, 150, it.label || '?', { size: 80, font: 'Bangers', color: '#e8f0ff', stroke: 8 });
+  return o + '</g>';
+};
+
+// suitcase radio set with dials and a morse key; signal arcs while sending
+ITEM.radio = (it, lt) => {
+  const [x, y] = posOf(it); const s = (it.scale || 1) * popT(it, lt), sending = it.sendAt != null && lt >= it.sendAt && (it.sendUntil == null || lt < it.sendUntil);
+  let o = `<g transform="translate(${f1(x)},${f1(y)}) scale(${f1(s * 100) / 100})">`;
+  if (sending) for (let k = 0; k < 3; k++) { const ph = ((lt - it.sendAt) * 1.4 + k / 3) % 1; o += `<path d="M${f1(-80 - ph * 160)},${f1(-300 - ph * 120)} a${f1(120 + ph * 260)},${f1(120 + ph * 260)} 0 0 1 ${f1(160 + ph * 320)},0" stroke="#ffd23f" stroke-width="10" fill="none" opacity="${f1(1 - ph)}" transform="translate(${f1(0)},0)"/>`; }
+  o += `<line x1="140" y1="-220" x2="210" y2="-420" stroke="#333" stroke-width="7"/><circle cx="210" cy="-420" r="9" fill="#e53935"/>`;
+  o += `<rect x="-230" y="-230" width="460" height="260" rx="18" fill="#5b4a33" stroke="#2a1f12" stroke-width="7"/><rect x="-200" y="-200" width="400" height="200" rx="8" fill="#2f3438" stroke="#111" stroke-width="5"/>`;
+  [[-130, -120], [-30, -120], [70, -120]].forEach(([dx, dy], k) => { const a = lt * (k + 1) * 40; o += `<circle cx="${dx}" cy="${dy}" r="34" fill="#d8d2c2" stroke="#111" stroke-width="4"/><line x1="${dx}" y1="${dy}" x2="${f1(dx + Math.cos(a / 57) * 24)}" y2="${f1(dy + Math.sin(a / 57) * 24)}" stroke="#c62828" stroke-width="5"/>`; });
+  o += `<circle cx="150" cy="-130" r="14" fill="${sending && Math.floor(lt * 6) % 2 ? '#ff5252' : '#5a1b1b'}" stroke="#111" stroke-width="3"/><rect x="-170" y="-60" width="340" height="30" rx="6" fill="#111"/><rect x="${f1(-160 + ((lt * 60) % 300))}" y="-58" width="8" height="26" fill="#ffd23f"/>`;
+  const down = sending && Math.sin(lt * 30) > 0.3 ? 10 : 0;
+  o += `<rect x="-80" y="40" width="160" height="30" rx="6" fill="#3b2f20"/><g transform="translate(0,${down})"><rect x="-70" y="16" width="140" height="16" rx="6" fill="#999" stroke="#333" stroke-width="3"/><circle cx="60" cy="10" r="16" fill="#222"/></g>`;
+  return o + '</g>';
+};
+
+// medals: ironcross (plain centre, no class marking) | british (generic round medal on a ribbon)
+ITEM.medal = (it, lt) => {
+  const [x, y] = posOf(it); const s = (it.scale || 1) * popT(it, lt, 0.4);
+  let o = `<g transform="translate(${f1(x)},${f1(y)}) rotate(${it.rotate || 0}) scale(${f1(s * 100) / 100})" filter="url(#ds)">`;
+  if (it.kind === 'british') {
+    o += `<path d="M-60,-200 H60 V-60 H-60Z" fill="#c05a75"/><path d="M-60,-200 H-40 V-60 H-60Z M40,-200 H60 V-60 H40Z" fill="#9aa3ad"/><path d="M-60,-200 H60" stroke="#6b3040" stroke-width="4"/>`;
+    o += `<rect x="-14" y="-70" width="28" height="30" rx="6" fill="#c9ccd1" stroke="#555" stroke-width="4"/><circle cy="40" r="90" fill="#d7dade" stroke="#555" stroke-width="7"/><circle cy="40" r="68" fill="none" stroke="#9aa0a8" stroke-width="5"/><path d="M0,0 l12,26 h28 l-22,18 l8,28 l-26,-16 l-26,16 l8,-28 l-22,-18 h28z" fill="#b8bec6" stroke="#6d737b" stroke-width="3"/>`;
+  } else {
+    o += [0, 90, 180, 270].map(r => `<path d="M-20,-20 L-62,-132 Q0,-114 62,-132 L20,-20Z" transform="rotate(${r})" fill="#d7dade" stroke="#555" stroke-width="5" stroke-linejoin="round"/>`).join('');
+    o += [0, 90, 180, 270].map(r => `<path d="M-11,-24 L-46,-118 Q0,-104 46,-118 L11,-24Z" transform="rotate(${r})" fill="#141414"/>`).join('');
+    o += `<rect x="-25" y="-25" width="50" height="50" fill="#141414"/>`;
+  }
+  // twinkle
+  const tw = Math.max(0, Math.sin(lt * 2.6 + (it.seed || 0) * 2)) ** 8;
+  if (tw > 0.02) o += `<g transform="translate(${it.kind === 'british' ? 45 : 40},${it.kind === 'british' ? -10 : -70}) scale(${f1(tw * 100) / 100})"><path d="M0,-40 Q4,-4 40,0 Q4,4 0,40 Q-4,4 -40,0 Q-4,-4 0,-40Z" fill="#fff"/></g>`;
+  return o + '</g>';
+};
+
+// quiet beach at dawn (unnamed), soft cliffs in the distance
+BGX.beach = (bg) => {
+  const hz = (bg.horizon || 0.5) * H;
+  let o = `<defs><linearGradient id="bdsk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8fb4d9"/><stop offset=".7" stop-color="#f7c99b"/><stop offset="1" stop-color="#fbe3c4"/></linearGradient><linearGradient id="bdse" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7aa6c4"/><stop offset="1" stop-color="#bcd6df"/></linearGradient></defs>`;
+  o += `<rect width="${W}" height="${hz}" fill="url(#bdsk)"/><circle cx="${W * 0.72}" cy="${hz - 70}" r="90" fill="#ffe6a8" opacity=".9"/>${cloud(200, hz * 0.35, 0.6, 0.6)}${cloud(760, hz * 0.22, 0.45, 0.5)}`;
+  o += `<path d="M${W * 0.55},${hz} L${W * 0.62},${hz - 70} Q${W * 0.8},${hz - 110} ${W},${hz - 90} V${hz}Z" fill="#a9a08a" opacity=".8"/>`;
+  o += `<rect y="${hz}" width="${W}" height="${H * 0.18}" fill="url(#bdse)"/>`;
+  for (let i = 0; i < 6; i++) o += `<path d="M${-40 + i * 60},${hz + 40 + i * 30} q${W / 4},-10 ${W / 2},0 t${W / 2},0" stroke="#fff" stroke-width="3" fill="none" opacity=".5"/>`;
+  const sy = hz + H * 0.18;
+  o += `<path d="M0,${sy - 10} Q${W * 0.3},${sy + 20} ${W * 0.6},${sy - 6} T${W},${sy} V${H} H0Z" fill="#e8d3a8"/><path d="M0,${sy - 10} Q${W * 0.3},${sy + 20} ${W * 0.6},${sy - 6} T${W},${sy}" stroke="#fff" stroke-width="10" fill="none" opacity=".7"/>`;
+  const r = rng(9); for (let i = 0; i < 60; i++) o += `<circle cx="${f1(r() * W)}" cy="${f1(sy + 40 + r() * (H - sy))}" r="${f1(2 + r() * 3)}" fill="#cdb78c"/>`;
+  return o;
 };
