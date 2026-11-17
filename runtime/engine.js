@@ -780,13 +780,13 @@ window.__frame = (t) => {
   document.getElementById('cam').style.transform = `translate(${f1(cam.x * W * (1 - cam.zoom) + shx - (cam.tx || 0) * W * cam.zoom)}px,${f1(cam.y * H * (1 - cam.zoom) + shy - (cam.ty || 0) * H * cam.zoom)}px) scale(${cam.zoom})`;
   // items
   let fx = S.defs, ui = '';
+  if (!isMap && S.data.vignette !== false && sc.vignette !== false) ui += `<rect width="${W}" height="${H}" fill="url(#vig)" pointer-events="none"/>`;
   for (const it of sc.items || []) {
     if (!visible(it, lt) && !SELF_TIMED.has(it.type)) continue;
     const fn = ITEM[it.type]; if (!fn) continue;
     const svg = fn(it, lt);
     if (UI_TYPES.has(it.type)) ui += svg; else fx += svg;
   }
-  if (!isMap && S.data.vignette !== false && sc.vignette !== false) ui += `<rect width="${W}" height="${H}" fill="url(#vig)" pointer-events="none"/>`;
   if (sc.flash) { const d = lt - sc.flash; if (d >= 0 && d < 0.35) ui += `<rect width="${W}" height="${H}" fill="#fff" opacity="${f1((1 - d / 0.35) * 100) / 100}"/>`; }
   ui += captionSVG(sc, lt);
   if (S.data.handle) ui += outlineText(W / 2, H - 70, S.data.handle, { size: 30, weight: 700, color: 'rgba(255,255,255,.85)', stroke: 6, strokeColor: 'rgba(0,0,0,.5)' });
