@@ -1,0 +1,87 @@
+{
+ "name": "rats",
+ "title": "The Rat Bomb That Never Went Off",
+ "voice": {
+  "name": "Charon",
+  "model": "gemini-3.1-flash-tts-preview",
+  "style": "Voice only, no music or sound effects. Read this at a brisk pace, about 170 words per minute, like a punchy, slightly witty YouTube Shorts history narrator. Confident and energetic, with only tiny pauses between sentences",
+  "maxPause": 0.3,
+  "lufs": -18,
+  "sps": 5.3
+ },
+ "pause": 0.2,
+ "captions": {
+  "mode": "word",
+  "color": "#ffe11a",
+  "size": 104,
+  "y": 0.86
+ },
+ "handle": "@thetimeguest",
+ "vignette": true,
+ "scenes": [
+  {
+   "say": "Britain's secret weapon against Hitler never exploded. It was a dead rat.",
+   "direction": "deadpan beat before 'It was a dead rat'",
+   "voice": {
+    "maxPause": 0.4
+   },
+   "pause": 0.3
+  },
+  {
+   "say": "In 1941, Britain's secret sabotage service had a problem. How do you blow up a German factory without getting caught? The answer was in the boiler room. Factories ran on coal, and someone shovelled it into the fire all day.",
+   "tts": "In nineteen forty-one, Britain's secret sabotage service had a problem. How do you blow up a German factory without getting caught? The answer was in the boiler room. Factories ran on coal, and someone shovelled it into the fire all day.",
+   "pause": 0.25
+  },
+  {
+   "say": "What if there's a dead rat in the coal?",
+   "voice": {
+    "name": "Orus",
+    "model": "gemini-2.5-flash-preview-tts",
+    "style": "Say it like a sly British intelligence officer in 1941, quick and conspiratorial",
+    "sps": 4.6
+   },
+   "captions": false,
+   "pause": 0.1
+  },
+  {
+   "say": "The stoker throws it in the fire...",
+   "voice": {
+    "name": "Puck",
+    "model": "gemini-2.5-flash-preview-tts",
+    "style": "Say it like a sly British intelligence officer in 1941, quick and conspiratorial",
+    "sps": 4.6
+   },
+   "captions": false,
+   "pause": 0.1
+  },
+  {
+   "say": "...and boom!",
+   "voice": {
+    "name": "Orus",
+    "model": "gemini-2.5-flash-preview-tts",
+    "style": "Say it like a delighted British intelligence officer in 1941",
+    "sps": 4.6
+   },
+   "captions": false,
+   "pause": 0.3
+  },
+  {
+   "say": "So an officer posing as a student got about a hundred rats, claiming they were for experiments. They filled them with plastic explosive, ready to hide in German coal piles.",
+   "direction": "amused",
+   "pause": 0.25
+  },
+  {
+   "say": "But the very first shipment was caught by the Germans. The plan was dead. Or was it? The Germans were rattled. They showed the rats off at their top military schools, and went searching for more.",
+   "direction": "flat on 'The plan was dead', then turning faster",
+   "voice": {
+    "maxPause": 0.4
+   },
+   "pause": 0.25
+  },
+  {
+   "say": "Britain's verdict? The trouble it caused them was a bigger success than if the rats had actually been used. The rats never blew up a single boiler. Just the idea of them was enough.",
+   "direction": "wry, then quieter and slower at the very end",
+   "pause": 1.2
+  }
+ ]
+}
