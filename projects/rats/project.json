@@ -26,13 +26,283 @@
     "maxPause": 0.4
    },
    "pause": 0.3,
-   "rawAudio": "assets/voice/line01.wav"
+   "rawAudio": "assets/voice/line01.wav",
+   "shots": [
+    {
+     "bg": {
+      "type": "spotlight"
+     },
+     "camera": [
+      {
+       "at": 0,
+       "zoom": 1.2,
+       "y": 0.6
+      },
+      {
+       "at": 0,
+       "zoom": 1.0,
+       "dur": 1.6
+      }
+     ],
+     "items": [
+      {
+       "type": "crate",
+       "x": 0.5,
+       "y": 0.76,
+       "label": "TOP SECRET",
+       "openAt": "never",
+       "rats": 3,
+       "at": 0,
+       "scale": 1.1
+      },
+      {
+       "type": "text",
+       "text": "SECRET WEAPON",
+       "y": 0.15,
+       "size": 130,
+       "color": "#ffe11a",
+       "font": "Bangers",
+       "at": "secret"
+      }
+     ]
+    },
+    {
+     "at": "It",
+     "bg": {
+      "type": "spotlight"
+     },
+     "items": [
+      {
+       "type": "rat",
+       "x": 0.5,
+       "y": 0.62,
+       "scale": 2.4,
+       "dead": true,
+       "at": 0
+      },
+      {
+       "type": "text",
+       "text": "A DEAD RAT",
+       "y": 0.2,
+       "size": 150,
+       "color": "#ffe11a",
+       "font": "Bangers",
+       "at": "dead"
+      },
+      {
+       "type": "text",
+       "style": "stamp",
+       "text": "TOP SECRET",
+       "at": "rat+0.2",
+       "y": 0.8,
+       "size": 80
+      }
+     ]
+    }
+   ]
   },
   {
    "say": "In 1941, Britain's secret sabotage service had a problem. How do you blow up a German factory without getting caught? The answer was in the boiler room. Factories ran on coal, and someone shovelled it into the fire all day.",
    "tts": "In nineteen forty-one, Britain's secret sabotage service had a problem. How do you blow up a German factory without getting caught? The answer was in the boiler room. Factories ran on coal, and someone shovelled it into the fire all day.",
    "pause": 0.25,
-   "rawAudio": "assets/voice/line02.wav"
+   "rawAudio": "assets/voice/line02.wav",
+   "shots": [
+    {
+     "bg": {
+      "type": "room",
+      "wall": "#d9cfb8",
+      "floor": "#6b4a32",
+      "props": [
+       {
+        "type": "flag",
+        "flag": "uk",
+        "x": 0.82
+       },
+       "window"
+      ]
+     },
+     "items": [
+      {
+       "type": "text",
+       "style": "date",
+       "text": "1941",
+       "at": 0.05
+      },
+      {
+       "cast": "officer",
+       "x": 0.4,
+       "y": 0.82,
+       "face": "right",
+       "at": -1,
+       "mood": "worried",
+       "poses": [
+        {
+         "at": 0,
+         "pose": "think"
+        }
+       ],
+       "emotes": [
+        {
+         "at": "problem",
+         "kind": "?"
+        }
+       ]
+      },
+      {
+       "type": "text",
+       "text": "SECRET SABOTAGE SERVICE",
+       "y": 0.16,
+       "size": 82,
+       "color": "#ffe11a",
+       "font": "Bangers",
+       "at": "secret"
+      }
+     ]
+    },
+    {
+     "at": "How",
+     "bg": {
+      "type": "map",
+      "view": [
+       {
+        "at": 0,
+        "lon": 10.5,
+        "lat": 51.0,
+        "span": 14
+       }
+      ],
+      "fills": [
+       {
+        "countries": [
+         "Germany",
+         "Austria"
+        ],
+        "color": "#8f8f7a",
+        "at": -5,
+        "fade": 0
+       }
+      ]
+     },
+     "items": [
+      {
+       "type": "icon",
+       "kind": "factory",
+       "pos": [
+        7.0,
+        51.45
+       ],
+       "scale": 1.3,
+       "at": "factory+0.0"
+      },
+      {
+       "type": "icon",
+       "kind": "factory",
+       "pos": [
+        11.6,
+        48.1
+       ],
+       "scale": 1.3,
+       "at": "factory+0.12"
+      },
+      {
+       "type": "icon",
+       "kind": "factory",
+       "pos": [
+        13.4,
+        52.5
+       ],
+       "scale": 1.3,
+       "at": "factory+0.24"
+      },
+      {
+       "type": "icon",
+       "kind": "factory",
+       "pos": [
+        9.99,
+        53.55
+       ],
+       "scale": 1.3,
+       "at": "factory+0.36"
+      },
+      {
+       "type": "icon",
+       "kind": "factory",
+       "pos": [
+        8.5,
+        49.5
+       ],
+       "scale": 1.3,
+       "at": "factory+0.48"
+      },
+      {
+       "type": "icon",
+       "kind": "factory",
+       "pos": [
+        12.4,
+        51.3
+       ],
+       "scale": 1.3,
+       "at": "factory+0.6"
+      },
+      {
+       "type": "icon",
+       "kind": "question",
+       "pos": [
+        10.5,
+        51.2
+       ],
+       "scale": 1.8,
+       "at": "caught"
+      },
+      {
+       "type": "text",
+       "text": "HOW?",
+       "y": 0.12,
+       "size": 150,
+       "color": "#ffe11a",
+       "font": "Bangers",
+       "at": 0.1
+      }
+     ]
+    },
+    {
+     "at": "answer",
+     "bg": {
+      "type": "boiler"
+     },
+     "items": [
+      {
+       "cast": "stoker",
+       "x": 0.74,
+       "y": 0.86,
+       "face": "left",
+       "at": -1,
+       "mood": "neutral",
+       "pose": "hold",
+       "hold": "shovel:coal"
+      },
+      {
+       "type": "text",
+       "text": "BOILER ROOM",
+       "y": 0.08,
+       "size": 120,
+       "color": "#ffe11a",
+       "font": "Bangers",
+       "at": "boiler"
+      },
+      {
+       "type": "text",
+       "text": "COAL",
+       "y": 0.5,
+       "size": 130,
+       "color": "#ffe11a",
+       "font": "Bangers",
+       "at": "coal",
+       "x": 0.3
+      }
+     ]
+    }
+   ]
   },
   {
    "say": "What if there's a dead rat in the coal?",
@@ -45,7 +315,62 @@
    "captions": false,
    "pause": 0.1,
    "rawAudio": "assets/voice/line03.wav",
-   "voiceNote": "gemini-3.8-flash-tts; style read aloud first, take cut at the pause before the line; transcript not yet machine-checked"
+   "voiceNote": "gemini-3.8-flash-tts; style read aloud first, take cut at the pause before the line; transcript not yet machine-checked",
+   "shots": [
+    {
+     "bg": {
+      "type": "room",
+      "wall": "#d8cdb4",
+      "floor": "#4e3626",
+      "props": [
+       {
+        "type": "lamp",
+        "x": 0.5
+       }
+      ]
+     },
+     "items": [
+      {
+       "cast": "officer",
+       "x": 0.25,
+       "y": 0.84,
+       "face": "right",
+       "at": -1,
+       "mood": "smug",
+       "pose": "point",
+       "say": [
+        {
+         "text": "What if there's a dead rat in the coal?",
+         "at": 0,
+         "until": "end",
+         "dx": 200,
+         "dy": -80,
+         "size": 66
+        }
+       ]
+      },
+      {
+       "cast": "officer2",
+       "x": 0.76,
+       "y": 0.84,
+       "face": "left",
+       "at": -1,
+       "mood": "shocked"
+      },
+      {
+       "type": "thought",
+       "x": 0.5,
+       "y": 0.22,
+       "kind": "rat",
+       "at": "rat",
+       "tail": {
+        "x": 0.3,
+        "y": 0.45
+       }
+      }
+     ]
+    }
+   ]
   },
   {
    "say": "The stoker throws it in the fire...",
@@ -58,7 +383,66 @@
    "captions": false,
    "pause": 0.1,
    "rawAudio": "assets/voice/line04.wav",
-   "voiceNote": "gemini-3.8-flash-tts; style read aloud first, take cut at the pause before the line; transcript not yet machine-checked"
+   "voiceNote": "gemini-3.8-flash-tts; style read aloud first, take cut at the pause before the line; transcript not yet machine-checked",
+   "shots": [
+    {
+     "bg": {
+      "type": "room",
+      "wall": "#d8cdb4",
+      "floor": "#4e3626",
+      "props": [
+       {
+        "type": "lamp",
+        "x": 0.5
+       }
+      ]
+     },
+     "items": [
+      {
+       "cast": "officer",
+       "x": 0.25,
+       "y": 0.84,
+       "face": "right",
+       "at": -1,
+       "mood": "smug"
+      },
+      {
+       "cast": "officer2",
+       "x": 0.76,
+       "y": 0.84,
+       "face": "left",
+       "at": -1,
+       "mood": "happy",
+       "pose": "hold",
+       "hold": "shovel",
+       "jumps": [
+        0.2
+       ],
+       "say": [
+        {
+         "text": "The stoker throws it in the fire...",
+         "at": 0,
+         "until": "end",
+         "dx": -210,
+         "dy": -80,
+         "size": 66
+        }
+       ]
+      },
+      {
+       "type": "thought",
+       "x": 0.5,
+       "y": 0.22,
+       "kind": "rat",
+       "at": -1,
+       "tail": {
+        "x": 0.3,
+        "y": 0.45
+       }
+      }
+     ]
+    }
+   ]
   },
   {
    "say": "...and boom!",
@@ -71,13 +455,205 @@
    "captions": false,
    "pause": 0.3,
    "rawAudio": "assets/voice/line05.wav",
-   "voiceNote": "gemini-3.8-flash-tts; style read aloud first, take cut at the pause before the line; transcript not yet machine-checked"
+   "voiceNote": "gemini-3.8-flash-tts; style read aloud first, take cut at the pause before the line; transcript not yet machine-checked",
+   "shots": [
+    {
+     "bg": {
+      "type": "room",
+      "wall": "#d8cdb4",
+      "floor": "#4e3626",
+      "props": [
+       {
+        "type": "lamp",
+        "x": 0.5
+       }
+      ]
+     },
+     "items": [
+      {
+       "cast": "officer",
+       "x": 0.25,
+       "y": 0.84,
+       "face": "right",
+       "at": -1,
+       "mood": "happy",
+       "pose": "cheer",
+       "jumps": [
+        0.05
+       ],
+       "say": [
+        {
+         "text": "...and boom!",
+         "at": 0,
+         "until": "end",
+         "dx": 200,
+         "dy": -80,
+         "size": 80
+        }
+       ]
+      },
+      {
+       "cast": "officer2",
+       "x": 0.76,
+       "y": 0.84,
+       "face": "left",
+       "at": -1,
+       "mood": "happy",
+       "pose": "cheer"
+      },
+      {
+       "type": "thought",
+       "x": 0.5,
+       "y": 0.22,
+       "kind": "boom",
+       "at": 0,
+       "tail": {
+        "x": 0.3,
+        "y": 0.45
+       }
+      }
+     ]
+    }
+   ]
   },
   {
    "say": "So an officer posing as a student got about a hundred rats, claiming they were for experiments. They filled them with plastic explosive, ready to hide in German coal piles.",
    "direction": "amused",
    "pause": 0.25,
-   "rawAudio": "assets/voice/line06.wav"
+   "rawAudio": "assets/voice/line06.wav",
+   "shots": [
+    {
+     "bg": {
+      "type": "shop",
+      "sign": "LAB SUPPLIES"
+     },
+     "items": [
+      {
+       "cast": "student",
+       "x": 0.28,
+       "y": 0.92,
+       "face": "right",
+       "at": -1,
+       "mood": "smug",
+       "emotes": [
+        {
+         "at": "student",
+         "kind": "sweat"
+        }
+       ]
+      },
+      {
+       "type": "crate",
+       "x": 0.66,
+       "y": 0.72,
+       "scale": 0.85,
+       "label": "FOR EXPERIMENTS",
+       "labelSize": 34,
+       "openAt": "hundred",
+       "dead": false,
+       "rats": 3,
+       "at": -1
+      },
+      {
+       "type": "text",
+       "text": "\"STUDENT\"",
+       "y": 0.3,
+       "size": 110,
+       "color": "#ffe11a",
+       "font": "Bangers",
+       "at": "student"
+      },
+      {
+       "type": "text",
+       "text": "100 RATS",
+       "y": 0.38,
+       "size": 120,
+       "color": "#ffffff",
+       "font": "Bangers",
+       "at": "hundred"
+      }
+     ]
+    },
+    {
+     "at": "They",
+     "bg": {
+      "type": "plain",
+      "color": "#e9e4d8"
+     },
+     "items": [
+      {
+       "type": "rat",
+       "x": 0.5,
+       "y": 0.55,
+       "scale": 2.2,
+       "dead": true,
+       "explosive": true,
+       "at": "filled"
+      },
+      {
+       "type": "text",
+       "text": "PLASTIC EXPLOSIVE",
+       "y": 0.25,
+       "size": 110,
+       "color": "#e53935",
+       "font": "Bangers",
+       "at": "plastic"
+      }
+     ]
+    },
+    {
+     "at": "ready",
+     "bg": {
+      "type": "boiler",
+      "coal": false
+     },
+     "items": [
+      {
+       "type": "coal",
+       "x": 0.5,
+       "y": 0.9,
+       "scale": 1.6,
+       "at": -1
+      },
+      {
+       "type": "rat",
+       "x": 0.38,
+       "y": 0.78,
+       "scale": 0.7,
+       "dead": true,
+       "at": "coal+0",
+       "rotate": -8
+      },
+      {
+       "type": "rat",
+       "x": 0.62,
+       "y": 0.8,
+       "scale": 0.7,
+       "dead": true,
+       "at": "coal+0.15",
+       "rotate": 6
+      },
+      {
+       "type": "rat",
+       "x": 0.5,
+       "y": 0.71,
+       "scale": 0.7,
+       "dead": true,
+       "at": "coal+0.3",
+       "rotate": 0
+      },
+      {
+       "type": "text",
+       "text": "GERMAN COAL",
+       "y": 0.14,
+       "size": 120,
+       "color": "#ffe11a",
+       "font": "Bangers",
+       "at": "German"
+      }
+     ]
+    }
+   ]
   },
   {
    "say": "But the very first shipment was caught by the Germans. The plan was dead. Or was it? The Germans were rattled. They showed the rats off at their top military schools, and went searching for more.",
@@ -86,14 +662,382 @@
     "maxPause": 0.4
    },
    "pause": 0.25,
-   "rawAudio": "assets/voice/line07.wav"
+   "rawAudio": "assets/voice/line07.wav",
+   "shots": [
+    {
+     "bg": {
+      "type": "field",
+      "palette": "mud"
+     },
+     "items": [
+      {
+       "type": "crate",
+       "x": 0.62,
+       "y": 0.8,
+       "scale": 0.9,
+       "label": "COAL",
+       "openAt": "caught",
+       "rats": 3,
+       "at": -1
+      },
+      {
+       "cast": "german",
+       "x": 0.25,
+       "y": 0.86,
+       "face": "right",
+       "at": -1,
+       "moods": [
+        {
+         "at": 0,
+         "mood": "neutral"
+        },
+        {
+         "at": "caught",
+         "mood": "shocked"
+        }
+       ],
+       "pose": "point",
+       "emotes": [
+        {
+         "at": "caught+0.2",
+         "kind": "!!"
+        }
+       ]
+      },
+      {
+       "type": "text",
+       "style": "stamp",
+       "text": "CAPTURED",
+       "at": "Germans",
+       "y": 0.25,
+       "size": 110
+      }
+     ]
+    },
+    {
+     "at": "plan",
+     "bg": {
+      "type": "spotlight"
+     },
+     "items": [
+      {
+       "type": "rat",
+       "x": 0.5,
+       "y": 0.66,
+       "scale": 2.0,
+       "dead": true,
+       "at": -1
+      },
+      {
+       "type": "text",
+       "text": "PLAN: DEAD",
+       "y": 0.2,
+       "size": 140,
+       "color": "#ffe11a",
+       "font": "Bangers",
+       "at": 0.05,
+       "until": "Or"
+      },
+      {
+       "type": "text",
+       "text": "...OR WAS IT?",
+       "y": 0.2,
+       "size": 130,
+       "color": "#ffe11a",
+       "font": "Bangers",
+       "at": "Or"
+      }
+     ]
+    },
+    {
+     "at": "rattled-0.6",
+     "bg": {
+      "type": "classroom"
+     },
+     "items": [
+      {
+       "cast": "german",
+       "x": 0.17,
+       "y": 0.8,
+       "face": "right",
+       "at": -1,
+       "mood": "angry",
+       "pose": "point"
+      },
+      {
+       "type": "desk",
+       "x": 0.55,
+       "y": 0.8
+      },
+      {
+       "type": "rat",
+       "x": 0.55,
+       "y": 0.76,
+       "scale": 0.8,
+       "dead": true,
+       "explosive": true,
+       "at": "showed"
+      },
+      {
+       "cast": "cadet",
+       "x": 0.4,
+       "y": 0.99,
+       "scale": 0.9,
+       "at": -1,
+       "mood": "shocked",
+       "emotes": [
+        {
+         "at": "rattled",
+         "kind": "!!"
+        }
+       ]
+      },
+      {
+       "cast": "cadet",
+       "x": 0.75,
+       "y": 0.99,
+       "scale": 0.9,
+       "at": -1,
+       "mood": "scared",
+       "emotes": [
+        {
+         "at": "rats",
+         "kind": "sweat"
+        }
+       ]
+      },
+      {
+       "type": "text",
+       "text": "TOP MILITARY SCHOOLS",
+       "y": 0.06,
+       "size": 90,
+       "color": "#ffe11a",
+       "font": "Bangers",
+       "at": "military"
+      }
+     ]
+    },
+    {
+     "at": "went",
+     "bg": {
+      "type": "boiler",
+      "doorOpen": false,
+      "dark": true,
+      "coal": false
+     },
+     "items": [
+      {
+       "cast": "german",
+       "x": 0.3,
+       "y": 0.86,
+       "face": "right",
+       "at": -1,
+       "mood": "worried",
+       "pose": "hold",
+       "hold": "torch",
+       "emotes": [
+        {
+         "at": 0.3,
+         "kind": "sweat"
+        }
+       ]
+      },
+      {
+       "type": "coal",
+       "x": 0.74,
+       "y": 0.88,
+       "at": -1
+      },
+      {
+       "type": "text",
+       "text": "SEARCHING...",
+       "y": 0.14,
+       "size": 120,
+       "color": "#ffe11a",
+       "font": "Bangers",
+       "at": "searching"
+      }
+     ]
+    }
+   ]
   },
   {
    "say": "Britain's verdict? The trouble it caused them was a bigger success than if the rats had actually been used. The rats never blew up a single boiler. Just the idea of them was enough.",
    "direction": "wry, then quieter and slower at the very end",
    "pause": 1.2,
    "rawAudio": "assets/voice/line08.wav",
-   "voiceNote": "Charon on gemini-3.8-flash-tts; the model read the style aloud first, so the take was cut at the pause before the line"
+   "voiceNote": "Charon on gemini-3.8-flash-tts; the model read the style aloud first, so the take was cut at the pause before the line",
+   "shots": [
+    {
+     "bg": {
+      "type": "room",
+      "wall": "#d9cfb8",
+      "floor": "#6b4a32",
+      "props": [
+       {
+        "type": "flag",
+        "flag": "uk",
+        "x": 0.82
+       },
+       "window"
+      ]
+     },
+     "items": [
+      {
+       "cast": "officer",
+       "x": 0.3,
+       "y": 0.84,
+       "face": "right",
+       "at": -1,
+       "mood": "smug",
+       "pose": "hold",
+       "hold": "paper"
+      },
+      {
+       "cast": "officer2",
+       "x": 0.72,
+       "y": 0.84,
+       "face": "left",
+       "at": -1,
+       "moods": [
+        {
+         "at": 0,
+         "mood": "neutral"
+        },
+        {
+         "at": "success",
+         "mood": "happy"
+        }
+       ],
+       "poses": [
+        {
+         "at": "success",
+         "pose": "cheer"
+        }
+       ]
+      },
+      {
+       "type": "typed",
+       "text": "SOE REPORT: RATS",
+       "x": 0.5,
+       "y": 0.32,
+       "at": "verdict",
+       "dur": 0.8,
+       "size": 60
+      },
+      {
+       "type": "check",
+       "x": 0.5,
+       "y": 0.32,
+       "scale": 2.4,
+       "at": "success"
+      },
+      {
+       "type": "text",
+       "text": "BIGGER SUCCESS",
+       "y": 0.1,
+       "size": 120,
+       "color": "#ffe11a",
+       "font": "Bangers",
+       "at": "bigger"
+      }
+     ]
+    },
+    {
+     "at": "never",
+     "bg": {
+      "type": "boiler",
+      "doorOpen": false,
+      "dark": true,
+      "coal": false
+     },
+     "camera": [
+      {
+       "at": 0,
+       "zoom": 1.0
+      },
+      {
+       "at": 0,
+       "zoom": 1.25,
+       "y": 0.8,
+       "dur": 6
+      }
+     ],
+     "items": [
+      {
+       "type": "coal",
+       "x": 0.5,
+       "y": 0.92,
+       "scale": 1.3,
+       "at": -1
+      },
+      {
+       "type": "rat",
+       "x": 0.52,
+       "y": 0.8,
+       "scale": 0.9,
+       "dead": true,
+       "at": -1
+      }
+     ]
+    }
+   ]
   }
- ]
+ ],
+ "cast": {
+  "officer": {
+   "type": "char",
+   "outfit": "suit",
+   "color": "#2f3b52",
+   "hair": "short",
+   "hairColor": "#5d4037",
+   "mustache": "thin"
+  },
+  "officer2": {
+   "type": "char",
+   "outfit": "suit",
+   "color": "#5a4f44",
+   "hair": "side",
+   "hairColor": "#3e2f22",
+   "glasses": true
+  },
+  "student": {
+   "type": "char",
+   "outfit": "civil",
+   "color": "#f4f4f0",
+   "hair": "short",
+   "hairColor": "#5d4037",
+   "mustache": "thin",
+   "glasses": true
+  },
+  "stoker": {
+   "type": "char",
+   "outfit": "civil",
+   "color": "#4a4f57",
+   "hat": "cap",
+   "hatColor": "#333",
+   "hair": "short",
+   "mustache": "walrus",
+   "hairColor": "#3e2f22"
+  },
+  "german": {
+   "type": "char",
+   "outfit": "military",
+   "color": "#6b6f5a",
+   "hat": "cap",
+   "hatColor": "#4a4d40",
+   "hair": "short",
+   "hairColor": "#c9a36b",
+   "mustache": "thin"
+  },
+  "cadet": {
+   "type": "char",
+   "outfit": "military",
+   "color": "#6b6f5a",
+   "hat": "cap",
+   "hatColor": "#4a4d40",
+   "hair": "short",
+   "hairColor": "#8a6a3a"
+  }
+ }
 }
