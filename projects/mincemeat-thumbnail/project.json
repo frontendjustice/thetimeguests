@@ -1,0 +1,149 @@
+{
+ "name": "mincemeat-thumbnail",
+ "captions": {
+  "enabled": false
+ },
+ "autoPush": false,
+ "cast": {
+  "martin": {
+   "type": "char",
+   "outfit": "military",
+   "color": "#2f4a6b",
+   "hat": "cap",
+   "hatColor": "#1c2c4c",
+   "hair": "short",
+   "hairColor": "#3e2f22"
+  },
+  "montagu": {
+   "type": "char",
+   "outfit": "navy",
+   "color": "#1c2c4c",
+   "hat": "navy",
+   "hair": "short",
+   "hairColor": "#3e2f22",
+   "mustache": "thin"
+  },
+  "cholmondeley": {
+   "type": "char",
+   "outfit": "military",
+   "color": "#5a6f8f",
+   "hat": "cap",
+   "hatColor": "#3f5070",
+   "hair": "short",
+   "mustache": "walrus",
+   "hairColor": "#5d4037",
+   "glasses": true
+  },
+  "hitler": {
+   "type": "char",
+   "outfit": "military",
+   "color": "#7a7a63",
+   "hair": "side",
+   "mustache": "toothbrush"
+  },
+  "spy": {
+   "type": "char",
+   "outfit": "civil",
+   "color": "#4a4a3a",
+   "hat": "fedora",
+   "hatColor": "#222",
+   "hair": "slick",
+   "mustache": "thin"
+  },
+  "michael": {
+   "type": "char",
+   "outfit": "civil",
+   "color": "#5a5048",
+   "hair": "short",
+   "hairColor": "#444"
+  }
+ },
+ "scenes": [
+  {
+   "dur": 2,
+   "shots": [
+    {
+     "bg": {
+      "type": "spotlight",
+      "color": "#0b0d12"
+     },
+     "items": [
+      {
+       "type": "text",
+       "text": "A DEAD MAN",
+       "font": "Bangers",
+       "at": -5,
+       "y": 0.115,
+       "size": 230,
+       "color": "#ffe11a",
+       "strokeW": 32,
+       "spacing": 4
+      },
+      {
+       "type": "text",
+       "text": "FOOLED HITLER",
+       "font": "Bangers",
+       "at": -5,
+       "y": 0.205,
+       "size": 142,
+       "color": "#ffffff",
+       "strokeW": 24,
+       "spacing": 3
+      },
+      {
+       "cast": "martin",
+       "x": 0.52,
+       "y": 0.84,
+       "scale": 1.25,
+       "face": "right",
+       "at": -5,
+       "enter": "none",
+       "mood": "dead",
+       "pose": "hold",
+       "hold": "briefcase"
+      },
+      {
+       "cast": "hitler",
+       "x": 0.15,
+       "y": 0.95,
+       "scale": 0.8,
+       "face": "right",
+       "at": -5,
+       "enter": "none",
+       "mood": "shocked",
+       "pose": "point",
+       "emotes": [
+        {
+         "at": -5,
+         "kind": "!!",
+         "until": 9
+        }
+       ]
+      },
+      {
+       "type": "text",
+       "style": "stamp",
+       "text": "TOP SECRET",
+       "at": -5,
+       "x": 0.72,
+       "y": 0.83,
+       "size": 54,
+       "rotate": -8
+      },
+      {
+       "type": "text",
+       "style": "stamp",
+       "text": "TRUE STORY",
+       "at": -5,
+       "x": 0.5,
+       "y": 0.285,
+       "size": 56,
+       "rotate": -4,
+       "color": "#ffe11a"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

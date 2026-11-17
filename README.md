@@ -38,7 +38,7 @@ Options: `--fps 30`, `--workers 4`, `--no-sfx`, `--out file.mp4`.
   "name": "file-name-for-output",
   "voice": { "name": "Charon", "speed": 1.0 },  // Gemini voice; also "style", "model", "maxPause"
   "captions": { "mode": "word", "color": "#ffe11a", "size": 92, "y": 0.85 }, // or mode "phrase"
-  "handle": "@thetimeguests",
+  "handle": "@thetimeguest",
   "music": "assets/music.mp3", "musicVolume": 0.12,   // optional
   "sfx": { "volume": 1 },                              // or { "enabled": false }
   "scenes": [ { "say": "...", "bg": { ... }, "items": [ ... ], "camera": [ ... ] } ]
