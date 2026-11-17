@@ -10,7 +10,7 @@ Target: about 60s, about 165 words. Narrator: Charon (the Garbo and Mincemeat vo
 | 4 | Officer 1 | What if there's a dead rat in the coal? | sly, conspiratorial | office, two officers; a rat on the desk. Captions off |
 | 5 | Officer 2 | The stoker throws it in the fire… | eager | the officer mimes shovelling |
 | 6 | Officer 1 | …and boom! | delighted | a cartoon explosion bubble over the desk |
-| 7 | Narrator | So they bought about a hundred dead rats in London, claiming they were for science experiments. | amused | a London shop counter; an officer in a fake lab coat; a crate of rats; "FOR SCIENCE" label |
+| 7 | Narrator | So they got about a hundred rats in London, claiming they were for medical experiments. | amused | a London shop counter; an officer in a fake lab coat; a crate of rats; "FOR SCIENCE" label |
 | 8 | Narrator | They filled them with plastic explosive, ready to hide in German coal piles. | conspiratorial | workshop: a rat with explosive inside, a fuse; rats lined up on a coal heap |
 | 9 | Narrator | But the very first shipment was caught by the Germans. The plan was dead. | flat, comic beat on "dead" | a German checkpoint opens the crate; "CAPTURED" stamp |
 | 10 | Narrator | Or was it? The Germans panicked. They showed the rats off at their top military schools, and went searching for more. | turning, faster | a German classroom: officer points at a rat on a blackboard; cadets "!!"; soldiers with torches search coal piles |
@@ -23,17 +23,17 @@ About 165 words.
 
 - standard English; "1941" → TTS "nineteen forty-one"
 
-## Fact check (search summaries; primary SOE file HS 7/49 and the 1999 Guardian article not read directly)
+## Fact check (Wikipedia article read directly, citing the 1999 Guardian report on the released SOE files; the Guardian page itself could not be fetched)
 
 | Claim | Status |
 |---|---|
 | SOE (Britain's sabotage and resistance organisation) developed explosive rats around 1941 | confirmed (Wikipedia, National Archives HS 7/49, Natural History Museum) |
 | Idea: dead rats with explosive left among the coal near boilers, so a stoker would shovel them into the furnace | confirmed |
-| About a hundred rats procured from a London supplier, with a cover story of experiments | confirmed; the cover varies (lab / university / medical), so the script says "science experiments" |
+| About a hundred rats procured "ostensibly for medical experiments", then killed and filled with explosive | confirmed (Wikipedia, citing the Guardian). London supplier: several secondary sources |
 | Filled with plastic explosive | confirmed |
 | The first shipment was intercepted by the Germans; the plan was dropped | confirmed |
 | The Germans exhibited the rats at top military schools and searched for more | confirmed |
 | SOE: "the trouble caused to them was a much greater success to us than if the rats had actually been used" | quoted in several secondary sources; line 11 paraphrases it |
 | "Never blew up a single boiler" | the one claim of nine damaged Belgian boilers is described as probably a myth; the plan was dropped. **Weakest line**: alternative "The rats were never used" |
 | Lines 4–6 | dramatized dialogue |
-| Left out: the "skinned and sewn" construction (not confirmed), exact dates of the interception, the Belgian boilers story | — |
+| Left out: the construction details (Wikipedia: explosive "sewn inside them"; not needed on screen), exact dates of the interception, the Belgian boilers story | — |
