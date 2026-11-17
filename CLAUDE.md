@@ -1,0 +1,54 @@
+# thetimeguests: project context for Claude Code
+
+YouTube history Shorts channel **@thetimeguest**: animated WW2 "why/how" explainers in the style of MapLore-type channels, but with original topics, scripts and art. Everything is code-drawn (maps, characters, props) and rendered by this repo's engine. Read `README.md` for the engine reference and `docs/reference-breakdown.md` for the style rules learned from a shot-by-shot study of a top channel.
+
+## Setup in a fresh session
+
+```bash
+npm install                       # map data, geo libs, fonts
+node src/cli.mjs projects/mincemeat --shots   # smoke test: one still per shot
+```
+
+- Playwright/Chromium and ffmpeg are expected to be preinstalled in the cloud container.
+- Gemini is used for voice, transcription and video review. Requests go through `src/gemini.mjs` (curl, proxy-injected key).
+- Renders (`projects/*/out/`) and caches (`projects/*/.cache/`) are **not** in git. Approved voice takes **are** committed (`projects/*/assets/voice/lineNN.wav`, referenced by `rawAudio`), so re-rendering any finished video costs zero API calls.
+
+## Finished videos
+
+| project | title | notes |
+|---|---|---|
+| `projects/switzerland` | Why Hitler Never Invaded Switzerland | 47s, 19 shots; older voice pipeline (no `rawAudio`, so it depends on `.cache`) |
+| `projects/turkey` | How Turkey Survived WW2 Without Firing a Shot | 60s, 20 shots, voiced Churchill/İnönü skit; thumbnail in `projects/turkey-thumbnail` |
+| `projects/mincemeat` | The Dead Man Who Fooled Hitler (Operation Mincemeat) | 58s, 23 shots, the current quality bar; thumbnail in `projects/mincemeat-thumbnail`; fact-checked script in `script.md` |
+
+Topic ideas not yet made: the Ghost Army (inflatable tanks), why Ireland stayed neutral.
+
+## Workflow (follow this order)
+
+1. **Topic**: not already covered by MapLore; must be *visual* (every beat drawable).
+2. **Script**: about 150–180 words (about 60s). Hook with a paradox in line 1, short skit mid-way, payoff, quiet close. **Fact-check every claim with web search before voicing.** Keep uncertain details vague ("decades later", "July"), and cut what can't be verified. Save as `projects/<name>/script.md`. Get the user's approval.
+3. **Voice first** (`--audio`): writes `out/speech-report.md` and `out/narration-preview.m4a`. Send the preview to the user before building visuals.
+   - Narrator: `gemini-3.1-flash-tts-preview`, voice `Charon`, Switzerland/Mincemeat style string (it gives about 5.3 syl/s). Pin `voice.model`.
+   - Character lines: `gemini-2.5-flash-preview-tts` with other voices (Orus, Puck, Algenib, Iapetus), with `captions: false`.
+   - Merge narrator sentences into about 7–10 clips (quota!). Keep `direction` short. Long prompts get **read aloud**.
+   - Use `tts` for respellings and spelled-out years; `say` stays the caption text.
+   - Gate each clip: the transcript must match. Check suspicious words by cutting the audio and transcribing just that part (this caught a dropped "him").
+   - When a clip passes: `node src/lock.mjs projects/<name> [lines]`, then commit.
+4. **Art gallery**: render new props as full-res stills before using them in shots.
+5. **Shots**: about 2.5s each, every noun or verb shown literally, action from frame 0, a different location per beat. Check with `--shots`, then the full render.
+6. **Review the actual MP4**: frame sheets every 0.5s; loudness (effects about 0.5 dB over the voice, no spikes in pauses). Fix, re-render, re-check.
+7. **Deliver**: video, thumbnail (separate one-shot project, 1080×1920, checked at feed size), title (short hook, under about 40 chars, plus `#history #didyouknow #ww2`).
+
+## Hard limits and gotchas
+
+- **Gemini free tier: about 10 TTS requests per model per day.** Every probe counts. Read the 429 body: `PerDay` means stop until reset. Never let the engine silently fall back to another model or to silence; the render warns "SILENT PLACEHOLDER", so don't ship that.
+- **Image and music generation (Gemini/Lyria) has quota 0** on this key, so all art is code-drawn. Engine hooks exist (`bg.type: "image"` with `prompt`) if a paid key appears.
+- **Wikimedia, archives, HuggingFace are blocked** by the network policy, so there are no archive photos and no offline speech recognition.
+- Gemini video/audio reviews have hallucinated (e.g. "background music" that doesn't exist). Verify with measurements and frame sheets.
+- Word timing: estimated, then snapped to real pauses of 0.1s or more (`alignedTimings`). Shorter "pauses" are consonants.
+- Fonts: Bangers (captions, headlines), Gochi Hand (speech lines), Inter (UI). Don't add CSS that overrides `font-family` on SVG text.
+
+## Git
+
+- Work on the session's branch; commit and push after every meaningful step (the container is ephemeral).
+- Commit messages end with the attribution lines the environment provides. Never put model names in commits.
