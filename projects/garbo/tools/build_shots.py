@@ -133,7 +133,7 @@ shots[7] = [
     {'type': 'marker', 'pos': NORMANDY, 'label': 'NORMANDY', 'at': 0, 'dy': 60, 'size': 60, 'r': 20},
     {'type': 'text', 'text': 'A TRICK!', 'at': 'trick', 'x': 0.32, 'y': 0.44, 'size': 100, 'color': '#ffe11a', 'font': 'Bangers'},
     {'type': 'cross', 'pos': NORMANDY, 'scale': 1.3, 'at': 'trick'},
-    {'type': 'wararrow', 'from': [1.0, 52.3], 'to': CALAIS, 'at': 'real', 'text': 'REAL?', 'width': 80},
+    {'type': 'wararrow', 'from': [1.0, 52.3], 'to': CALAIS, 'at': 'real', 'text': 'REAL?', 'width': 80, 'sfx': 'whoosh'},
     {'type': 'marker', 'pos': CALAIS, 'label': 'CALAIS', 'at': 'Calais', 'color': '#ffd23f', 'dx': 40, 'size': 60, 'r': 20}]},
 ]
 # 9. army waits at Calais, two medals

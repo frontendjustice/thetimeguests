@@ -1728,7 +1728,8 @@
        ],
        "at": "real",
        "text": "REAL?",
-       "width": 80
+       "width": 80,
+       "sfx": "whoosh"
       },
       {
        "type": "marker",

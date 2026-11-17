@@ -62,7 +62,7 @@ export function sfxEvents(scenes, opts = {}) {
         case 'mushroom': add('boom', t, 1); break;
         case 'icon': case 'fire': case 'bunker': case 'tunnel': case 'bridge': if ((it.at || 0) >= 0) add('pop', t, 0.4); break;
         case 'drawer': if (it.closeAt != null) add('slam', sc.start + it.closeAt + 0.1, 0.45); break;
-        case 'door': if (it.closeAt != null) add('slam', sc.start + it.closeAt + 0.1, 0.5); break;
+        case 'door': if (it.closeAt != null) add('slam', sc.start + it.closeAt + 0.1, 0.35); break;
         case 'typewriter': { const t0 = sc.start + (it.typeAt == null ? (it.at || 0) : it.typeAt); for (let k = 0; k < Math.floor((it.dur || 1.5) / 0.11); k++) add('tick', t0 + k * 0.11 + (k % 3) * 0.02, 0.35); break; }
         case 'radio': if (it.sendAt != null) for (let k = 0; k < 8; k++) add('tick', sc.start + it.sendAt + k * 0.16 + (k % 2) * 0.06, 0.3); break;
         case 'doc': case 'medal': case 'agentcard': case 'chicken': if ((it.at || 0) >= 0) add('pop', t, 0.4); break;
