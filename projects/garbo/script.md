@@ -1,6 +1,6 @@
 # Garbo: The Spy Whose Agents Didn't Exist
 
-Target: about 70–75s, about 210 words (Mincemeat: 165 words in 58s). Narrator: Charon (the Mincemeat voice and style). Skit: Garbo and his MI5 handler (dramatized).
+Target: about 70–75s, about 215 words (Mincemeat: 165 words in 58s). Narrator: Charon (the Mincemeat voice and style). Skit: Garbo and his MI5 handler (dramatized).
 
 | # | Speaker | Line | Delivery | On screen |
 |---|---|---|---|---|
@@ -9,7 +9,7 @@ Target: about 70–75s, about 210 words (Mincemeat: 165 words in 58s). Narrator:
 | 3 | Narrator | So he came up with a better plan. Spy for Germany… and feed them lies. | sly, a smile in the voice | he shakes hands with a German officer, fingers crossed behind his back |
 | 4 | Narrator | He wasn't even in Britain. From Lisbon, he faked it all with a guidebook, train timetables and newsreels. | brisk, amused | "LONDON" label crossed out over a Lisbon café; guidebook, timetable and a cinema screen pop up around his typewriter |
 | 5 | Narrator | His lies were so good, Germany's navy chased a convoy he'd made up. Suddenly, Britain wanted him after all. | building, then a wry turn | night sea: German ships sweep searchlights over empty water; then a British officer's phone rings |
-| 6 | Narrator | MI5 named him Garbo, the best actor in the world, and together they invented a whole spy network. | admiring, conspiratorial | codename card typed "GARBO" under a film-star spotlight; a corkboard map of Britain fills with pins and string |
+| 6 | Narrator | MI5, Britain's spy-catchers, named him Garbo, the best actor in the world, and together they invented a whole spy network. | admiring, conspiratorial | "MI5: Britain's spy-catchers" label over a magnifying glass on a London building; codename card typed "GARBO" under a film-star spotlight; a corkboard map of Britain fills with pins and string |
 | 7 | Garbo | My man in Liverpool missed a whole fleet! | panicked, comic | Garbo at the corkboard; ships sail past a sleeping agent card in Liverpool. Captions off |
 | 8 | Handler | Then he got sick. | calm, dry | the handler draws a thermometer on the card |
 | 9 | Garbo | And died! Put it in the papers. | delighted | the card gets a black border; a newspaper obituary slides in |
@@ -21,7 +21,7 @@ Target: about 70–75s, about 210 words (Mincemeat: 165 words in 58s). Narrator:
 | 15 | Narrator | Forty years later, a historian found him alive, in Venezuela. | gentle surprise | a phone book, then a pin in Venezuela, then an old man opening a door; "1984" |
 | 16 | Narrator | That June, he walked Normandy's beaches, as veterans lined up to thank him. | slow, warm close | Normandy beach at dawn; an old man walking; a line of veterans; fade |
 
-About 210 words.
+About 215 words.
 
 ## Voice plan (10 clips or fewer, for the TTS quota)
 
@@ -33,6 +33,7 @@ Characters, `gemini-2.5-flash-preview-tts`, with `captions: false`: Garbo (7, 9)
 - Juan → "hwahn"
 - Pujol → **to decide**: Spanish "poo-HOLE" (recommended; he is best known as Juan Pujol García) or Catalan "poo-ZHOL"
 - Calais → "KAL-ay"
+- MI5 → "M-I-five" (TTS text "M I 5")
 - Lisbon, Liverpool, Normandy, Venezuela: standard English
 - "twenty-seven" is already spelled out
 
@@ -47,6 +48,7 @@ Primary pages (mi5.gov.uk, spartacus-educational.com, agentgarbo.com, wikipedia)
 | Offered to spy for Britain and was turned down | confirmed. The count varies (three or more), so the script gives none |
 | Became a German (Abwehr) agent and reported from Lisbon, pretending to be in Britain | confirmed. "He wasn't even in Britain" refers to this period only (MI5 brought him over in 1942) |
 | The German navy searched for a Liverpool→Malta convoy he had reported (Feb 1942); British intelligence noticed, which led to his recruitment | confirmed (several sources). One source says a real convoy roughly matched, so the script says "a convoy he'd made up" (his report), not "a convoy that didn't exist". MI6 interviewed him first, then MI5 ran him |
+| MI5 = Britain's Security Service, which catches enemy spies at home (counter-espionage); MI5 officer Cyril Mills renamed him GARBO | confirmed |
 | Sources: tourist guide (Blue Guide), railway guide or timetable, newsreels | confirmed (several sources) |
 | MI5 took him on (1942); codename GARBO after Greta Garbo, "the best actor in the world" | confirmed (Cyril Mills renamed him from BOVRIL). The script gives no year |
 | Built the network with MI5 (handler Tomás Harris) | confirmed |
