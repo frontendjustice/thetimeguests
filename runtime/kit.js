@@ -737,3 +737,103 @@ BGX.beach = (bg) => {
   const r = rng(9); for (let i = 0; i < 60; i++) o += `<circle cx="${f1(r() * W)}" cy="${f1(sy + 40 + r() * (H - sy))}" r="${f1(2 + r() * 3)}" fill="#cdb78c"/>`;
   return o;
 };
+
+// ================= Rats kit: rat, crate, boiler room, coal heap, classroom, shop, thought bubble =================
+// rat (side view). dead: X eyes, legs up. explosive: cut-away showing explosive and stitches. `fuse` lights a fuse
+function ratSVG(o, lt) {
+  const dead = !!o.dead, sd = o.seed || 0, sniff = dead ? 0 : Math.sin(lt * 9 + sd) * 3, tailW = dead ? 0 : Math.sin(lt * 3 + sd) * 10;
+  let s = `<path d="M-95,10 C-160,${f1(30 + tailW)} -200,${f1(-20 - tailW)} -250,${f1(10 + tailW)}" stroke="#d99a9a" stroke-width="9" fill="none" stroke-linecap="round"/>`;
+  if (dead) s += [-50, -20, 30, 60].map(x => `<path d="M${x},20 l${x % 2 ? -6 : 6},-36" stroke="#d99a9a" stroke-width="7" stroke-linecap="round" transform="rotate(180 ${x} 20)"/>`).join('');
+  else s += [-50, -20, 30, 60].map(x => `<path d="M${x},28 l${x < 0 ? -8 : 8},26" stroke="#d99a9a" stroke-width="7" stroke-linecap="round"/>`).join('');
+  s += `<ellipse cx="0" cy="0" rx="105" ry="${dead ? 48 : 52}" fill="${o.color || '#8a8580'}" stroke="#333" stroke-width="5"/><path d="M-70,18 Q0,48 70,18" stroke="#b4aea8" stroke-width="10" fill="none"/>`;
+  if (o.explosive) s += `<path d="M-60,-8 Q0,-40 60,-8 Q0,26 -60,-8Z" fill="#3b2a24"/><g>${[-36, -12, 12, 36].map(x => `<rect x="${x - 10}" y="-24" width="20" height="30" rx="5" fill="#d62828" stroke="#6b0f0f" stroke-width="3"/>`).join('')}</g><path d="M-62,-10 Q0,-44 62,-10" stroke="#333" stroke-width="4" fill="none" stroke-dasharray="8 8"/><path d="M-62,-6 Q0,26 62,-6" stroke="#333" stroke-width="4" fill="none" stroke-dasharray="8 8"/>`;
+  s += `<g transform="translate(${f1(100 + sniff)},-10)"><path d="M-30,-40 Q30,-40 70,10 Q30,34 -30,30Z" fill="${o.color || '#8a8580'}" stroke="#333" stroke-width="5" stroke-linejoin="round"/><circle cx="72" cy="10" r="10" fill="#e78fa0" stroke="#333" stroke-width="3"/>`;
+  s += `<path d="M-14,-40 Q-30,-90 6,-80 Q20,-60 4,-38" fill="#e7a8b0" stroke="#333" stroke-width="5"/>`;
+  s += dead ? `<path d="M14,-14 l16,16 M30,-14 l-16,16" stroke="#111" stroke-width="5" stroke-linecap="round"/>` : `<circle cx="22" cy="-6" r="7" fill="#111"/><circle cx="24" cy="-8" r="2.5" fill="#fff"/>`;
+  s += `<path d="M66,14 l30,-8 M66,18 l30,6 M66,22 l26,16" stroke="#555" stroke-width="2"/></g>`;
+  if (o.fuse) { const sp = (lt * 7) % 1; s += `<path d="M-100,-20 q-30,-60 -10,-90" stroke="#5b4630" stroke-width="5" fill="none"/><circle cx="-110" cy="-112" r="${f1(10 + sp * 8)}" fill="#ffd23f" opacity="${f1(1 - sp * 0.6)}"/><circle cx="-110" cy="-112" r="6" fill="#fff"/>`; }
+  return s;
+}
+ITEM.rat = (it, lt) => {
+  let [x, y] = posOf(it); if (it.to) { const b = pt(it.to), q = easeIO(clamp((lt - (it.moveAt == null ? (it.at || 0) : it.moveAt)) / (it.moveDur || 1))); x = lerp(x, b[0], q); y = lerp(y, b[1], q); }
+  const s = (it.scale || 1) * popT(it, lt) * (1 - exitP(it, lt)), f = it.face === 'left' ? -1 : 1;
+  return `<g transform="translate(${f1(x)},${f1(y)}) rotate(${it.rotate || 0}) scale(${f1(f * s * 100) / 100},${f1(s * 100) / 100})" filter="url(#ds)">${ratSVG(it, lt)}</g>`;
+};
+
+// wooden crate with stencilled label; lid flips open at `openAt` and rats peek out (`rats`: number)
+ITEM.crate = (it, lt) => {
+  const [x, y] = posOf(it); const s = (it.scale || 1) * popT(it, lt);
+  const open = it.openAt != null && lt >= it.openAt ? easeOut(clamp((lt - it.openAt) / 0.35)) : 0, shake = it.openAt != null && lt >= it.openAt - 0.4 && lt < it.openAt ? Math.sin(lt * 70) * 4 : 0;
+  let o = `<g transform="translate(${f1(x + shake)},${f1(y)}) scale(${f1(s * 100) / 100})" filter="url(#ds)">`;
+  if (open > 0) for (let k = 0; k < (it.rats || 3); k++) o += `<g transform="translate(${-120 + k * 120},${f1(-250 + 60 * (1 - open))}) rotate(${-62 + k * 12}) scale(.72)">${ratSVG({ dead: it.dead !== false, seed: k }, lt)}</g>`;
+  o += `<rect x="-230" y="-260" width="460" height="260" fill="#b98a55" stroke="#5c3b1e" stroke-width="7"/>${[-180, -120, -60].map(yy => `<path d="M-230,${yy} H230" stroke="#8a6238" stroke-width="5"/>`).join('')}<path d="M-230,-260 L230,0 M230,-260 L-230,0" stroke="#8a6238" stroke-width="10" opacity=".55"/>`;
+  o += `<text y="-115" font-size="${it.labelSize || 46}" font-weight="900" text-anchor="middle" fill="#2b1b0c" font-family="Inter" letter-spacing="3" opacity=".85">${esc(it.label || '')}</text>`;
+  o += open > 0 ? `<g transform="translate(250,-250) rotate(${f1(25 * open)})"><rect x="-20" y="-60" width="220" height="40" fill="#c99b62" stroke="#5c3b1e" stroke-width="6" transform="rotate(-8)"/></g>`
+    : `<rect x="-240" y="-292" width="480" height="40" fill="#c99b62" stroke="#5c3b1e" stroke-width="6"/>`;
+  return o + '</g>';
+};
+
+// boiler room: brick wall, pipes, gauge, furnace (door open = fire glow), coal heap
+BGX.boiler = (bg, lt = 0) => {
+  let o = `<rect width="${W}" height="${H}" fill="#3a2a24"/>`;
+  for (let y = 0; y < 1380; y += 50) for (let x = ((y / 50) % 2) * -60; x < W; x += 120) o += `<rect x="${x + 3}" y="${y + 3}" width="114" height="44" fill="#5a3a2e" opacity=".9"/>`;
+  o += `<path d="M0,180 H${W}" stroke="#6d6d6d" stroke-width="40"/><path d="M0,180 H${W}" stroke="#8a8a8a" stroke-width="10"/><path d="M${W - 160},180 V560" stroke="#6d6d6d" stroke-width="40"/>`;
+  o += `<g transform="translate(${W - 160},430)"><circle r="60" fill="#e9e4d8" stroke="#333" stroke-width="10"/><path d="M0,0 L${f1(Math.cos(-0.6 + Math.sin(lt * 2) * 0.15) * 44)},${f1(Math.sin(-0.6 + Math.sin(lt * 2) * 0.15) * 44)}" stroke="#c62828" stroke-width="7"/><path d="M-40,20 A44,44 0 0 1 40,20" stroke="#c62828" stroke-width="6" fill="none" opacity=".5"/></g>`;
+  const fx = (bg.furnaceX || 0.4) * W;
+  o += `<rect x="${fx - 300}" y="420" width="600" height="960" rx="40" fill="#2c2c2e" stroke="#111" stroke-width="10"/><rect x="${fx - 250}" y="470" width="500" height="80" fill="#3a3a3c"/>${[0, 1, 2, 3, 4].map(k => `<circle cx="${fx - 240 + k * 120}" cy="510" r="12" fill="#555"/>`).join('')}`;
+  const door = `<rect x="${fx - 160}" y="760" width="320" height="260" rx="20"`;
+  if (bg.doorOpen !== false) {
+    const fl = 0.85 + 0.15 * Math.sin(lt * 13) * Math.sin(lt * 7);
+    o += `<radialGradient id="furn"><stop offset="0" stop-color="#fff3b0"/><stop offset=".45" stop-color="#ff9a1e"/><stop offset="1" stop-color="#b3260f"/></radialGradient>${door} fill="url(#furn)" opacity="${f1(fl)}"/>`;
+    for (let k = 0; k < 5; k++) { const h = 90 + 50 * Math.sin(lt * 9 + k * 1.7); o += `<path d="M${fx - 130 + k * 65},1015 q20,${f1(-h)} 30,${f1(-h - 30)} q10,${f1(h * 0.6)} 30,${f1(h + 30)}Z" fill="#ffd23f" opacity=".8"/>`; }
+    o += `<ellipse cx="${fx}" cy="1250" rx="420" ry="140" fill="#ff8a1e" opacity="${f1(0.12 * fl)}"/>`;
+  } else o += `${door} fill="#1e1e20" stroke="#111" stroke-width="8"/>`;
+  o += `<rect x="${fx - 180}" y="740" width="360" height="300" rx="26" fill="none" stroke="#111" stroke-width="16"/>`;
+  o += `<rect y="1380" width="${W}" height="${H - 1380}" fill="#2a2420"/><path d="M0,1380 H${W}" stroke="#15110f" stroke-width="10"/>`;
+  if (bg.coal !== false) o += coalHeap(W * (bg.coalX || 0.82), 1500, 1.2);
+  if (bg.dark) o += `<rect width="${W}" height="${H}" fill="#000" opacity=".55"/><ellipse cx="${fx}" cy="900" rx="420" ry="420" fill="#ff8a1e" opacity=".08"/>`;
+  return o;
+};
+function coalHeap(x, y, s) {
+  const r = rng(hashStr('coal' + x));
+  let o = `<g transform="translate(${f1(x)},${f1(y)}) scale(${s})"><path d="M-260,40 Q-200,-120 -40,-170 Q80,-200 180,-90 Q250,-20 270,40Z" fill="#1c1c1e"/>`;
+  for (let i = 0; i < 40; i++) { const a = r() * Math.PI, rr = r() * 0.9, cx = Math.cos(a) * 230 * rr, cy = 30 - Math.sin(a) * 180 * rr; o += `<path d="M${f1(cx - 18)},${f1(cy)} l${f1(10 + r() * 8)},-${f1(12 + r() * 10)} l${f1(16 + r() * 8)},${f1(4)} l-4,${f1(16 + r() * 6)}Z" fill="${r() > 0.5 ? '#2d2d31' : '#3a3a40'}" stroke="#0e0e10" stroke-width="2"/>`; }
+  return o + '</g>';
+}
+ITEM.coal = (it, lt) => { const [x, y] = posOf(it); return `<g opacity="${f1(appear(it, lt))}">${coalHeap(x, y, it.scale || 1)}</g>`; };
+
+// German military classroom: blackboard with a chalk rat and ACHTUNG!, rows of desks
+BGX.classroom = (bg) => {
+  let o = `<rect width="${W}" height="${H}" fill="#cbc3ae"/><rect y="1300" width="${W}" height="${H - 1300}" fill="#6b4a32"/>`;
+  o += `<rect x="90" y="240" width="${W - 180}" height="620" fill="#2f4a3a" stroke="#6b4a32" stroke-width="22"/><rect x="90" y="860" width="${W - 180}" height="22" fill="#8a6238"/>`;
+  o += `<text x="${W / 2}" y="350" font-size="92" text-anchor="middle" fill="#f4f4ee" font-family="Gochi Hand" opacity=".9">ACHTUNG!</text>`;
+  o += `<g transform="translate(${W / 2},620) scale(1.5)" opacity=".85" fill="none" stroke="#f4f4ee" stroke-width="5"><ellipse rx="105" ry="50"/><path d="M95,-20 Q140,-40 180,10 Q140,34 95,24"/><path d="M110,-40 Q100,-80 130,-74"/><path d="M-100,10 C-150,40 -190,-20 -240,10"/><path d="M128,-10 l10,10 M138,-10 l-10,10"/></g>`;
+  o += `<text x="${W - 120}" y="820" text-anchor="end" font-size="60" fill="#f4f4ee" font-family="Gochi Hand" opacity=".85">= BOMBE!</text>`;
+  o += `${flagSVG('wehrmacht', W / 2 - 90, 60, 180, 120)}`;
+  return o;
+};
+ITEM.desk = (it, lt) => { const [x, y] = posOf(it); const s = it.scale || 1; return `<g transform="translate(${f1(x)},${f1(y)}) scale(${s})"><rect x="-200" y="-20" width="400" height="40" fill="#8a6238" stroke="#4a3018" stroke-width="5"/><rect x="-180" y="20" width="18" height="160" fill="#4a3018"/><rect x="162" y="20" width="18" height="160" fill="#4a3018"/></g>`; };
+
+// shop: counter, shelves of jars and cages, sign
+BGX.shop = (bg) => {
+  let o = `<rect width="${W}" height="${H}" fill="#e9dcc0"/><rect x="140" y="120" width="${W - 280}" height="120" fill="#2f4a3a" stroke="#c9a54a" stroke-width="8"/><text x="${W / 2}" y="205" font-size="64" font-weight="900" text-anchor="middle" fill="#f3e3a8" font-family="Georgia, serif">${esc(bg.sign || 'SUPPLIES')}</text>`;
+  for (const sy of [520, 800]) {
+    o += `<rect x="60" y="${sy}" width="${W - 120}" height="22" fill="#7a5230"/>`;
+    for (let k = 0; k < 7; k++) { const cx = 120 + k * 135; o += k % 3 === 1 ? `<rect x="${cx - 50}" y="${sy - 120}" width="100" height="120" fill="none" stroke="#888" stroke-width="5"/>${[0, 1, 2, 3].map(j => `<path d="M${cx - 50 + j * 25},${sy - 120} v120" stroke="#888" stroke-width="3"/>`).join('')}` : `<rect x="${cx - 36}" y="${sy - 110}" width="72" height="110" rx="12" fill="#cfe7f5" stroke="#666" stroke-width="4" opacity=".9"/><rect x="${cx - 40}" y="${sy - 124}" width="80" height="20" fill="#7a5230"/><rect x="${cx - 26}" y="${sy - 70}" width="52" height="30" fill="#fff"/>`; }
+  }
+  o += `<rect y="1180" width="${W}" height="${H - 1180}" fill="#6b4a32"/><rect x="0" y="1180" width="${W}" height="260" fill="#8a6238" stroke="#4a3018" stroke-width="8"/><rect x="0" y="1160" width="${W}" height="30" fill="#a57a48"/>`;
+  return o;
+};
+
+// thought bubble that shows an imagined scene: kind boom (cartoon blast) | rat
+ITEM.thought = (it, lt) => {
+  const [x, y] = posOf(it); const s = (it.scale || 1) * popT(it, lt) * (1 - exitP(it, lt));
+  let o = `<g transform="translate(${f1(x)},${f1(y)}) scale(${f1(s * 100) / 100})">`;
+  if (it.tail) { const [tx, ty] = [it.tail.x * W - x, it.tail.y * H - y]; [0.35, 0.6, 0.82].forEach((k, i) => { o += `<circle cx="${f1(tx * (1 - k))}" cy="${f1(ty * (1 - k) + 0)}" r="${14 + i * 10}" fill="#fff" stroke="#333" stroke-width="5"/>`; }); }
+  o += `<path d="M-230,0 Q-260,-110 -150,-130 Q-120,-210 -20,-180 Q60,-240 140,-170 Q250,-170 240,-60 Q290,40 190,90 Q140,170 30,130 Q-60,190 -140,120 Q-260,120 -230,0Z" fill="#fff" stroke="#333" stroke-width="6"/>`;
+  if (it.kind === 'boom') {
+    const p = clamp((lt - (it.at || 0) - 0.15) / 0.3), pts = Array.from({ length: 16 }, (_, k) => { const a = k * Math.PI / 8, r = k % 2 ? 70 : 140; return `${f1(Math.cos(a) * r)},${f1(Math.sin(a) * r * 0.7)}`; }).join(' ');
+    o += `<g transform="translate(0,-20) scale(${f1(backOut(p))})"><polygon points="${pts}" fill="#ffd23f" stroke="#e53935" stroke-width="8"/>${outlineText(0, 26, it.text || 'BOOM!', { size: 74, font: 'Bangers', color: '#e53935', stroke: 8, strokeColor: '#fff' })}</g>`;
+  } else o += `<g transform="translate(-10,-10) scale(.75)">${ratSVG({ dead: true }, lt)}</g>`;
+  return o + '</g>';
+};

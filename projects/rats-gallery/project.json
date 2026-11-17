@@ -1,0 +1,291 @@
+{
+ "name": "rats-gallery",
+ "captions": {
+  "enabled": false
+ },
+ "autoPush": false,
+ "scenes": [
+  {
+   "dur": 2,
+   "shots": [
+    {
+     "bg": {
+      "type": "spotlight"
+     },
+     "items": [
+      {
+       "type": "crate",
+       "x": 0.5,
+       "y": 0.72,
+       "label": "TOP SECRET",
+       "openAt": 0.5,
+       "rats": 3,
+       "at": -1
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dur": 2,
+   "shots": [
+    {
+     "bg": {
+      "type": "plain",
+      "color": "#e9e4d8"
+     },
+     "items": [
+      {
+       "type": "rat",
+       "x": 0.3,
+       "y": 0.35,
+       "at": -1
+      },
+      {
+       "type": "rat",
+       "x": 0.65,
+       "y": 0.55,
+       "dead": true,
+       "at": -1,
+       "face": "left"
+      },
+      {
+       "type": "rat",
+       "x": 0.5,
+       "y": 0.8,
+       "dead": true,
+       "explosive": true,
+       "fuse": true,
+       "scale": 1.4,
+       "at": -1
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dur": 2,
+   "shots": [
+    {
+     "bg": {
+      "type": "boiler"
+     },
+     "items": [
+      {
+       "type": "char",
+       "outfit": "civil",
+       "color": "#4a4f57",
+       "hat": "cap",
+       "hatColor": "#333",
+       "hair": "short",
+       "mustache": "walrus",
+       "hairColor": "#3e2f22",
+       "x": 0.75,
+       "y": 0.86,
+       "face": "left",
+       "pose": "hold",
+       "hold": "shovel:coal",
+       "mood": "neutral",
+       "at": -1
+      },
+      {
+       "type": "rat",
+       "x": 0.84,
+       "y": 0.74,
+       "dead": true,
+       "scale": 0.6,
+       "at": -1
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dur": 2,
+   "shots": [
+    {
+     "bg": {
+      "type": "room",
+      "wall": "#d8cdb4",
+      "floor": "#4e3626",
+      "props": [
+       {
+        "type": "lamp",
+        "x": 0.5
+       }
+      ]
+     },
+     "items": [
+      {
+       "type": "char",
+       "outfit": "suit",
+       "color": "#2f3b52",
+       "hair": "short",
+       "hairColor": "#5d4037",
+       "mustache": "thin",
+       "x": 0.28,
+       "y": 0.84,
+       "face": "right",
+       "mood": "smug",
+       "pose": "point",
+       "at": -1
+      },
+      {
+       "type": "thought",
+       "x": 0.62,
+       "y": 0.3,
+       "kind": "boom",
+       "tail": {
+        "x": 0.35,
+        "y": 0.5
+       },
+       "at": -1
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dur": 2,
+   "shots": [
+    {
+     "bg": {
+      "type": "shop",
+      "sign": "LAB SUPPLIES"
+     },
+     "items": [
+      {
+       "type": "char",
+       "outfit": "civil",
+       "color": "#f4f4f0",
+       "hair": "short",
+       "hairColor": "#5d4037",
+       "glasses": true,
+       "x": 0.3,
+       "y": 0.92,
+       "face": "right",
+       "mood": "smug",
+       "at": -1
+      },
+      {
+       "type": "crate",
+       "x": 0.66,
+       "y": 0.72,
+       "scale": 0.8,
+       "label": "FOR EXPERIMENTS",
+       "labelSize": 34,
+       "openAt": 0.3,
+       "dead": false,
+       "at": -1
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dur": 2,
+   "shots": [
+    {
+     "bg": {
+      "type": "classroom"
+     },
+     "items": [
+      {
+       "type": "char",
+       "outfit": "military",
+       "color": "#6b6f5a",
+       "hat": "cap",
+       "hatColor": "#4a4d40",
+       "hair": "short",
+       "hairColor": "#c9a36b",
+       "x": 0.18,
+       "y": 0.8,
+       "face": "right",
+       "pose": "point",
+       "mood": "angry",
+       "at": -1
+      },
+      {
+       "type": "desk",
+       "x": 0.5,
+       "y": 0.88
+      },
+      {
+       "type": "char",
+       "outfit": "military",
+       "color": "#6b6f5a",
+       "hat": "cap",
+       "hatColor": "#4a4d40",
+       "hair": "short",
+       "hairColor": "#c9a36b",
+       "mustache": null,
+       "x": 0.35,
+       "y": 0.98,
+       "scale": 0.9,
+       "mood": "shocked",
+       "at": -1,
+       "emotes": [
+        {
+         "at": -1,
+         "kind": "!!"
+        }
+       ]
+      },
+      {
+       "type": "char",
+       "outfit": "military",
+       "color": "#6b6f5a",
+       "hat": "cap",
+       "hatColor": "#4a4d40",
+       "hair": "short",
+       "hairColor": "#c9a36b",
+       "mustache": null,
+       "x": 0.7,
+       "y": 0.98,
+       "scale": 0.9,
+       "mood": "scared",
+       "at": -1
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dur": 2,
+   "shots": [
+    {
+     "bg": {
+      "type": "boiler",
+      "doorOpen": false,
+      "dark": true,
+      "coal": false
+     },
+     "items": [
+      {
+       "type": "char",
+       "outfit": "military",
+       "color": "#6b6f5a",
+       "hat": "cap",
+       "hatColor": "#4a4d40",
+       "hair": "short",
+       "hairColor": "#c9a36b",
+       "x": 0.3,
+       "y": 0.86,
+       "face": "right",
+       "pose": "hold",
+       "hold": "torch",
+       "mood": "worried",
+       "at": -1
+      },
+      {
+       "type": "coal",
+       "x": 0.72,
+       "y": 0.86,
+       "at": -1
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

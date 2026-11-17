@@ -229,7 +229,7 @@ function bgSVG(sc, lt) {
   }
 }
 const BGX_get = t => (window.BGX || {})[t];
-const animatedBg = bg => bg && (bg.type === 'sky' || bg.type === 'sea' || bg.type === 'image');
+const animatedBg = bg => bg && (bg.type === 'sky' || bg.type === 'sea' || bg.type === 'image' || bg.type === 'boiler' || bg.type === 'nightsea');
 
 function roomSVG(bg) {
   const wall = bg.wall || '#efe4cc', floor = bg.floor || '#8a5a3b', fy = (bg.horizon || 0.62) * H;
@@ -714,6 +714,8 @@ function holdSVG(what, x, y, f) {
     case 'briefcase': return `<g transform="translate(${f1(x)},${f1(y + 60)})"><path d="M${f1(-f * 4)},-62 q${f * 10},20 ${f * 4},44" stroke="#9aa0a6" stroke-width="6" fill="none" stroke-dasharray="8 5"/><rect x="-62" y="-20" width="124" height="88" rx="10" fill="#6d4325" stroke="#2b1a0e" stroke-width="5"/><path d="M-24,-20 v-16 h48 v16" fill="none" stroke="#2b1a0e" stroke-width="6"/><rect x="-10" y="10" width="20" height="14" fill="#d4a93a" stroke="#2b1a0e" stroke-width="3"/></g>`;
     case 'phone': return `<g transform="translate(${f1(x)},${f1(y)})"><path d="M-30,-20 q30,-30 60,0 l-10,10 q-20,-14 -40,0z" fill="#222"/></g>`;
     case 'pistol': return `<g transform="translate(${f1(x)},${f1(y)}) scale(${f},1)"><path d="M-6,-10 h56 v14 h-38 l-6,26 h-14z" fill="#2b2b2b" stroke="#111" stroke-width="3"/></g>`;
+    case 'shovel': return `<g transform="translate(${f1(x)},${f1(y)}) rotate(${f * 35})"><rect x="-6" y="-170" width="12" height="190" fill="#7a5230" stroke="#111" stroke-width="3"/><path d="M-26,-182 h52 v-14 h-52z" fill="#5a3a22"/><path d="M-40,20 h80 l-10,80 q-30,20 -60,0z" fill="#8a8f96" stroke="#111" stroke-width="4"/>${arg === 'coal' ? '<path d="M-34,26 q34,-30 68,0z" fill="#222"/>' : ''}</g>`;
+    case 'torch': return `<g transform="translate(${f1(x)},${f1(y)}) rotate(${f * -20})"><path d="M0,0 L${f * 420},-120 L${f * 420},120Z" fill="#fff8d0" opacity=".35"/><rect x="${f > 0 ? -60 : 0}" y="-14" width="60" height="28" rx="6" fill="#333" stroke="#111" stroke-width="3"/></g>`;
     case 'magnifier': return `<g transform="translate(${f1(x)},${f1(y)}) rotate(${f * -30})"><rect x="-9" y="10" width="18" height="90" rx="8" fill="#6d4325" stroke="#111" stroke-width="4"/><circle cy="-40" r="52" fill="#cfe9f7" fill-opacity=".55" stroke="#333" stroke-width="12"/><path d="M-26,-62 q14,-14 32,-10" stroke="#fff" stroke-width="7" fill="none"/></g>`;
     case 'pointer': return `<line x1="${f1(x)}" y1="${f1(y)}" x2="${f1(x + f * 120)}" y2="${f1(y - 90)}" stroke="#7a4a22" stroke-width="7" stroke-linecap="round"/>`;
     default: return '';
