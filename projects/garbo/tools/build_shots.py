@@ -19,7 +19,7 @@ UKMAP = {'type': 'map', 'view': [{'at': 0, 'lon': -3, 'lat': 54.6, 'span': 15}, 
 TOWNS = [[-2.98,53.41],[-4.25,55.86],[-3.19,55.95],[-1.9,52.48],[-2.24,53.48],[-1.55,53.8],[-1.08,53.96],[-2.59,51.45],[-3.18,51.48],[-1.61,54.97],[-2.1,57.15],[-4.14,50.37],[-1.4,50.9],[1.3,52.63],[1.08,51.28],[-1.26,51.75],[0.12,52.2],[-3.97,51.62],[-1.47,53.38],[-1.15,52.95],[-0.34,53.74],[-3.0,56.46],[-4.22,57.48],[-5.93,54.6],[-1.08,50.8],[-2.36,51.38],[0.5,51.38]]
 assert len(TOWNS) == 27
 LONDON, LISBON, BERLIN, CALAIS, NORMANDY = [-0.13, 51.5], [-9.14, 38.72], [13.4, 52.5], [1.86, 50.95], [-0.6, 49.35]
-SKITROOM = {'type': 'room', 'wall': '#d9cfb8', 'floor': '#6b4a32', 'props': [{'type': 'wallmap', 'focus': ['UK'], 'cities': [{'name': 'Liverpool', 'lon': -2.98, 'lat': 53.41}], 'x': 0.5, 'y': 0.04, 'w': 0.4, 'h': 0.21}]}
+SKITROOM = {'type': 'room', 'wall': '#d9cfb8', 'floor': '#6b4a32', 'props': [{'type': 'lamp', 'x': 0.5}]}
 UKROOM = {'type': 'room', 'wall': '#d9cfb8', 'floor': '#6b4a32', 'props': [{'type': 'flag', 'flag': 'uk', 'x': 0.82}, 'window']}
 DEROOM = {'type': 'room', 'wall': '#c9c2ae', 'floor': '#4e3626', 'props': [{'type': 'flag', 'flag': 'wehrmacht', 'x': 0.8}, {'type': 'lamp', 'x': 0.25}]}
 bubble = lambda text, **k: dict({'text': text, 'at': 0, 'until': 'end', 'dx': 230, 'dy': -60, 'size': 70}, **k)
@@ -31,6 +31,7 @@ shots[0] = [
     {'type': 'text', 'style': 'date', 'text': '1944', 'at': 0.1},
     {'cast': 'garbo', 'pos': [-1.3, 52.4], 'scale': 0.5, 'face': 'right', 'at': 0, 'enter': 'drop', 'mood': 'smug', 'pose': 'hips'},
     {'type': 'web', 'hub': LONDON, 'points': TOWNS, 'at': 'twenty', 'every': 0.045, 'dur': 0.2},
+    {'type': 'text', 'text': "HITLER'S TOP SPY", 'at': 'Hitler', 'until': 'twenty', 'y': 0.13, 'size': 110, 'color': '#ffe11a', 'font': 'Bangers'},
     {'type': 'text', 'text': '27 AGENTS', 'at': 'agents', 'y': 0.12, 'size': 130, 'color': '#ffe11a', 'font': 'Bangers'}]},
   {'at': 'Not', 'bg': {'type': 'map', 'view': [{'at': 0, 'lon': -2.6, 'lat': 53.6, 'span': 11}], 'fills': UKMAP['fills']}, 'items': [
     {'type': 'web', 'hub': LONDON, 'points': TOWNS, 'at': -5, 'every': 0, 'ghostAt': 0.15, 'ghostDur': 1.4},
@@ -66,8 +67,8 @@ shots[2] = [
   {'bg': {'type': 'map', 'view': [{'at': 0, 'lon': -3, 'lat': 48, 'span': 26}], 'fills': [{'countries': ['UK'], 'color': '#c9b98f', 'at': -5, 'fade': 0}, {'countries': ['Portugal'], 'color': '#9fc7a6', 'at': -5, 'fade': 0}]}, 'items': [
     {'type': 'marker', 'pos': LONDON, 'label': 'LONDON?', 'at': 0},
     {'type': 'cross', 'pos': LONDON, 'scale': 1.2, 'at': 'even'},
-    {'type': 'arrow', 'from': LONDON, 'to': LISBON, 'at': 'Britain+0.2', 'color': '#ffe11a', 'width': 16},
-    {'type': 'marker', 'pos': LISBON, 'label': 'LISBON', 'at': 'Britain+0.6', 'color': '#2e7d32'}]},
+    {'type': 'arrow', 'from': LONDON, 'to': LISBON, 'at': 'even+0.15', 'color': '#ffe11a', 'width': 16},
+    {'type': 'marker', 'pos': LISBON, 'label': 'LISBON', 'at': 'even+0.5', 'color': '#2e7d32'}]},
   {'at': 'From', 'bg': {'type': 'lisbon'}, 'items': [
     {'cast': 'garbo', 'x': 0.28, 'y': 0.88, 'face': 'right', 'at': -1, 'mood': 'smug'},
     {'type': 'cafetable', 'x': 0.62, 'y': 0.82},
@@ -101,18 +102,18 @@ shots[3] = [
 ]
 # 5-7. skit
 shots[4] = [{'bg': SKITROOM, 'items': [
-  {'type': 'agentcard', 'x': 0.5, 'y': 0.36, 'scale': 0.85, 'label': 'LIVERPOOL', 'at': -1},
-  {'cast': 'garbo', 'x': 0.24, 'y': 0.84, 'face': 'right', 'at': -1, 'mood': 'shocked', 'pose': 'point', 'emotes': [{'at': 0.2, 'kind': 'sweat'}], 'say': [bubble('My man in Liverpool missed the whole fleet!', dx=190, dy=-80, size=62)]},
-  {'cast': 'handler', 'x': 0.78, 'y': 0.84, 'face': 'left', 'at': -1, 'mood': 'worried'}]}]
+  {'type': 'agentcard', 'x': 0.5, 'y': 0.25, 'scale': 1.25, 'label': 'LIVERPOOL', 'at': -1},
+  {'cast': 'garbo', 'x': 0.2, 'y': 0.86, 'face': 'right', 'at': -1, 'mood': 'shocked', 'pose': 'point', 'emotes': [{'at': 0.2, 'kind': 'sweat'}], 'say': [bubble('My man in Liverpool missed the whole fleet!', dx=190, dy=-80, size=62)]},
+  {'cast': 'handler', 'x': 0.8, 'y': 0.86, 'face': 'left', 'at': -1, 'mood': 'worried'}]}]
 shots[5] = [{'bg': SKITROOM, 'items': [
-  {'type': 'agentcard', 'x': 0.5, 'y': 0.36, 'scale': 0.85, 'label': 'LIVERPOOL', 'at': -1, 'sickAt': 0.35},
-  {'cast': 'garbo', 'x': 0.24, 'y': 0.84, 'face': 'right', 'at': -1, 'mood': 'worried'},
-  {'cast': 'handler', 'x': 0.78, 'y': 0.84, 'face': 'left', 'at': -1, 'mood': 'smug', 'pose': 'point', 'say': [bubble('Then he got sick.', dx=-200, dy=-80, size=66)]}]}]
+  {'type': 'agentcard', 'x': 0.5, 'y': 0.25, 'scale': 1.25, 'label': 'LIVERPOOL', 'at': -1, 'sickAt': 0.35},
+  {'cast': 'garbo', 'x': 0.2, 'y': 0.86, 'face': 'right', 'at': -1, 'mood': 'worried'},
+  {'cast': 'handler', 'x': 0.8, 'y': 0.86, 'face': 'left', 'at': -1, 'mood': 'smug', 'pose': 'point', 'say': [bubble('Then he got sick.', dx=-200, dy=-80, size=66)]}]}]
 shots[6] = [{'bg': SKITROOM, 'items': [
-  {'type': 'agentcard', 'x': 0.5, 'y': 0.36, 'scale': 0.85, 'label': 'LIVERPOOL', 'at': -1, 'sickAt': -1, 'deadAt': 0.2},
-  {'cast': 'garbo', 'x': 0.24, 'y': 0.84, 'face': 'right', 'at': -1, 'mood': 'happy', 'pose': 'cheer', 'jumps': [0.1], 'say': [bubble('And died! Put it in the paper.', dx=190, dy=-80, size=62)]},
-  {'cast': 'handler', 'x': 0.78, 'y': 0.84, 'face': 'left', 'at': -1, 'mood': 'happy'},
-  {'type': 'doc', 'kind': 'obituary', 'x': 0.5, 'y': 0.7, 'scale': 0.75, 'rotate': 6, 'at': 'paper'}]}]
+  {'type': 'agentcard', 'x': 0.5, 'y': 0.25, 'scale': 1.25, 'label': 'LIVERPOOL', 'at': -1, 'sickAt': -1, 'deadAt': 0.2},
+  {'cast': 'garbo', 'x': 0.2, 'y': 0.86, 'face': 'right', 'at': -1, 'mood': 'happy', 'pose': 'cheer', 'jumps': [0.1], 'say': [bubble('And died! Put it in the paper.', dx=190, dy=-80, size=62)]},
+  {'cast': 'handler', 'x': 0.8, 'y': 0.86, 'face': 'left', 'at': -1, 'mood': 'happy'},
+  {'type': 'doc', 'kind': 'obituary', 'x': 0.5, 'y': 0.66, 'scale': 0.7, 'rotate': 6, 'at': 'paper'}]}]
 # 8. salaries, D-Day, the big lie
 shots[7] = [
   {'bg': {'type': 'map', 'view': [{'at': 0, 'lon': 5, 'lat': 52.5, 'span': 24}], 'fills': [{'countries': ['UK'], 'color': '#c9b98f', 'at': -5, 'fade': 0}, {'countries': ['Germany'], 'color': '#8f8f7a', 'at': -5, 'fade': 0}]}, 'items': [
@@ -128,19 +129,21 @@ shots[7] = [
   {'at': 'Garbo', 'bg': {'type': 'room', 'wall': '#cfc6b3', 'floor': '#5b4030', 'props': ['window']}, 'items': [
     {'type': 'radio', 'x': 0.64, 'y': 0.74, 'scale': 1.0, 'sendAt': 0.1, 'at': -1},
     {'cast': 'garbo', 'x': 0.27, 'y': 0.84, 'face': 'right', 'at': -1, 'mood': 'smug', 'pose': 'point'}]},
-  {'at': 'Normandy', 'bg': {'type': 'map', 'view': [{'at': 0, 'lon': 0.4, 'lat': 50.4, 'span': 9}], 'fills': [{'countries': ['UK'], 'color': '#c9b98f', 'at': -5, 'fade': 0}, {'countries': ['France'], 'color': '#8f8f7a', 'at': -5, 'fade': 0}]}, 'items': [
-    {'type': 'marker', 'pos': NORMANDY, 'label': 'NORMANDY', 'at': 0, 'dy': 50},
+  {'at': 'Normandy', 'bg': {'type': 'map', 'view': [{'at': 0, 'lon': 0.6, 'lat': 50.6, 'span': 7.5}], 'fills': [{'countries': ['UK'], 'color': '#c9b98f', 'at': -5, 'fade': 0}, {'countries': ['France'], 'color': '#8f8f7a', 'at': -5, 'fade': 0}]}, 'items': [
+    {'type': 'marker', 'pos': NORMANDY, 'label': 'NORMANDY', 'at': 0, 'dy': 60, 'size': 60, 'r': 20},
     {'type': 'text', 'text': 'A TRICK!', 'at': 'trick', 'x': 0.32, 'y': 0.44, 'size': 100, 'color': '#ffe11a', 'font': 'Bangers'},
     {'type': 'cross', 'pos': NORMANDY, 'scale': 1.3, 'at': 'trick'},
     {'type': 'wararrow', 'from': [1.0, 52.3], 'to': CALAIS, 'at': 'real', 'text': 'REAL?', 'width': 80},
-    {'type': 'marker', 'pos': CALAIS, 'label': 'CALAIS', 'at': 'Calais', 'color': '#ffd23f', 'dx': 60}]},
+    {'type': 'marker', 'pos': CALAIS, 'label': 'CALAIS', 'at': 'Calais', 'color': '#ffd23f', 'dx': 40, 'size': 60, 'r': 20}]},
 ]
 # 9. army waits at Calais, two medals
 shots[8] = [
   {'bg': {'type': 'map', 'view': [{'at': 0, 'lon': 1.8, 'lat': 50.6, 'span': 6}], 'fills': [{'countries': ['UK'], 'color': '#c9b98f', 'at': -5, 'fade': 0}, {'countries': ['France'], 'color': '#8f8f7a', 'at': -5, 'fade': 0}]}, 'items': [
-    *[{'type': 'token', 'flag': 'wehrmacht', 'pos': p, 'at': 0.1 + k * 0.12, 'r': 36} for k, p in enumerate([[2.2, 50.6], [2.7, 50.8], [2.4, 50.25], [3.0, 50.45], [1.9, 50.2], [2.9, 50.1]])],
-    {'type': 'marker', 'pos': CALAIS, 'label': 'CALAIS', 'at': -1, 'color': '#ffd23f'},
-    {'type': 'icon', 'kind': 'calendar', 'x': 0.78, 'y': 0.26, 'scale': 2.6, 'at': 'weeks'},
+    *[{'type': 'token', 'flag': 'wehrmacht', 'pos': p, 'at': 0.1 + k * 0.12, 'r': 52} for k, p in enumerate([[2.2, 50.6], [2.7, 50.8], [2.4, 50.25], [3.0, 50.45], [1.9, 50.2], [2.9, 50.1]])],
+    {'type': 'marker', 'pos': CALAIS, 'label': 'CALAIS', 'at': -1, 'color': '#ffd23f', 'size': 60, 'r': 20, 'dy': -60},
+    {'type': 'icon', 'kind': 'calendar', 'label': 'JUN', 'x': 0.78, 'y': 0.26, 'scale': 2.6, 'at': 'weeks', 'until': 'weeks+0.7', 'bob': False},
+    {'type': 'icon', 'kind': 'calendar', 'label': 'JUL', 'x': 0.78, 'y': 0.26, 'scale': 2.6, 'at': 'weeks+0.7', 'until': 'weeks+1.4', 'bob': False},
+    {'type': 'icon', 'kind': 'calendar', 'label': 'AUG', 'x': 0.78, 'y': 0.26, 'scale': 2.6, 'at': 'weeks+1.4', 'bob': False},
     {'type': 'text', 'text': 'WAITING...', 'at': 'army', 'y': 0.12, 'size': 110, 'color': '#ffe11a', 'font': 'Bangers'}]},
   {'at': 'waiting', 'bg': {'type': 'beach', 'horizon': 0.48}, 'items': [
     {'cast': 'soldier', 'x': 0.3, 'y': 0.86, 'face': 'right', 'at': -1, 'mood': 'worried', 'pose': 'hold', 'hold': 'rifle', 'emotes': [{'at': 0.3, 'kind': '...'}]},
@@ -170,8 +173,8 @@ shots[9] = [
     {'cast': 'oldgarbo', 'pos': [-66.9, 8.0], 'scale': 0.6, 'at': 0, 'enter': 'drop', 'mood': 'happy', 'pose': 'wave'},
     {'type': 'text', 'text': 'ALIVE!', 'at': 0.05, 'y': 0.14, 'size': 140, 'color': '#ffe11a', 'font': 'Bangers'}]},
   {'at': 'That', 'bg': {'type': 'beach'}, 'items': [
-    {'cast': 'oldgarbo', 'x': 0.15, 'y': 0.86, 'face': 'right', 'at': -1, 'mood': 'happy', 'moves': [{'at': 0, 'x': 0.36, 'y': 0.86, 'dur': 2.2}]},
-    *[{'type': 'char', 'outfit': 'suit', 'color': c, 'hair': h, 'hairColor': '#eee', 'medals': True, 'x': 0.58 + k * 0.14, 'y': 0.85, 'scale': 0.9, 'face': 'left', 'at': 'veterans+' + str(round(k * 0.2, 2)), 'enter': 'right', 'mood': 'happy', 'poses': [{'at': 'thank', 'pose': 'wave' if k % 2 == 0 else 'cheer'}]} for k, (c, h) in enumerate([('#2f3b52', 'white'), ('#4b3b2f', 'bald'), ('#2f4a3b', 'sides')])]]},
+    {'cast': 'oldgarbo', 'x': -0.1, 'y': 0.86, 'face': 'right', 'at': -1, 'mood': 'happy', 'moves': [{'at': 0, 'x': 0.25, 'y': 0.86, 'dur': 2.4}]},
+    *[{'type': 'char', 'outfit': 'suit', 'color': c, 'hair': h, 'hairColor': '#eee', 'medals': True, 'x': 0.55 + k * 0.16, 'y': 0.85, 'scale': 0.78, 'face': 'left', 'at': 'veterans+' + str(round(k * 0.2, 2)), 'enter': 'right', 'mood': 'happy', 'poses': [{'at': 'thank', 'pose': 'wave' if k % 2 == 0 else 'cheer'}]} for k, (c, h) in enumerate([('#2f3b52', 'white'), ('#4b3b2f', 'bald'), ('#2f4a3b', 'sides')])]]},
 ]
 for sc, sh in zip(proj['scenes'], shots):
   sc['shots'] = sh

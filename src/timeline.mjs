@@ -38,7 +38,7 @@ export function resolveCue(v, words, dur, ctx) {
   return words[i].t0 + off; // may be negative: already happened before this shot
 }
 
-const CUE_KEYS = new Set(['at', 'until', 'moveAt', 'blowAt', 'explosives', 'closeAt', 'paperAt', 'vehicleAt', 'addAt']);
+const CUE_KEYS = new Set(['at', 'until', 'moveAt', 'blowAt', 'explosives', 'closeAt', 'paperAt', 'vehicleAt', 'addAt', 'openAt', 'typeAt', 'sickAt', 'deadAt', 'ghostAt', 'sendAt', 'sendUntil']);
 const CUE_LISTS = new Set(['jumps', 'drops']);
 export function resolveAll(obj, words, dur, ctx) {
   if (Array.isArray(obj)) return obj.map(o => resolveAll(o, words, dur, ctx));
