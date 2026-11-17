@@ -43,7 +43,9 @@
     "sps": 4.6
    },
    "captions": false,
-   "pause": 0.1
+   "pause": 0.1,
+   "rawAudio": "assets/voice/line03.wav",
+   "voiceNote": "gemini-3.8-flash-tts; style read aloud first, take cut at the pause before the line; transcript not yet machine-checked"
   },
   {
    "say": "The stoker throws it in the fire...",
@@ -54,7 +56,9 @@
     "sps": 4.6
    },
    "captions": false,
-   "pause": 0.1
+   "pause": 0.1,
+   "rawAudio": "assets/voice/line04.wav",
+   "voiceNote": "gemini-3.8-flash-tts; style read aloud first, take cut at the pause before the line; transcript not yet machine-checked"
   },
   {
    "say": "...and boom!",
@@ -65,7 +69,9 @@
     "sps": 4.6
    },
    "captions": false,
-   "pause": 0.3
+   "pause": 0.3,
+   "rawAudio": "assets/voice/line05.wav",
+   "voiceNote": "gemini-3.8-flash-tts; style read aloud first, take cut at the pause before the line; transcript not yet machine-checked"
   },
   {
    "say": "So an officer posing as a student got about a hundred rats, claiming they were for experiments. They filled them with plastic explosive, ready to hide in German coal piles.",
