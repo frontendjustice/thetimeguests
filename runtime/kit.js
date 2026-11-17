@@ -290,6 +290,7 @@ ITEM.vehicle = (it, lt) => {
     if (it.smoke !== false && !wrecked) for (let i = 0; i < 6; i++) { const q = (lt * 1.4 + i / 6) % 1; o += `<circle cx="${f1(dir * (-45 - q * 260))}" cy="${f1(-185 - q * 120)}" r="${f1(16 + q * 46)}" fill="url(#gSmokeL)" opacity="${f1((1 - q) * 0.9)}"/>`; }
   } else if (k === 'tank') o += tankSVG(dir, it.color || '#6b6f5a', 1, rot);
   else if (k === 'cart') o += `<g transform="scale(${dir},1)"><path d="M-110,-90 H110 L90,-22 H-90Z" fill="#6d4c41" stroke="#111" stroke-width="5"/>${iconSVG(it.load || 'gold').replace(/^/, '<g transform="translate(0,-120) scale(1.4)">') + '</g>'}${wheel(-60, -18, 20, rot, '#555')}${wheel(60, -18, 20, rot, '#555')}</g>`;
+  else if (k === 'landingcraft') o += `<g transform="scale(${dir},1)"><path d="M-260,-40 H150 L230,-130 V-40 L200,30 H-230Z" fill="#5f6b4f" stroke="#111" stroke-width="6" stroke-linejoin="round"/><rect x="-250" y="-120" width="90" height="80" fill="#4d5740" stroke="#111" stroke-width="5"/><rect x="-235" y="-108" width="30" height="22" fill="#bfe0f2"/>${[-130, -70, -10, 50, 110].map(hx => `<circle cx="${hx}" cy="-62" r="20" fill="#e8c9a8" stroke="#111" stroke-width="4"/><path d="M${hx - 24},-70 a24,22 0 0 1 48,0Z" fill="#6b7a4a" stroke="#111" stroke-width="4"/>`).join('')}<path d="M-260,20 q60,-14 120,0 t120,0 t120,0 t120,0" stroke="#cfe3ff" stroke-width="6" fill="none" opacity=".7"/></g>`;
   else if (k === 'truck') o += `<g transform="scale(${dir},1)"><rect x="-230" y="-150" width="170" height="110" fill="${it.color || '#5d6b3a'}" stroke="#111" stroke-width="5"/><path d="M-56,-40 V-120 H10 L40,-80 V-40Z" fill="${shade(it.color || '#5d6b3a', 0.1)}" stroke="#111" stroke-width="5"/><rect x="-20" y="-112" width="34" height="30" fill="#bfe0f2" stroke="#111" stroke-width="3"/>${wheel(-190, -26, 26, rot, '#333')}${wheel(-100, -26, 26, rot, '#333')}${wheel(10, -26, 26, rot, '#333')}</g>`;
   o += '</g>';
   if (wrecked) o += ITEM.fire({ x: x / W, y: (y - 80 * sc) / H, size: 1.2 * sc, at: it.blowAt, smoke: true }, lt);
@@ -429,3 +430,107 @@ BGX.vault = (bg) => {
   return o;
 };
 BGX.desk = (bg) => `<rect width="${W}" height="${H}" fill="${bg.wall || '#d9c9a8'}"/><rect y="${0.36 * H}" width="${W}" height="${0.64 * H}" fill="#7a4a2a"/><rect y="${0.36 * H - 30}" width="${W}" height="40" fill="#5d3a20"/><path d="M0,${0.36 * H + 10} H${W}" stroke="#4a2c17" stroke-width="6"/>` + Array.from({ length: 10 }, (_, i) => `<path d="M0,${f1(0.42 * H + i * 110)} Q${W / 2},${f1(0.42 * H + i * 110 + 20)} ${W},${f1(0.42 * H + i * 110)}" stroke="#6d4024" stroke-width="4" fill="none" opacity=".6"/>`).join('');
+
+// ================= Mincemeat kit: night sea, submarine, boats, documents, grave, typed text =================
+REGIONS['Sicily'] = [[12.4, 38.1], [13.3, 38.2], [14.3, 38.0], [15.6, 38.3], [15.1, 37.3], [15.3, 37.0], [14.5, 36.7], [12.4, 37.6], [12.4, 38.1]];
+REGIONS['Sardinia'] = [[8.4, 40.9], [9.2, 41.3], [9.8, 40.9], [9.7, 39.8], [9.6, 39.1], [8.9, 38.9], [8.4, 39.0], [8.3, 39.6], [8.5, 40.3], [8.2, 40.9], [8.4, 40.9]];
+
+BGX.nightsea = (bg, lt) => {
+  const hz = (bg.horizon || 0.42) * H, r = rng(77);
+  let o = `<defs><linearGradient id="nsk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#050b1f"/><stop offset="1" stop-color="#1b2d55"/></linearGradient><linearGradient id="nse" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#14284a"/><stop offset="1" stop-color="#050c1c"/></linearGradient><radialGradient id="moonGlow"><stop offset="0" stop-color="#fff8d8" stop-opacity=".55"/><stop offset="1" stop-color="#fff8d8" stop-opacity="0"/></radialGradient></defs>`;
+  o += `<rect width="${W}" height="${hz}" fill="url(#nsk)"/>`;
+  for (let i = 0; i < 70; i++) { const tw = 0.5 + 0.5 * Math.sin(lt * (1 + r() * 3) + i); o += `<circle cx="${f1(r() * W)}" cy="${f1(r() * hz * 0.9)}" r="${f1(1 + r() * 2.2)}" fill="#fff" opacity="${f1(0.3 + 0.6 * tw)}"/>`; }
+  const mx = (bg.moonX || 0.74) * W, my = hz * 0.32;
+  o += `<circle cx="${mx}" cy="${my}" r="230" fill="url(#moonGlow)"/><circle cx="${mx}" cy="${my}" r="62" fill="#fdf6d8"/><circle cx="${mx - 18}" cy="${my - 12}" r="12" fill="#eee5bf"/><circle cx="${mx + 20}" cy="${my + 16}" r="8" fill="#eee5bf"/>`;
+  if (bg.coast) o += `<path d="M0,${hz} L0,${hz - 60} Q120,${hz - 110} 260,${hz - 70} T520,${hz - 40} L560,${hz}Z" fill="#0a1426"/>`;
+  o += `<rect y="${hz}" width="${W}" height="${H - hz}" fill="url(#nse)"/>`;
+  for (let i = 0; i < 18; i++) { const y = hz + 12 + Math.pow(i / 18, 1.7) * (H - hz), w = 40 + i * 9, off = Math.sin(lt * 1.2 + i) * 14; o += `<rect x="${f1(mx - w / 2 + off)}" y="${f1(y)}" width="${f1(w)}" height="${f1(3 + i / 4)}" rx="3" fill="#fff6c9" opacity="${f1(0.55 - i / 40)}"/>`; }
+  for (let i = 0; i < 22; i++) { const y = hz + 20 + Math.pow(i / 22, 1.5) * (H - hz); const off = (lt * 25 * (1 + i / 12) + i * 71) % 220; o += `<path d="M${-220 + off},${f1(y)} q55,-10 110,0 t110,0 t110,0 t110,0 t110,0 t110,0 t110,0 t110,0 t110,0 t110,0 t110,0 t110,0" stroke="rgba(160,190,255,${f1(0.05 + i / 160)})" stroke-width="${f1(2 + i / 5)}" fill="none"/>`; }
+  return o;
+};
+BGX.spotlight = (bg) => `<defs><radialGradient id="spotF" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fff2c4" stop-opacity=".9"/><stop offset="1" stop-color="#fff2c4" stop-opacity="0"/></radialGradient><linearGradient id="spotB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff6d5" stop-opacity=".55"/><stop offset="1" stop-color="#fff6d5" stop-opacity=".05"/></linearGradient></defs>
+  <rect width="${W}" height="${H}" fill="${bg.color || '#0d0f14'}"/><path d="M${W / 2 - 70},0 H${W / 2 + 70} L${W / 2 + 330},${H * 0.8} H${W / 2 - 330}Z" fill="url(#spotB)"/><ellipse cx="${W / 2}" cy="${H * 0.8}" rx="360" ry="80" fill="url(#spotF)"/>`;
+BGX.londonnight = (bg) => {
+  const r = rng(hashStr('london'));
+  let o = `<defs><linearGradient id="lsk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0b1330"/><stop offset="1" stop-color="#3a3f63"/></linearGradient></defs><rect width="${W}" height="${H}" fill="url(#lsk)"/>`;
+  o += `<rect x="${W * 0.66}" y="420" width="120" height="900" fill="#141a33"/><path d="M${W * 0.66 - 10},420 L${W * 0.66 + 60},300 L${W * 0.66 + 130},420Z" fill="#141a33"/><circle cx="${W * 0.66 + 60}" cy="520" r="44" fill="#ffe9a0" stroke="#141a33" stroke-width="8"/><path d="M${W * 0.66 + 60},520 l0,-30 M${W * 0.66 + 60},520 l20,8" stroke="#141a33" stroke-width="6"/>`;
+  for (let layer = 0; layer < 2; layer++) { let x = -20; while (x < W) { const w = 90 + r() * 140, h = (layer ? 380 : 560) + r() * 360, base = 1350; const col = layer ? '#1b2142' : '#252c52'; o += `<rect x="${f1(x)}" y="${f1(base - h)}" width="${f1(w)}" height="${f1(h)}" fill="${col}"/>`; for (let wy = base - h + 30; wy < base - 40; wy += 58) for (let wx = x + 16; wx < x + w - 26; wx += 38) if (r() < 0.35) o += `<rect x="${f1(wx)}" y="${f1(wy)}" width="16" height="24" fill="#ffd36b" opacity="${f1(0.6 + r() * 0.4)}"/>`; x += w + (layer ? 6 : 24); } }
+  o += `<rect y="1350" width="${W}" height="${H - 1350}" fill="#2a2a33"/><rect y="1350" width="${W}" height="14" fill="#15151c"/>`;
+  for (let i = 0; i < 4; i++) o += `<ellipse cx="${f1(r() * W)}" cy="${f1(1200 + r() * 300)}" rx="${f1(300 + r() * 200)}" ry="60" fill="#c9cde0" opacity=".08"/>`;
+  return o;
+};
+BGX.cemetery = (bg) => `<defs><linearGradient id="csk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f6c48a"/><stop offset="1" stop-color="#fbe7c7"/></linearGradient></defs><rect width="${W}" height="${H}" fill="url(#csk)"/>
+  <circle cx="${W * 0.2}" cy="${H * 0.3}" r="110" fill="#ffd27a" opacity=".8"/>
+  <path d="M0,${H * 0.55} Q${W * 0.3},${H * 0.5} ${W * 0.6},${H * 0.54} T${W},${H * 0.52} V${H} H0Z" fill="#9fae6a"/><rect y="${H * 0.62}" width="${W}" height="${H * 0.38}" fill="#87985a"/>
+  ${[0.08, 0.86].map(x => `<path d="M${W * x},${H * 0.62} q-40,-260 0,-520 q40,260 0,520Z" fill="#3f5a32"/>`).join('')}
+  ${[0.25, 0.75].map(x => `<rect x="${W * x - 40}" y="${H * 0.56}" width="80" height="110" rx="30" fill="#c7c0b0" opacity=".7"/>`).join('')}`;
+
+// submarine (side view) that surfaces at `at`; water band drawn over the lower hull
+ITEM.submarine = (it, lt) => {
+  const [x, y] = posOf(it); const s = it.scale || 1, t = lt - (it.at || 0); if (t < -0.01 && it.at > 0) return '';
+  const rise = 1 - easeOut(clamp(t / (it.riseDur || 1.4))), dy = rise * 160, bob = Math.sin(lt * 1.4) * 5;
+  const sea = it.sea || '#14284a';
+  let o = `<g transform="translate(${f1(x)},${f1(y + bob)}) scale(${s})">`;
+  o += `<g transform="translate(0,${f1(dy)})"><path d="M-420,10 Q-430,-40 -330,-50 H330 Q420,-40 440,0 Q420,40 330,46 H-330 Q-430,40 -420,10Z" fill="#2c3440" stroke="#0e1218" stroke-width="6"/>`;
+  o += `<path d="M-90,-50 L-70,-170 H70 L100,-50Z" fill="#2c3440" stroke="#0e1218" stroke-width="6"/><rect x="-10" y="-260" width="10" height="95" fill="#0e1218"/><rect x="-10" y="-260" width="40" height="10" fill="#0e1218"/>`;
+  o += `<rect x="-55" y="-140" width="26" height="14" rx="4" fill="#ffe28a" opacity="${f1(0.6 + 0.4 * Math.sin(lt * 3))}"/><text x="210" y="15" font-size="40" font-weight="900" fill="#97a3b3" font-family="Inter">${esc(it.label || 'P 219')}</text>`;
+  o += `<path d="M-330,-20 H330" stroke="#46505e" stroke-width="5"/></g>`;
+  o += `<rect x="-600" y="10" width="1200" height="260" fill="${sea}" opacity=".88"/><path d="M-600,10 q60,-12 120,0 t120,0 t120,0 t120,0 t120,0 t120,0 t120,0 t120,0 t120,0 t120,0" stroke="#9fb8e8" stroke-width="5" fill="none" opacity=".5"/>`;
+  return o + '</g>';
+};
+// small fishing boat with a fisherman, bobbing; optional move from->to
+ITEM.boat = (it, lt) => {
+  let [x, y] = posOf(it);
+  if (it.to) { const b = pt(it.to), q = easeIO(clamp((lt - (it.moveAt == null ? (it.at || 0) : it.moveAt)) / (it.moveDur || 2))); x = lerp(x, b[0], q); y = lerp(y, b[1], q); }
+  const s = (it.scale || 1) * popT(it, lt), bob = Math.sin(lt * 2) * 8, tilt = Math.sin(lt * 1.6) * 3, f = it.face === 'left' ? -1 : 1;
+  let o = `<g transform="translate(${f1(x)},${f1(y + bob)}) rotate(${f1(tilt)}) scale(${f1(f * s * 100) / 100},${f1(s * 100) / 100})">`;
+  o += `<line x1="-40" y1="-60" x2="-40" y2="-330" stroke="#5d4037" stroke-width="10"/><path d="M-36,-320 L120,-110 H-36Z" fill="#f1e3c3" stroke="#8d7a5a" stroke-width="4"/>`;
+  o += `<g transform="translate(70,-60) scale(.38)">${drawChar({ x: 0, y: 0, outfit: 'civil', color: '#c0573a', hair: 'short', hairColor: '#222', mustache: 'thin', face: 'right', mood: it.mood || 'shocked', pose: it.pose || 'point', enter: 'none', at: -9 }, lt).replace(/translate\([^)]*\) rotate/, 'translate(0,0) rotate')}</g>`;
+  o += `<path d="M-230,-70 H240 L190,30 H-190Z" fill="#c62828" stroke="#5a1010" stroke-width="7" stroke-linejoin="round"/><path d="M-220,-50 H230" stroke="#fff" stroke-width="10"/><text x="-60" y="2" font-size="34" font-weight="900" fill="#fff" font-family="Inter">HUELVA</text>`;
+  return o + '</g>';
+};
+// documents: id | photo | letter | ticket | bank | plans
+function docSVG(kind, text) {
+  switch (kind) {
+    case 'id': return `<rect x="-150" y="-100" width="300" height="200" rx="12" fill="#e9dfc4" stroke="#6b5a3a" stroke-width="5"/><rect x="-130" y="-70" width="100" height="120" fill="#cfc6b0" stroke="#6b5a3a" stroke-width="3"/><circle cx="-80" cy="-30" r="26" fill="#a8977a"/><path d="M-120,40 q40,-40 80,0" fill="#a8977a"/><text x="-10" y="-50" font-size="20" font-weight="800" fill="#4a3a20" font-family="Inter">NAVAL ID</text><path d="M-10,-20 h120 M-10,10 h120 M-10,40 h90" stroke="#9c8a66" stroke-width="7"/><text x="-10" y="80" font-size="22" font-weight="900" fill="#4a3a20" font-family="Inter">W. MARTIN</text>`;
+    case 'photo': return `<rect x="-120" y="-150" width="240" height="300" fill="#fbfaf5" stroke="#999" stroke-width="3"/><rect x="-100" y="-130" width="200" height="220" fill="#8a8f96"/><circle cx="0" cy="-50" r="44" fill="#d9c5b0"/><path d="M-50,-60 q50,-80 100,0 q-10,-30 -50,-40 q-40,10 -50,40Z" fill="#3e2b1f"/><path d="M-70,90 q70,-90 140,0Z" fill="#5b6f8f"/><text y="132" font-size="34" text-anchor="middle" fill="#333" font-family="Gochi Hand">Pam x</text>`;
+    case 'letter': return `<rect x="-140" y="-170" width="280" height="340" fill="#fff7f2" stroke="#d9a6b0" stroke-width="4"/><text x="-110" y="-120" font-size="36" fill="#a83250" font-family="Gochi Hand">My darling Bill,</text>${[0, 1, 2, 3, 4].map(k => `<path d="M-110,${-80 + k * 42} q50,-10 100,0 t110,0" stroke="#a1556b" stroke-width="4" fill="none"/>`).join('')}<path d="M60,120 c0,-25 40,-25 40,0 c0,25 -40,40 -40,50 c0,-10 -40,-25 -40,-50 c0,-25 40,-25 40,0Z" fill="#e53950"/>`;
+    case 'ticket': return `<rect x="-170" y="-70" width="340" height="140" rx="10" fill="#f7d36a" stroke="#8a6a12" stroke-width="5"/><path d="M80,-70 V70" stroke="#8a6a12" stroke-width="4" stroke-dasharray="10 8"/><text x="-150" y="-20" font-size="26" font-weight="900" fill="#5a3f08" font-family="Inter">PRINCE OF WALES</text><text x="-150" y="20" font-size="24" font-weight="800" fill="#5a3f08" font-family="Inter">THEATRE · STALLS</text><text x="96" y="12" font-size="30" font-weight="900" fill="#5a3f08" font-family="Inter">22</text>`;
+    case 'bank': return `<rect x="-150" y="-180" width="300" height="360" fill="#fdfdfb" stroke="#888" stroke-width="4"/><text x="-120" y="-130" font-size="28" font-weight="900" fill="#1f3b6b" font-family="Inter">LLOYDS BANK</text>${[0, 1, 2].map(k => `<path d="M-120,${-80 + k * 36} h240" stroke="#bbb" stroke-width="7"/>`).join('')}<text x="-120" y="60" font-size="40" font-weight="900" fill="#c62828" font-family="Inter">£79 19s 2d</text><g transform="translate(10,130) rotate(-12)"><rect x="-135" y="-34" width="270" height="62" fill="none" stroke="#c62828" stroke-width="7"/><text y="14" font-size="38" font-weight="900" text-anchor="middle" fill="#c62828" font-family="Inter">OVERDRAWN</text></g>`;
+    case 'plans': return `<rect x="-170" y="-210" width="340" height="420" fill="#f5efdc" stroke="#555" stroke-width="4"/><text y="-150" font-size="34" font-weight="900" text-anchor="middle" fill="#8b0000" font-family="Inter">MOST SECRET</text><path d="M-130,-100 h260 M-130,-60 h260 M-130,-20 h200" stroke="#999" stroke-width="8"/><path d="M-110,60 q60,-50 120,-10 l40,-30" stroke="#c62828" stroke-width="9" fill="none"/><path d="M50,0 l26,8 l-18,20z" fill="#c62828"/><text y="150" font-size="30" font-weight="900" text-anchor="middle" fill="#333" font-family="Inter">GREECE · SARDINIA</text>`;
+    default: return outlineText(0, 0, text || kind, { size: 50 });
+  }
+}
+ITEM.doc = (it, lt) => {
+  const [x, y] = posOf(it); const p = appear(it, lt, 0.35), s = (it.scale || 1) * (p >= 1 ? 1 : backOut(p)) * (1 - exitP(it, lt));
+  if (s <= 0) return '';
+  const rot = (it.rotate || 0) + (1 - easeOut(p)) * -25, fly = (1 - easeOut(p)) * 220;
+  return `<g transform="translate(${f1(x)},${f1(y + fly)}) rotate(${f1(rot)}) scale(${f1(s * 100) / 100})" filter="url(#ds)">${docSVG(it.kind, it.text)}</g>`;
+};
+// typewriter text on a card
+ITEM.typed = (it, lt) => {
+  const [x, y] = posOf(it); const txt = String(it.text), n = Math.floor(clamp((lt - (it.at || 0)) / (it.dur || 1.2)) * txt.length);
+  if (lt < (it.at || 0) - 0.3) return '';
+  const size = it.size || 74, w = txt.length * size * 0.62 + 80, cursor = Math.floor(lt * 3) % 2 ? '|' : ' ';
+  return `<g transform="translate(${f1(x)},${f1(y)})" filter="url(#ds)"><rect x="${f1(-w / 2)}" y="${f1(-size * 1.1)}" width="${f1(w)}" height="${f1(size * 1.7)}" fill="#f5efdc" stroke="#6b5a3a" stroke-width="5"/><text x="${f1(-w / 2 + 40)}" y="${f1(size * 0.2)}" font-size="${size}" font-family="Courier New, monospace" font-weight="700" fill="#222">${esc(txt.slice(0, n))}${n < txt.length ? cursor : ''}</text></g>`;
+};
+// camera flash burst with a small camera
+ITEM.flash = (it, lt) => {
+  const t = lt - (it.at || 0); if (t < 0 || t > 1.2) return '';
+  const [x, y] = posOf(it), s = it.scale || 1, k = 1 - clamp(t / 0.5);
+  return `<g transform="translate(${f1(x)},${f1(y)}) scale(${s})"><circle r="${f1(60 + 500 * easeOut(clamp(t / 0.25)))}" fill="url(#gFlash)" opacity="${f1(k)}"/>${[0, 1, 2, 3, 4, 5, 6, 7].map(i => { const a = i * Math.PI / 4; return `<path d="M${f1(Math.cos(a) * 90)},${f1(Math.sin(a) * 90)} L${f1(Math.cos(a) * (90 + 160 * k))},${f1(Math.sin(a) * (90 + 160 * k))}" stroke="#fff" stroke-width="10" stroke-linecap="round" opacity="${f1(k)}"/>`; }).join('')}<g transform="translate(0,0)"><rect x="-70" y="-40" width="140" height="90" rx="12" fill="#333" stroke="#111" stroke-width="5"/><circle cx="0" cy="5" r="28" fill="#555" stroke="#111" stroke-width="5"/><rect x="30" y="-58" width="34" height="20" fill="#333"/></g></g>`;
+};
+// headstone with lines of text; `addAt` carves in the final line(s)
+ITEM.grave = (it, lt) => {
+  const [x, y] = posOf(it); const s = it.scale || 1, lines = it.lines || [], add = it.added || [];
+  let o = `<g transform="translate(${f1(x)},${f1(y)}) scale(${s})" filter="url(#ds)"><path d="M-260,0 V-520 Q-260,-640 0,-650 Q260,-640 260,-520 V0Z" fill="#e2dccf" stroke="#8d8676" stroke-width="8"/><path d="M-230,-30 V-510 Q-230,-610 0,-620 Q230,-610 230,-510 V-30Z" fill="none" stroke="#b9b2a2" stroke-width="4"/><path d="M-20,-600 h40 v40 h40 v40 h-40 v70 h-40 v-70 h-40 v-40 h40z" fill="#b9b2a2"/>`;
+  const top = it.addAbove ? -330 + add.length * 66 : -380;
+  lines.forEach((l, i) => { o += `<text y="${top + i * 62}" font-size="${l.size || 44}" font-weight="800" text-anchor="middle" fill="#5d574a" font-family="Inter">${esc(l.text || l)}</text>`; });
+  if (it.addAt != null && lt >= it.addAt) {
+    const q = clamp((lt - it.addAt) / (it.addDur || 1.4)), y0 = it.addAbove ? -430 : -380 + lines.length * 62 + 30;
+    o += `<clipPath id="carve"><rect x="-240" y="${y0 - 70}" width="${f1(480 * q)}" height="${add.length * 70 + 40}"/></clipPath><g clip-path="url(#carve)">` + add.map((l, i) => `<text y="${y0 + i * 66}" font-size="${l.size || 46}" font-weight="900" text-anchor="middle" fill="#3b352a" font-family="Inter">${esc(l.text || l)}</text>`).join('') + `</g>`;
+    if (q < 1) o += `<circle cx="${f1(-240 + 480 * q)}" cy="${y0 - 10}" r="${f1(8 + Math.random() * 0)}" fill="#fff8c0"/>`;
+  }
+  o += `<rect x="-300" y="-10" width="600" height="40" rx="10" fill="#cfc8b8" stroke="#8d8676" stroke-width="6"/>`;
+  return o + '</g>';
+};

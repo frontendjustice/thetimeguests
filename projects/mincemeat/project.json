@@ -23,7 +23,1398 @@
    "tts": "In nineteen forty-three, Britain's most important secret agent was already dead.",
    "direction": "with a dramatic beat before 'already dead'",
    "pause": 0.3,
-   "rawAudio": "assets/voice/line01.wav"
+   "rawAudio": "assets/voice/line01.wav",
+   "shots": [
+    {
+     "bg": {
+      "type": "spotlight"
+     },
+     "camera": [
+      {
+       "at": 0,
+       "zoom": 1
+      },
+      {
+       "at": 0,
+       "zoom": 1.12,
+       "x": 0.5,
+       "y": 0.5,
+       "dur": 4
+      }
+     ],
+     "items": [
+      {
+       "type": "text",
+       "style": "date",
+       "text": "1943",
+       "at": 0.2
+      },
+      {
+       "cast": "martin",
+       "x": 0.5,
+       "y": 0.8,
+       "scale": 1.2,
+       "face": "right",
+       "at": 0,
+       "enter": "fade",
+       "pose": "hold",
+       "hold": "briefcase",
+       "moods": [
+        {
+         "at": 0,
+         "mood": "smug"
+        },
+        {
+         "at": "dead",
+         "mood": "dead"
+        }
+       ]
+      },
+      {
+       "type": "text",
+       "text": "TOP SECRET AGENT",
+       "font": "Bangers",
+       "at": "secret",
+       "until": "dead",
+       "y": 0.2,
+       "size": 96,
+       "color": "#ffe11a"
+      },
+      {
+       "type": "text",
+       "style": "stamp",
+       "text": "DECEASED",
+       "at": "dead+0.15",
+       "y": 0.22,
+       "size": 90
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "say": "The Allies were about to invade Sicily. The problem? Everyone could see it coming. So British intelligence came up with a plan that sounds completely made up.",
+   "pause": 0.25,
+   "shots": [
+    {
+     "bg": {
+      "type": "map",
+      "view": [
+       {
+        "at": 0,
+        "lon": 12,
+        "lat": 38,
+        "span": 30
+       }
+      ],
+      "fills": [
+       {
+        "countries": [
+         "Germany",
+         "Austria",
+         "Czechia",
+         "Poland",
+         "France",
+         "Belgium",
+         "Netherlands",
+         "Denmark",
+         "Norway",
+         "Yugoslavia",
+         "Greece",
+         "Hungary",
+         "Romania",
+         "Bulgaria",
+         "Italy"
+        ],
+        "color": "#8e44ad",
+        "at": -5,
+        "fade": 0
+       },
+       {
+        "countries": [
+         "Tunisia",
+         "Algeria",
+         "Libya",
+         "Egypt"
+        ],
+        "color": "#1e88e5",
+        "at": -5,
+        "fade": 0
+       },
+       {
+        "countries": [
+         "Sicily"
+        ],
+        "color": "#ffd23f",
+        "at": -5,
+        "fade": 0
+       }
+      ]
+     },
+     "items": [
+      {
+       "type": "wararrow",
+       "from": [
+        10,
+        34.5
+       ],
+       "to": [
+        13,
+        37.1
+       ],
+       "at": "invade",
+       "text": "ALLIES",
+       "width": 90
+      },
+      {
+       "type": "pulse",
+       "pos": [
+        14,
+        37.5
+       ],
+       "at": "Sicily",
+       "r": 140,
+       "color": "#fff3a0"
+      }
+     ]
+    },
+    {
+     "at": "problem",
+     "bg": "same",
+     "keep": true,
+     "items": [
+      {
+       "type": "token",
+       "flag": "wehrmacht",
+       "pos": [
+        13.3,
+        41.5
+       ],
+       "at": 0.05,
+       "r": 40
+      },
+      {
+       "type": "token",
+       "flag": "wehrmacht",
+       "pos": [
+        16.2,
+        40.3
+       ],
+       "at": 0.15,
+       "r": 40
+      },
+      {
+       "type": "token",
+       "flag": "italy",
+       "pos": [
+        11.2,
+        43.4
+       ],
+       "at": 0.25,
+       "r": 40
+      },
+      {
+       "type": "icon",
+       "kind": "exclaim",
+       "pos": [
+        13.3,
+        43
+       ],
+       "at": "Everyone",
+       "scale": 0.8
+      },
+      {
+       "type": "icon",
+       "kind": "exclaim",
+       "pos": [
+        16.5,
+        42
+       ],
+       "at": "Everyone+0.15",
+       "scale": 0.8
+      },
+      {
+       "type": "label",
+       "pos": [
+        14,
+        36.3
+       ],
+       "text": "OBVIOUS TARGET",
+       "size": 50,
+       "at": "coming",
+       "color": "#ffe11a"
+      }
+     ]
+    },
+    {
+     "at": "So",
+     "bg": {
+      "type": "room",
+      "wall": "#e3dcc8",
+      "floor": "#5d4130",
+      "props": [
+       {
+        "type": "window",
+        "x": 0.86
+       },
+       {
+        "type": "lamp",
+        "x": 0.5
+       },
+       {
+        "type": "desk",
+        "x": 0.5,
+        "w": 620
+       },
+       {
+        "type": "flag",
+        "flag": "uk",
+        "x": 0.1
+       }
+      ]
+     },
+     "items": [
+      {
+       "cast": "montagu",
+       "x": 0.3,
+       "y": 0.76,
+       "face": "right",
+       "at": -1,
+       "pose": "think",
+       "mood": "neutral",
+       "emotes": [
+        {
+         "at": "plan",
+         "kind": "idea",
+         "until": "end"
+        }
+       ],
+       "moods": [
+        {
+         "at": 0,
+         "mood": "neutral"
+        },
+        {
+         "at": "plan",
+         "mood": "smug"
+        }
+       ]
+      },
+      {
+       "cast": "cholmondeley",
+       "x": 0.72,
+       "y": 0.76,
+       "face": "left",
+       "at": -1,
+       "pose": "hips",
+       "mood": "neutral",
+       "moods": [
+        {
+         "at": 0,
+         "mood": "neutral"
+        },
+        {
+         "at": "made",
+         "mood": "shocked"
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "rawAudio": "assets/voice/line02.wav"
+  },
+  {
+   "say": "We find a dead body...",
+   "voice": {
+    "name": "Orus",
+    "model": "gemini-2.5-flash-preview-tts",
+    "style": "Say it like a sly British intelligence officer in 1943, quick and conspiratorial",
+    "sps": 4.6
+   },
+   "captions": false,
+   "pause": 0.1,
+   "shots": [
+    {
+     "bg": {
+      "type": "room",
+      "wall": "#d8cdb4",
+      "floor": "#4e3626",
+      "props": [
+       {
+        "type": "lamp",
+        "x": 0.5
+       },
+       {
+        "type": "wallmap",
+        "focus": [
+         "Italy",
+         "Greece"
+        ],
+        "highlight": [
+         "Italy"
+        ],
+        "x": 0.5,
+        "y": 0.1,
+        "w": 0.6,
+        "h": 0.22
+       }
+      ]
+     },
+     "items": [
+      {
+       "cast": "montagu",
+       "x": 0.3,
+       "y": 0.78,
+       "face": "right",
+       "at": -1,
+       "pose": "point",
+       "mood": "smug",
+       "say": [
+        {
+         "text": "We find a dead body...",
+         "at": 0,
+         "until": "end",
+         "dx": 220,
+         "dy": -40
+        }
+       ]
+      },
+      {
+       "cast": "cholmondeley",
+       "x": 0.74,
+       "y": 0.78,
+       "face": "left",
+       "at": -1,
+       "mood": "shocked",
+       "emotes": [
+        {
+         "at": 0.3,
+         "kind": "!!",
+         "until": "end"
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "rawAudio": "assets/voice/line03.wav"
+  },
+  {
+   "say": "...dress him as an officer...",
+   "voice": {
+    "name": "Puck",
+    "model": "gemini-2.5-flash-preview-tts",
+    "style": "Say it like a sly British intelligence officer in 1943, quick and conspiratorial",
+    "sps": 4.6
+   },
+   "captions": false,
+   "pause": 0.1,
+   "shots": [
+    {
+     "bg": {
+      "type": "spotlight"
+     },
+     "items": [
+      {
+       "cast": "martin",
+       "x": 0.5,
+       "y": 0.8,
+       "face": "right",
+       "at": -1,
+       "enter": "none",
+       "outfit": "civil",
+       "color": "#5a5048",
+       "hat": null,
+       "mood": "dead",
+       "holds": []
+      },
+      {
+       "type": "char",
+       "x": 0.5,
+       "y": 0.8,
+       "outfit": "military",
+       "color": "#2f4a6b",
+       "hat": "cap",
+       "hatColor": "#1c2c4c",
+       "hair": "short",
+       "mood": "dead",
+       "face": "right",
+       "at": "officer",
+       "enter": "drop",
+       "shadow": false
+      },
+      {
+       "cast": "cholmondeley",
+       "x": 0.84,
+       "y": 0.8,
+       "face": "left",
+       "at": -1,
+       "pose": "cheer",
+       "mood": "happy",
+       "say": [
+        {
+         "text": "...dress him as an officer...",
+         "at": 0,
+         "until": "end",
+         "dx": -260,
+         "dy": -40
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "rawAudio": "assets/voice/line04.wav"
+  },
+  {
+   "say": "...and chain fake invasion plans to his wrist.",
+   "voice": {
+    "name": "Orus",
+    "model": "gemini-2.5-flash-preview-tts",
+    "style": "Say it like a sly British intelligence officer in 1943, quick and conspiratorial",
+    "sps": 4.6
+   },
+   "captions": false,
+   "pause": 0.3,
+   "shots": [
+    {
+     "bg": {
+      "type": "spotlight"
+     },
+     "items": [
+      {
+       "cast": "martin",
+       "x": 0.5,
+       "y": 0.8,
+       "face": "right",
+       "at": -1,
+       "enter": "none",
+       "mood": "dead",
+       "pose": "down",
+       "holds": [
+        {
+         "at": "chain",
+         "item": "briefcase"
+        }
+       ],
+       "poses": [
+        {
+         "at": 0,
+         "pose": "down"
+        },
+        {
+         "at": "chain",
+         "pose": "hold"
+        }
+       ]
+      },
+      {
+       "cast": "montagu",
+       "x": 0.16,
+       "y": 0.8,
+       "face": "right",
+       "at": -1,
+       "pose": "point",
+       "mood": "smug",
+       "say": [
+        {
+         "text": "...and chain fake invasion plans to his wrist.",
+         "at": 0,
+         "until": "end",
+         "dx": 250,
+         "dy": -40
+        }
+       ]
+      },
+      {
+       "type": "text",
+       "style": "stamp",
+       "text": "TOP SECRET",
+       "at": "wrist",
+       "y": 0.25,
+       "size": 80
+      }
+     ]
+    }
+   ],
+   "rawAudio": "assets/voice/line05.wav"
+  },
+  {
+   "say": "The fake plans said the real targets were Greece and Sardinia. They found a homeless Welshman who had died in London, and gave him a whole new life.",
+   "pause": 0.25,
+   "shots": [
+    {
+     "bg": {
+      "type": "map",
+      "view": [
+       {
+        "at": 0,
+        "lon": 16,
+        "lat": 39,
+        "span": 24
+       }
+      ],
+      "fills": [
+       {
+        "countries": [
+         "Italy",
+         "Greece",
+         "Yugoslavia",
+         "Albania"
+        ],
+        "color": "#d8cfb2",
+        "at": -5,
+        "fade": 0
+       },
+       {
+        "countries": [
+         "Sicily"
+        ],
+        "color": "#ffd23f",
+        "at": -5,
+        "fade": 0
+       },
+       {
+        "countries": [
+         "Sardinia"
+        ],
+        "color": "#d8cfb2",
+        "at": -5,
+        "fade": 0
+       }
+      ],
+      "style": "paper"
+     },
+     "items": [
+      {
+       "type": "doc",
+       "kind": "plans",
+       "x": 0.5,
+       "y": 0.16,
+       "at": 0,
+       "scale": 0.55,
+       "rotate": -4
+      },
+      {
+       "type": "cross",
+       "pos": [
+        14,
+        37.5
+       ],
+       "at": "real",
+       "scale": 1.4
+      },
+      {
+       "type": "arrow",
+       "from": [
+        11,
+        33.5
+       ],
+       "to": [
+        22,
+        38.5
+       ],
+       "at": "Greece",
+       "color": "#c62828",
+       "width": 24
+      },
+      {
+       "type": "arrow",
+       "from": [
+        8,
+        34
+       ],
+       "to": [
+        9,
+        39.2
+       ],
+       "at": "Sardinia",
+       "color": "#c62828",
+       "width": 24
+      },
+      {
+       "type": "label",
+       "pos": [
+        22.5,
+        40
+       ],
+       "text": "GREECE?",
+       "size": 56,
+       "at": "Greece",
+       "color": "#c62828"
+      },
+      {
+       "type": "label",
+       "pos": [
+        9,
+        41.4
+       ],
+       "text": "SARDINIA?",
+       "size": 56,
+       "at": "Sardinia",
+       "color": "#c62828"
+      }
+     ]
+    },
+    {
+     "at": "They",
+     "bg": {
+      "type": "londonnight"
+     },
+     "camera": [
+      {
+       "at": 0,
+       "zoom": 1
+      },
+      {
+       "at": 0,
+       "zoom": 1.1,
+       "dur": 4
+      }
+     ],
+     "items": [
+      {
+       "cast": "michael",
+       "x": 0.5,
+       "y": 0.8,
+       "face": "right",
+       "at": -1,
+       "mood": "sad",
+       "until": "gave"
+      },
+      {
+       "type": "text",
+       "style": "date",
+       "text": "London, 1943",
+       "at": 0
+      },
+      {
+       "type": "typed",
+       "text": "NEW IDENTITY",
+       "x": 0.5,
+       "y": 0.3,
+       "at": "gave",
+       "dur": 0.9,
+       "size": 70
+      }
+     ]
+    }
+   ],
+   "rawAudio": "assets/voice/line06.wav"
+  },
+  {
+   "say": "Major William Martin. A fiancée named Pam, with love letters. Theatre tickets. Even an angry letter from his bank.",
+   "direction": "a quick list, with a comic beat before 'Even an angry letter from his bank'",
+   "pause": 0.3,
+   "shots": [
+    {
+     "bg": {
+      "type": "desk"
+     },
+     "items": [
+      {
+       "type": "typed",
+       "text": "MAJOR WILLIAM MARTIN",
+       "x": 0.5,
+       "y": 0.2,
+       "at": 0,
+       "dur": 0.9,
+       "size": 52
+      },
+      {
+       "type": "doc",
+       "kind": "id",
+       "x": 0.5,
+       "y": 0.5,
+       "rotate": -5,
+       "at": 0.2,
+       "scale": 1.7
+      }
+     ]
+    },
+    {
+     "at": "fiancée",
+     "bg": {
+      "type": "desk"
+     },
+     "camera": [
+      {
+       "at": 0,
+       "zoom": 1
+      },
+      {
+       "at": 0,
+       "zoom": 1.08,
+       "dur": 2
+      }
+     ],
+     "items": [
+      {
+       "type": "doc",
+       "kind": "photo",
+       "x": 0.5,
+       "y": 0.5,
+       "rotate": 6,
+       "at": 0,
+       "scale": 1.5
+      },
+      {
+       "type": "text",
+       "text": "PAM",
+       "font": "Bangers",
+       "at": 0.1,
+       "y": 0.18,
+       "size": 110,
+       "color": "#ffe11a"
+      },
+      {
+       "type": "doc",
+       "kind": "letter",
+       "x": 0.3,
+       "y": 0.62,
+       "rotate": -10,
+       "at": "letters",
+       "scale": 1.1
+      }
+     ]
+    },
+    {
+     "at": "Theatre",
+     "bg": {
+      "type": "desk"
+     },
+     "camera": [
+      {
+       "at": 0,
+       "zoom": 1
+      },
+      {
+       "at": 0,
+       "zoom": 1.08,
+       "dur": 2
+      }
+     ],
+     "items": [
+      {
+       "type": "doc",
+       "kind": "ticket",
+       "x": 0.5,
+       "y": 0.5,
+       "rotate": -6,
+       "at": 0,
+       "scale": 1.5
+      },
+      {
+       "type": "text",
+       "text": "THEATRE TICKETS",
+       "font": "Bangers",
+       "at": 0.1,
+       "y": 0.18,
+       "size": 110,
+       "color": "#ffe11a"
+      }
+     ]
+    },
+    {
+     "at": "angry",
+     "bg": {
+      "type": "desk"
+     },
+     "camera": [
+      {
+       "at": 0,
+       "zoom": 1
+      },
+      {
+       "at": 0,
+       "zoom": 1.08,
+       "dur": 2
+      }
+     ],
+     "items": [
+      {
+       "type": "doc",
+       "kind": "bank",
+       "x": 0.5,
+       "y": 0.52,
+       "rotate": 3,
+       "at": 0,
+       "scale": 1.5
+      },
+      {
+       "type": "text",
+       "text": "EVEN THE BANK",
+       "font": "Bangers",
+       "at": 0,
+       "y": 0.15,
+       "size": 110,
+       "color": "#ff5252"
+      }
+     ]
+    }
+   ],
+   "rawAudio": "assets/voice/line07.wav"
+  },
+  {
+   "say": "In April 1943, a submarine slipped him into the sea off the coast of Spain. Spanish fishermen found him. Within days, the Germans had copies of the plans.",
+   "tts": "In April nineteen forty-three, a submarine slipped him into the sea off the coast of Spain. Spanish fishermen found him. Within days, the Germans had copies of the plans.",
+   "pause": 0.25,
+   "shots": [
+    {
+     "bg": {
+      "type": "nightsea",
+      "horizon": 0.45
+     },
+     "items": [
+      {
+       "type": "text",
+       "style": "date",
+       "text": "April 30, 1943",
+       "at": 0
+      },
+      {
+       "type": "submarine",
+       "x": 0.5,
+       "y": 0.58,
+       "at": 0,
+       "riseDur": 1.2,
+       "scale": 1.05,
+       "label": "HMS SERAPH"
+      }
+     ]
+    },
+    {
+     "at": "slipped",
+     "bg": {
+      "type": "nightsea",
+      "horizon": 0.45,
+      "coast": true
+     },
+     "items": [
+      {
+       "type": "submarine",
+       "x": 0.72,
+       "y": 0.56,
+       "at": -5,
+       "scale": 0.7,
+       "label": "HMS SERAPH"
+      },
+      {
+       "cast": "martin",
+       "x": 0.42,
+       "y": 0.72,
+       "at": 0,
+       "enter": "drop",
+       "lying": true,
+       "float": true,
+       "mood": "dead",
+       "hold": "briefcase",
+       "pose": "hold",
+       "shadow": false,
+       "scale": 0.9
+      },
+      {
+       "type": "label",
+       "x": 0.18,
+       "y": 0.36,
+       "text": "SPAIN",
+       "size": 60,
+       "at": "Spain",
+       "color": "#fff"
+      }
+     ]
+    },
+    {
+     "at": "Spanish",
+     "bg": {
+      "type": "sea",
+      "horizon": 0.4,
+      "sea": "#2b6f99"
+     },
+     "items": [
+      {
+       "type": "boat",
+       "x": 0.62,
+       "y": 0.6,
+       "scale": 1.5,
+       "at": 0,
+       "face": "left",
+       "mood": "shocked",
+       "pose": "point"
+      },
+      {
+       "cast": "martin",
+       "x": 0.24,
+       "y": 0.74,
+       "at": -1,
+       "lying": true,
+       "float": true,
+       "mood": "dead",
+       "hold": "briefcase",
+       "pose": "hold",
+       "shadow": false,
+       "scale": 0.9
+      },
+      {
+       "type": "icon",
+       "kind": "exclaim",
+       "x": 0.62,
+       "y": 0.25,
+       "at": "found",
+       "scale": 1.2
+      }
+     ]
+    },
+    {
+     "at": "Within",
+     "bg": {
+      "type": "room",
+      "wall": "#cfc3a4",
+      "floor": "#4a3524",
+      "props": [
+       {
+        "type": "lamp",
+        "x": 0.5
+       },
+       {
+        "type": "desk",
+        "x": 0.5,
+        "w": 640
+       }
+      ]
+     },
+     "items": [
+      {
+       "cast": "spy",
+       "x": 0.25,
+       "y": 0.76,
+       "face": "right",
+       "at": -1,
+       "pose": "hold",
+       "mood": "smug"
+      },
+      {
+       "type": "doc",
+       "kind": "plans",
+       "x": 0.62,
+       "y": 0.5,
+       "at": -1,
+       "scale": 0.9,
+       "rotate": -6
+      },
+      {
+       "type": "flash",
+       "x": 0.35,
+       "y": 0.4,
+       "at": "copies",
+       "scale": 0.9
+      },
+      {
+       "type": "flash",
+       "x": 0.35,
+       "y": 0.4,
+       "at": "copies+0.6",
+       "scale": 0.9
+      }
+     ]
+    }
+   ],
+   "rawAudio": "assets/voice/line08.wav"
+  },
+  {
+   "say": "Hitler took the bait, and rushed reinforcements to Greece and Sardinia. In July, the Allies landed on Sicily, the one place the plans said they wouldn't.",
+   "pause": 0.35,
+   "shots": [
+    {
+     "bg": {
+      "type": "map",
+      "view": [
+       {
+        "at": 0,
+        "lon": 16,
+        "lat": 40,
+        "span": 26
+       }
+      ],
+      "fills": [
+       {
+        "countries": [
+         "Germany",
+         "Austria",
+         "Czechia",
+         "Poland",
+         "France",
+         "Belgium",
+         "Netherlands",
+         "Denmark",
+         "Norway",
+         "Yugoslavia",
+         "Greece",
+         "Hungary",
+         "Romania",
+         "Bulgaria",
+         "Italy"
+        ],
+        "color": "#8e44ad",
+        "at": -5,
+        "fade": 0
+       },
+       {
+        "countries": [
+         "Sicily"
+        ],
+        "color": "#ffd23f",
+        "at": -5,
+        "fade": 0
+       },
+       {
+        "countries": [
+         "Tunisia",
+         "Algeria",
+         "Libya"
+        ],
+        "color": "#1e88e5",
+        "at": -5,
+        "fade": 0
+       }
+      ]
+     },
+     "items": [
+      {
+       "cast": "hitler",
+       "pos": [
+        13.5,
+        46.3
+       ],
+       "scale": 0.55,
+       "face": "right",
+       "at": 0,
+       "enter": "drop",
+       "pose": "point",
+       "mood": "smug",
+       "emotes": [
+        {
+         "at": "bait",
+         "kind": "!!",
+         "until": "end"
+        }
+       ]
+      },
+      {
+       "type": "token",
+       "flag": "wehrmacht",
+       "pos": [
+        14.2,
+        37.6
+       ],
+       "at": -1,
+       "to": [
+        22,
+        39
+       ],
+       "moveAt": "rushed",
+       "moveDur": 1.2,
+       "r": 42
+      },
+      {
+       "type": "token",
+       "flag": "wehrmacht",
+       "pos": [
+        13.2,
+        37.9
+       ],
+       "at": -1,
+       "to": [
+        9,
+        40
+       ],
+       "moveAt": "Sardinia",
+       "moveDur": 1.1,
+       "r": 42
+      },
+      {
+       "type": "token",
+       "flag": "wehrmacht",
+       "pos": [
+        15,
+        37.2
+       ],
+       "at": -1,
+       "to": [
+        22.5,
+        37.6
+       ],
+       "moveAt": "rushed+0.3",
+       "moveDur": 1.2,
+       "r": 42
+      }
+     ]
+    },
+    {
+     "at": "In",
+     "bg": {
+      "type": "map",
+      "view": [
+       {
+        "at": 0,
+        "lon": 14,
+        "lat": 37.5,
+        "span": 9
+       }
+      ],
+      "fills": [
+       {
+        "countries": [
+         "Italy"
+        ],
+        "color": "#8e44ad",
+        "at": -5,
+        "fade": 0
+       },
+       {
+        "countries": [
+         "Sicily"
+        ],
+        "color": "#ffd23f",
+        "at": -5,
+        "fade": 0
+       },
+       {
+        "countries": [
+         "Tunisia"
+        ],
+        "color": "#1e88e5",
+        "at": -5,
+        "fade": 0
+       }
+      ]
+     },
+     "items": [
+      {
+       "type": "text",
+       "style": "date",
+       "text": "July 1943",
+       "at": 0
+      },
+      {
+       "type": "wararrow",
+       "from": [
+        11,
+        34.6
+       ],
+       "to": [
+        14.2,
+        36.9
+       ],
+       "at": "landed",
+       "text": "LANDING",
+       "width": 90
+      },
+      {
+       "type": "boom",
+       "pos": [
+        14.5,
+        37.1
+       ],
+       "at": "Sicily",
+       "size": 0.8
+      },
+      {
+       "type": "label",
+       "pos": [
+        14,
+        38.5
+       ],
+       "text": "EMPTY BEACHES",
+       "size": 48,
+       "at": "wouldn't",
+       "color": "#ffe11a"
+      }
+     ]
+    },
+    {
+     "at": "one",
+     "bg": {
+      "type": "sea",
+      "horizon": 0.42,
+      "sea": "#2b6f99"
+     },
+     "items": [
+      {
+       "type": "vehicle",
+       "kind": "landingcraft",
+       "from": {
+        "x": -0.5,
+        "y": 0.7
+       },
+       "to": {
+        "x": 0.42,
+        "y": 0.7
+       },
+       "at": 0,
+       "dur": 1.2,
+       "ease": "out",
+       "scale": 1.5
+      },
+      {
+       "type": "vehicle",
+       "kind": "landingcraft",
+       "from": {
+        "x": -0.9,
+        "y": 0.86
+       },
+       "to": {
+        "x": 0.12,
+        "y": 0.86
+       },
+       "at": 0.2,
+       "dur": 1.2,
+       "ease": "out",
+       "scale": 1.5
+      }
+     ]
+    }
+   ],
+   "rawAudio": "assets/voice/line09.wav"
+  },
+  {
+   "say": "The man who fooled Hitler was buried in Spain as Major Martin. Decades later, his real name was added to the grave: Glyndwr Michael.",
+   "tts": "The man who fooled Hitler was buried in Spain as Major Martin. Decades later, his real name was added to the grave: Glin-DOOR Michael.",
+   "direction": "respectful and a little slower at the very end",
+   "pause": 1.2,
+   "shots": [
+    {
+     "bg": {
+      "type": "cemetery"
+     },
+     "items": [
+      {
+       "type": "text",
+       "style": "date",
+       "text": "Huelva, Spain",
+       "at": 0
+      },
+      {
+       "type": "grave",
+       "x": 0.5,
+       "y": 0.86,
+       "scale": 1.15,
+       "lines": [
+        "MAJOR",
+        "WILLIAM MARTIN",
+        "ROYAL MARINES"
+       ],
+       "at": -1
+      }
+     ]
+    },
+    {
+     "at": "Decades",
+     "bg": {
+      "type": "cemetery"
+     },
+     "camera": [
+      {
+       "at": 0,
+       "zoom": 1
+      },
+      {
+       "at": "Glyndwr",
+       "zoom": 1.25,
+       "x": 0.5,
+       "y": 0.55,
+       "dur": 1.2
+      }
+     ],
+     "items": [
+      {
+       "type": "grave",
+       "x": 0.5,
+       "y": 0.86,
+       "scale": 1.15,
+       "lines": [
+        "MAJOR",
+        "WILLIAM MARTIN",
+        "ROYAL MARINES"
+       ],
+       "added": [
+        "GLYNDWR MICHAEL",
+        "SERVED AS"
+       ],
+       "addAbove": true,
+       "addAt": "name",
+       "addDur": 1.6,
+       "at": -1
+      },
+      {
+       "type": "text",
+       "text": "GLYNDWR MICHAEL",
+       "font": "Bangers",
+       "at": "Michael+0.2",
+       "y": 0.14,
+       "size": 120,
+       "color": "#ffffff"
+      }
+     ]
+    }
+   ],
+   "rawAudio": "assets/voice/line10.wav"
   }
- ]
+ ],
+ "cast": {
+  "martin": {
+   "type": "char",
+   "outfit": "military",
+   "color": "#2f4a6b",
+   "hat": "cap",
+   "hatColor": "#1c2c4c",
+   "hair": "short",
+   "hairColor": "#3e2f22"
+  },
+  "montagu": {
+   "type": "char",
+   "outfit": "navy",
+   "color": "#1c2c4c",
+   "hat": "navy",
+   "hair": "short",
+   "hairColor": "#3e2f22",
+   "mustache": "thin"
+  },
+  "cholmondeley": {
+   "type": "char",
+   "outfit": "military",
+   "color": "#5a6f8f",
+   "hat": "cap",
+   "hatColor": "#3f5070",
+   "hair": "short",
+   "mustache": "walrus",
+   "hairColor": "#5d4037",
+   "glasses": true
+  },
+  "hitler": {
+   "type": "char",
+   "outfit": "military",
+   "color": "#7a7a63",
+   "hair": "side",
+   "mustache": "toothbrush"
+  },
+  "spy": {
+   "type": "char",
+   "outfit": "civil",
+   "color": "#4a4a3a",
+   "hat": "fedora",
+   "hatColor": "#222",
+   "hair": "slick",
+   "mustache": "thin"
+  },
+  "michael": {
+   "type": "char",
+   "outfit": "civil",
+   "color": "#5a5048",
+   "hair": "short",
+   "hairColor": "#444"
+  }
+ },
+ "vignette": true
 }

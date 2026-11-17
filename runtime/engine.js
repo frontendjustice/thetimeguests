@@ -547,6 +547,7 @@ function drawChar(it, lt) {
   let g = '';
   // body
   const bw = it.wide ? 70 : 58;
+  if (!it.lying && it.shadow !== false) g += `<ellipse cx="0" cy="4" rx="${bw + 30}" ry="16" fill="#000" opacity=".22"/>`;
   g += `<rect x="${-bw}" y="-238" width="${bw * 2}" height="238" rx="24" fill="${col}" ${ln}/>`;
   if (outfit === 'suit') g += `<path d="M-28,-236 L0,-170 L28,-236Z" fill="#fff" stroke="#111" stroke-width="3"/><path d="M-6,-226 L6,-226 L9,-150 L0,-136 L-9,-150Z" fill="${it.tie || '#8b1d1d'}"/><path d="M-40,-236 L-6,-160 M40,-236 L6,-160" stroke="${shade(col, -0.35)}" stroke-width="5"/><circle cx="${f * 18}" cy="-110" r="5" fill="#111"/><circle cx="${f * 18}" cy="-75" r="5" fill="#111"/>`;
   if (outfit === 'navy') { for (const yy of [-190, -150, -110, -70]) g += `<circle cx="-20" cy="${yy}" r="6" fill="#e8c34a"/><circle cx="20" cy="${yy}" r="6" fill="#e8c34a"/>`; g += `<path d="M-30,-236 L0,-196 L30,-236" fill="#fff" stroke="#111" stroke-width="3"/>`; }
@@ -626,6 +627,7 @@ function drawChar(it, lt) {
   }
   if (it.tag) g += outlineText(0, 52, it.tag, { size: 34, color: '#fff', stroke: 8 });
 
+  if (it.lying) { spin += it.lying === 'left' ? -90 : 90; y -= 40 * sc; if (it.float) y += Math.sin(lt * 1.6) * 8; }
   let out = `<g opacity="${f1(alpha * 100) / 100}" transform="translate(${f1(x)},${f1(y)}) rotate(${f1(spin)} 0 ${f1(-180 * sc * s)}) scale(${f1(sc * s * 1000) / 1000})">${g}</g>`;
   // props that leave the hand: thrown along an arc, or dropped to the floor
   const handX = x + A1.ex * sc * s, handY = y + A1.ey * sc * s;
@@ -709,6 +711,7 @@ function holdSVG(what, x, y, f) {
     case 'cigar': return `<g transform="translate(${f1(x)},${f1(y)})"><rect x="-6" y="-8" width="46" height="13" rx="6" fill="#6d4325" stroke="#111" stroke-width="3"/><circle cx="42" cy="-1" r="5" fill="#ff7043"/><path d="M44,-8 q8,-14 0,-26 q-8,-12 2,-24" stroke="#bbb" stroke-width="4" fill="none" opacity=".7"/></g>`;
     case 'gold': return `<g transform="translate(${f1(x)},${f1(y + 10)})">${[[-40, 0], [10, 0], [-15, -26]].map(([gx, gy]) => `<path d="M${gx},${gy} l8,-20 h40 l8,20z" fill="#f2c230" stroke="#8a6a12" stroke-width="3"/><path d="M${gx + 10},${gy - 16} h30" stroke="#fff3b0" stroke-width="3"/>`).join('')}</g>`;
     case 'money': return `<g transform="translate(${f1(x)},${f1(y)}) rotate(${f * -8})">${[0, 1, 2].map(k => `<rect x="${-40 + k * 4}" y="${-24 - k * 8}" width="80" height="40" rx="4" fill="#7fb77e" stroke="#2f5d2e" stroke-width="3"/><circle cx="${k * 4}" cy="${-4 - k * 8}" r="9" fill="none" stroke="#2f5d2e" stroke-width="3"/>`).join('')}</g>`;
+    case 'briefcase': return `<g transform="translate(${f1(x)},${f1(y + 60)})"><path d="M${f1(-f * 4)},-62 q${f * 10},20 ${f * 4},44" stroke="#9aa0a6" stroke-width="6" fill="none" stroke-dasharray="8 5"/><rect x="-62" y="-20" width="124" height="88" rx="10" fill="#6d4325" stroke="#2b1a0e" stroke-width="5"/><path d="M-24,-20 v-16 h48 v16" fill="none" stroke="#2b1a0e" stroke-width="6"/><rect x="-10" y="10" width="20" height="14" fill="#d4a93a" stroke="#2b1a0e" stroke-width="3"/></g>`;
     case 'phone': return `<g transform="translate(${f1(x)},${f1(y)})"><path d="M-30,-20 q30,-30 60,0 l-10,10 q-20,-14 -40,0z" fill="#222"/></g>`;
     case 'pistol': return `<g transform="translate(${f1(x)},${f1(y)}) scale(${f},1)"><path d="M-6,-10 h56 v14 h-38 l-6,26 h-14z" fill="#2b2b2b" stroke="#111" stroke-width="3"/></g>`;
     case 'pointer': return `<line x1="${f1(x)}" y1="${f1(y)}" x2="${f1(x + f * 120)}" y2="${f1(y - 90)}" stroke="#7a4a22" stroke-width="7" stroke-linecap="round"/>`;
@@ -737,7 +740,7 @@ function captionSVG(sc, lt) {
 
 // ---------- frame ----------
 const UI_TYPES = new Set(['text']);
-const SELF_TIMED = new Set(['boom', 'plane', 'vehicle', 'bridge', 'mushroom', 'wararrow', 'route', 'flow', 'drawer']);
+const SELF_TIMED = new Set(['boom', 'plane', 'vehicle', 'bridge', 'mushroom', 'wararrow', 'route', 'flow', 'drawer', 'flash', 'typed', 'submarine']);
 window.__init = async (data) => {
   S.data = data;
   const topo = data.topo;
@@ -745,7 +748,7 @@ window.__init = async (data) => {
   S.land = topojson.merge(topo, topo.objects.countries.geometries.filter(g => g.properties.name !== 'Antarctica'));
   S.borders = topojson.mesh(topo, topo.objects.countries, (a, b) => a !== b);
   S.noise = makeNoise();
-  S.defs = `<defs><filter id="ds" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="6" stdDeviation="6" flood-opacity=".35"/></filter><filter id="gray"><feColorMatrix type="saturate" values="0"/></filter><filter id="burnt"><feColorMatrix type="matrix" values=".35 0 0 0 0  0 .3 0 0 0  0 0 .28 0 0  0 0 0 1 0"/></filter>${typeof KIT_DEFS === 'string' ? KIT_DEFS : ''}</defs>`;
+  S.defs = `<defs><filter id="ds" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="6" stdDeviation="6" flood-opacity=".35"/></filter><filter id="gray"><feColorMatrix type="saturate" values="0"/></filter><radialGradient id="vig" cx=".5" cy=".45" r=".75"><stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".55"/></radialGradient><filter id="burnt"><feColorMatrix type="matrix" values=".35 0 0 0 0  0 .3 0 0 0  0 0 .28 0 0  0 0 0 1 0"/></filter>${typeof KIT_DEFS === 'string' ? KIT_DEFS : ''}</defs>`;
   // preload images so frames are deterministic
   await Promise.all(Object.values(data.assets || {}).map(src => new Promise(r => { const i = new Image(); i.onload = i.onerror = r; i.src = src; })));
   try { await document.fonts.load('40px Bangers'); await document.fonts.load('40px "Gochi Hand"'); } catch (e) { /* fall back to Inter */ }
@@ -783,6 +786,7 @@ window.__frame = (t) => {
     const svg = fn(it, lt);
     if (UI_TYPES.has(it.type)) ui += svg; else fx += svg;
   }
+  if (!isMap && S.data.vignette !== false && sc.vignette !== false) ui += `<rect width="${W}" height="${H}" fill="url(#vig)" pointer-events="none"/>`;
   if (sc.flash) { const d = lt - sc.flash; if (d >= 0 && d < 0.35) ui += `<rect width="${W}" height="${H}" fill="#fff" opacity="${f1((1 - d / 0.35) * 100) / 100}"/>`; }
   ui += captionSVG(sc, lt);
   if (S.data.handle) ui += outlineText(W / 2, H - 70, S.data.handle, { size: 30, weight: 700, color: 'rgba(255,255,255,.85)', stroke: 6, strokeColor: 'rgba(0,0,0,.5)' });

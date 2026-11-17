@@ -163,7 +163,7 @@ async function main() {
   const scenes = shots;
   const total = t;
   const topo = require('world-atlas/countries-50m.json');
-  const data = { scenes, duration: total, topo, assets: collectAssets(scenes, projDir), captions: proj.captions || {}, handle: proj.handle, autoPush: proj.autoPush };
+  const data = { scenes, duration: total, topo, assets: collectAssets(scenes, projDir), captions: proj.captions || {}, handle: proj.handle, autoPush: proj.autoPush, vignette: proj.vignette };
   log(`timeline: ${narr.length} scenes, ${anchored} pause anchors, ${shots.length} shots, ${total.toFixed(1)}s (avg ${(total / shots.length).toFixed(1)}s/shot)`);
 
   // stills for quick checks

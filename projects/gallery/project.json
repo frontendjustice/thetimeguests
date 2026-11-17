@@ -1,0 +1,321 @@
+{
+ "name": "gallery",
+ "captions": {
+  "enabled": false
+ },
+ "autoPush": false,
+ "scenes": [
+  {
+   "dur": 2,
+   "shots": [
+    {
+     "bg": {
+      "type": "spotlight"
+     },
+     "items": [
+      {
+       "type": "char",
+       "x": 0.5,
+       "y": 0.8,
+       "outfit": "military",
+       "color": "#2f4a6b",
+       "hat": "cap",
+       "hatColor": "#1c2c4c",
+       "hair": "short",
+       "mood": "dead",
+       "pose": "hold",
+       "hold": "briefcase",
+       "at": -1,
+       "face": "right"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dur": 2,
+   "shots": [
+    {
+     "bg": {
+      "type": "nightsea",
+      "horizon": 0.45
+     },
+     "items": [
+      {
+       "type": "submarine",
+       "x": 0.5,
+       "y": 0.6,
+       "scale": 1.0,
+       "at": -5
+      },
+      {
+       "type": "char",
+       "x": 0.5,
+       "y": 0.86,
+       "outfit": "military",
+       "color": "#2f4a6b",
+       "hair": "short",
+       "mood": "dead",
+       "lying": true,
+       "float": true,
+       "at": -1
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dur": 2,
+   "shots": [
+    {
+     "bg": {
+      "type": "sea",
+      "horizon": 0.45,
+      "sea": "#2b6f99"
+     },
+     "items": [
+      {
+       "type": "boat",
+       "x": 0.5,
+       "y": 0.66,
+       "scale": 1.0,
+       "at": -5
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dur": 2,
+   "shots": [
+    {
+     "bg": {
+      "type": "desk"
+     },
+     "items": [
+      {
+       "type": "doc",
+       "kind": "id",
+       "x": 0.28,
+       "y": 0.25,
+       "rotate": -8,
+       "at": -1
+      },
+      {
+       "type": "doc",
+       "kind": "photo",
+       "x": 0.72,
+       "y": 0.28,
+       "rotate": 7,
+       "at": -1
+      },
+      {
+       "type": "doc",
+       "kind": "letter",
+       "x": 0.3,
+       "y": 0.58,
+       "rotate": 5,
+       "at": -1
+      },
+      {
+       "type": "doc",
+       "kind": "ticket",
+       "x": 0.72,
+       "y": 0.55,
+       "rotate": -6,
+       "at": -1
+      },
+      {
+       "type": "doc",
+       "kind": "bank",
+       "x": 0.5,
+       "y": 0.78,
+       "rotate": 3,
+       "at": -1
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dur": 2,
+   "shots": [
+    {
+     "bg": {
+      "type": "londonnight"
+     },
+     "items": [
+      {
+       "type": "typed",
+       "text": "MAJOR WILLIAM MARTIN",
+       "x": 0.5,
+       "y": 0.3,
+       "at": -5,
+       "size": 56
+      },
+      {
+       "type": "char",
+       "x": 0.5,
+       "y": 0.8,
+       "outfit": "civil",
+       "color": "#5a5048",
+       "hair": "short",
+       "hairColor": "#444",
+       "mood": "sad",
+       "at": -1
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dur": 2,
+   "shots": [
+    {
+     "bg": {
+      "type": "cemetery"
+     },
+     "items": [
+      {
+       "type": "grave",
+       "x": 0.5,
+       "y": 0.86,
+       "scale": 1.0,
+       "lines": [
+        "MAJOR",
+        "WILLIAM MARTIN",
+        "ROYAL MARINES"
+       ],
+       "added": [
+        "GLYNDWR MICHAEL",
+        "SERVED AS"
+       ],
+       "addAt": -5
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dur": 2,
+   "shots": [
+    {
+     "bg": {
+      "type": "nightsea",
+      "horizon": 0.4
+     },
+     "items": [
+      {
+       "type": "vehicle",
+       "kind": "landingcraft",
+       "from": {
+        "x": 0.5,
+        "y": 0.66
+       },
+       "at": -1,
+       "dur": 0.1,
+       "scale": 1.4
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dur": 2,
+   "shots": [
+    {
+     "bg": {
+      "type": "room",
+      "wall": "#e9dcc0",
+      "floor": "#6b4a32",
+      "props": [
+       "window"
+      ]
+     },
+     "items": [
+      {
+       "type": "char",
+       "outfit": "military",
+       "color": "#4b5a3c",
+       "hat": "cap",
+       "hatColor": "#4b5a3c",
+       "hair": "short",
+       "mustache": "thin",
+       "x": 0.3,
+       "y": 0.76,
+       "face": "right",
+       "pose": "point",
+       "mood": "smug",
+       "at": -1
+      },
+      {
+       "type": "char",
+       "outfit": "military",
+       "color": "#3c4a5c",
+       "hat": "cap",
+       "hatColor": "#3c4a5c",
+       "hair": "short",
+       "mustache": "walrus",
+       "x": 0.72,
+       "y": 0.76,
+       "face": "left",
+       "mood": "happy",
+       "at": -1,
+       "hold": "plans",
+       "pose": "hold"
+      },
+      {
+       "type": "flash",
+       "x": 0.5,
+       "y": 0.3,
+       "at": -0.1
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dur": 2,
+   "shots": [
+    {
+     "bg": {
+      "type": "map",
+      "view": [
+       {
+        "at": 0,
+        "lon": 14,
+        "lat": 40,
+        "span": 22
+       }
+      ],
+      "fills": [
+       {
+        "countries": [
+         "Italy",
+         "Greece"
+        ],
+        "color": "#9aa679",
+        "at": -5
+       },
+       {
+        "countries": [
+         "Sicily"
+        ],
+        "color": "#ffd23f",
+        "at": -5
+       },
+       {
+        "countries": [
+         "Sardinia"
+        ],
+        "color": "#e53935",
+        "at": -5
+       }
+      ]
+     },
+     "items": []
+    }
+   ]
+  }
+ ]
+}
