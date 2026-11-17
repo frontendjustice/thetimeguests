@@ -1,0 +1,142 @@
+{
+ "name": "garbo-thumbnail-farmer",
+ "captions": {
+  "enabled": false
+ },
+ "autoPush": false,
+ "vignette": true,
+ "cast": {
+  "garbo": {
+   "type": "char",
+   "outfit": "suit",
+   "color": "#3a3a44",
+   "hair": "slick",
+   "hairColor": "#222",
+   "mustache": "thin",
+   "hat": "fedora",
+   "hatColor": "#222"
+  },
+  "hitler": {
+   "type": "char",
+   "outfit": "military",
+   "color": "#7a7a63",
+   "hair": "side",
+   "mustache": "toothbrush"
+  }
+ },
+ "scenes": [
+  {
+   "dur": 2,
+   "shots": [
+    {
+     "bg": {
+      "type": "field",
+      "palette": "grass"
+     },
+     "items": [
+      {
+       "type": "text",
+       "text": "HOW A",
+       "font": "Bangers",
+       "at": -5,
+       "y": 0.07,
+       "size": 120,
+       "color": "#ffffff",
+       "strokeW": 22,
+       "spacing": 3
+      },
+      {
+       "type": "text",
+       "text": "CHICKEN FARMER",
+       "font": "Bangers",
+       "at": -5,
+       "y": 0.145,
+       "size": 165,
+       "color": "#ffe11a",
+       "strokeW": 30,
+       "spacing": 3
+      },
+      {
+       "type": "text",
+       "text": "FOOLED HITLER",
+       "font": "Bangers",
+       "at": -5,
+       "y": 0.225,
+       "size": 150,
+       "color": "#ffffff",
+       "strokeW": 26,
+       "spacing": 3
+      },
+      {
+       "cast": "garbo",
+       "x": 0.6,
+       "y": 0.86,
+       "scale": 1.3,
+       "face": "left",
+       "at": -5,
+       "enter": "none",
+       "mood": "smug",
+       "pose": "hips"
+      },
+      {
+       "type": "chicken",
+       "x": 0.88,
+       "y": 0.93,
+       "scale": 2.0,
+       "face": "left",
+       "seed": 1,
+       "at": -5
+      },
+      {
+       "type": "chicken",
+       "x": 0.42,
+       "y": 0.97,
+       "scale": 1.7,
+       "face": "right",
+       "seed": 3,
+       "at": -5
+      },
+      {
+       "type": "chicken",
+       "x": 0.9,
+       "y": 0.55,
+       "scale": 1.1,
+       "face": "left",
+       "seed": 5,
+       "at": -5
+      },
+      {
+       "cast": "hitler",
+       "x": 0.17,
+       "y": 0.97,
+       "scale": 0.85,
+       "face": "right",
+       "at": -5,
+       "enter": "none",
+       "mood": "shocked",
+       "pose": "point",
+       "emotes": [
+        {
+         "at": -5,
+         "kind": "!!",
+         "until": 9
+        }
+       ]
+      },
+      {
+       "type": "text",
+       "style": "stamp",
+       "text": "TRUE STORY",
+       "at": -5,
+       "x": 0.5,
+       "y": 0.3,
+       "size": 56,
+       "rotate": -4,
+       "color": "#ffe11a"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
