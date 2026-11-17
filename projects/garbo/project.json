@@ -105,7 +105,11 @@
   {
    "say": "After the war, he faked his own death, and vanished. Forty years later, a historian found him alive, in Venezuela. That June, he walked Normandy's beaches, as veterans lined up to thank him.",
    "direction": "quieter and warmer, slower at the very end",
-   "pause": 1.2
+   "pause": 1.2,
+   "voice": {
+    "model": "gemini-2.5-flash-preview-tts"
+   },
+   "rawAudio": "assets/voice/line10.wav"
   }
  ]
 }
