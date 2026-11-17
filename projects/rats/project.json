@@ -85,7 +85,9 @@
   {
    "say": "Britain's verdict? The trouble it caused them was a bigger success than if the rats had actually been used. The rats never blew up a single boiler. Just the idea of them was enough.",
    "direction": "wry, then quieter and slower at the very end",
-   "pause": 1.2
+   "pause": 1.2,
+   "rawAudio": "assets/voice/line08.wav",
+   "voiceNote": "Charon on gemini-3.8-flash-tts; the model read the style aloud first, so the take was cut at the pause before the line"
   }
  ]
 }
