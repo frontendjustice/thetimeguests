@@ -1,0 +1,29 @@
+{
+ "name": "operation-mincemeat",
+ "title": "Operation Mincemeat: The Dead Man Who Fooled Hitler",
+ "voice": {
+  "name": "Charon",
+  "model": "gemini-3.1-flash-tts-preview",
+  "style": "Voice only, no music or sound effects. Read this at a brisk pace, about 170 words per minute, like a punchy, slightly witty YouTube Shorts history narrator. Confident and energetic, with only tiny pauses between sentences",
+  "maxPause": 0.3,
+  "lufs": -18,
+  "sps": 5.3
+ },
+ "pause": 0.2,
+ "captions": {
+  "mode": "word",
+  "color": "#ffe11a",
+  "size": 104,
+  "y": 0.86
+ },
+ "handle": "@thetimeguests",
+ "scenes": [
+  {
+   "say": "In 1943, Britain's most important secret agent was already dead.",
+   "tts": "In nineteen forty-three, Britain's most important secret agent was already dead.",
+   "direction": "with a dramatic beat before 'already dead'",
+   "pause": 0.3,
+   "rawAudio": "assets/voice/line01.wav"
+  }
+ ]
+}

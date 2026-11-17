@@ -1,0 +1,69 @@
+[
+ {
+  "say": "In 1943, Britain's most important secret agent was already dead.",
+  "tts": "In nineteen forty-three, Britain's most important secret agent was already dead.",
+  "direction": "with a dramatic beat before 'already dead'",
+  "pause": 0.3
+ },
+ {
+  "say": "The Allies were about to invade Sicily. The problem? Everyone could see it coming. So British intelligence came up with a plan that sounds completely made up.",
+  "pause": 0.25
+ },
+ {
+  "say": "We find a dead body...",
+  "voice": {
+   "name": "Orus",
+   "model": "gemini-2.5-flash-preview-tts",
+   "style": "Say it like a sly British intelligence officer in 1943, quick and conspiratorial",
+   "sps": 4.6
+  },
+  "captions": false,
+  "pause": 0.1
+ },
+ {
+  "say": "...dress him as an officer...",
+  "voice": {
+   "name": "Puck",
+   "model": "gemini-2.5-flash-preview-tts",
+   "style": "Say it like a sly British intelligence officer in 1943, quick and conspiratorial",
+   "sps": 4.6
+  },
+  "captions": false,
+  "pause": 0.1
+ },
+ {
+  "say": "...and chain fake invasion plans to his wrist.",
+  "voice": {
+   "name": "Orus",
+   "model": "gemini-2.5-flash-preview-tts",
+   "style": "Say it like a sly British intelligence officer in 1943, quick and conspiratorial",
+   "sps": 4.6
+  },
+  "captions": false,
+  "pause": 0.3
+ },
+ {
+  "say": "The fake plans said the real targets were Greece and Sardinia. They found a homeless Welshman who had died in London, and gave him a whole new life.",
+  "pause": 0.25
+ },
+ {
+  "say": "Major William Martin. A fianc\u00e9e named Pam, with love letters. Theatre tickets. Even an angry letter from his bank.",
+  "direction": "a quick list, with a comic beat before 'Even an angry letter from his bank'",
+  "pause": 0.3
+ },
+ {
+  "say": "In April 1943, a submarine slipped him into the sea off the coast of Spain. Spanish fishermen found him. Within days, the Germans had copies of the plans.",
+  "tts": "In April nineteen forty-three, a submarine slipped him into the sea off the coast of Spain. Spanish fishermen found him. Within days, the Germans had copies of the plans.",
+  "pause": 0.25
+ },
+ {
+  "say": "Hitler took the bait, and rushed reinforcements to Greece and Sardinia. In July, the Allies landed on Sicily, the one place the plans said they wouldn't.",
+  "pause": 0.35
+ },
+ {
+  "say": "The man who fooled Hitler was buried in Spain as Major Martin. Decades later, his real name was added to the grave: Glyndwr Michael.",
+  "tts": "The man who fooled Hitler was buried in Spain as Major Martin. Decades later, his real name was added to the grave: Glin-DOOR Michael.",
+  "direction": "respectful and a little slower at the very end",
+  "pause": 1.2
+ }
+]
