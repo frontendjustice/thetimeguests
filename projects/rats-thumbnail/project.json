@@ -79,13 +79,6 @@
        "mood": "scared",
        "sweat": false,
        "pose": "point",
-       "emotes": [
-        {
-         "at": -5,
-         "kind": "!!",
-         "until": 9
-        }
-       ],
        "outfit": "military",
        "color": "#7a7a63",
        "hair": "side",
