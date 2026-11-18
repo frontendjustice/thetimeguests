@@ -504,6 +504,11 @@ function moodAt(it, lt) {
   if (!Array.isArray(it.moods)) return it.mood || 'neutral';
   let m = it.moods[0].mood; for (const k of it.moods) if (lt >= k.at) m = k.mood; return m;
 }
+// when the current mood began (for one-shot effects such as a single sweat drop)
+function moodStartAt(it, lt) {
+  if (!Array.isArray(it.moods)) return Math.max(it.at || 0, 0);
+  let t0 = Math.max(it.at || 0, 0); for (const k of it.moods) if (lt >= k.at) t0 = Math.max(k.at, 0); return t0;
+}
 function talkingAt(it, lt) {
   if (it.talk) for (const w of [].concat(it.talk)) if (lt >= w.at && lt < w.until) return true;
   for (const s of it.say || []) { const end = s.at + Math.min(0.25 + String(s.text).length * 0.055, (s.until || 1e9) - s.at); if (lt >= s.at && lt < end) return true; }
@@ -616,13 +621,14 @@ function drawChar(it, lt) {
     else if (mood === 'happy' || mood === 'smug') g += `<path d="M${mx - 16},${mouthY - 4} Q${mx},${mouthY + 12} ${mx + 16},${mouthY - 4}" stroke="#111" stroke-width="4" fill="none" stroke-linecap="round"/>`;
     else if (mood === 'sad' || mood === 'worried' || mood === 'angry' || mood === 'furious') g += `<path d="M${mx - 15},${mouthY + 6} Q${mx},${mouthY - 6} ${mx + 15},${mouthY + 6}" stroke="#111" stroke-width="4" fill="none" stroke-linecap="round"/>`;
     else if (mood === 'shocked' || mood === 'scared') g += `<ellipse cx="${mx}" cy="${mouthY + 2}" rx="10" ry="14" fill="#5a1414" stroke="#111" stroke-width="3"/>`;
-    if (mood === 'worried' || mood === 'scared') { const sy = hy - 30 + ((lt * 40) % 40); g += `<path d="M${-f * 70},${f1(sy)} q-10,18 0,24 q10,-6 0,-24Z" fill="#7cc8ff" stroke="#2b7bbf" stroke-width="2"/>`; }
-    if (mood === 'sad') g += `<path d="M${ex - 26},${ey + 12} q-4,${f1(20 + (lt * 30) % 20)} 0,${f1(26 + (lt * 30) % 20)}" stroke="#7cc8ff" stroke-width="6" fill="none" stroke-linecap="round"/>`;
+    const md = lt - moodStartAt(it, lt), loopDrop = it.sweat === 'loop';
+    if ((mood === 'worried' || mood === 'scared') && it.sweat !== false && (loopDrop || md < 1.1)) { const ph = loopDrop ? (lt * 40) % 40 : clamp(md / 1.1) * 40, op = loopDrop ? 1 : 1 - clamp((md - 0.7) / 0.4); const sy = hy - 30 + ph; g += `<g opacity="${f1(op * 100) / 100}"><path d="M${-f * 70},${f1(sy)} q-10,18 0,24 q10,-6 0,-24Z" fill="#7cc8ff" stroke="#2b7bbf" stroke-width="2"/></g>`; }
+    if (mood === 'sad' && (it.sweat === 'loop' || md < 1.4)) { const tq = it.sweat === 'loop' ? (lt * 30) % 20 : clamp(md / 1.4) * 30; g += `<path d="M${ex - 26},${ey + 12} q-4,${f1(20 + tq)} 0,${f1(26 + tq)}" stroke="#7cc8ff" stroke-width="6" fill="none" stroke-linecap="round" opacity="${f1((it.sweat === 'loop' ? 1 : 1 - clamp((md - 1) / 0.4)) * 100) / 100}"/>`; }
   }
   g += hatSVG(it, hy, hr, f);
   for (const e of it.emotes || []) {
     const until = e.until == null ? e.at + 1.6 : e.until; if (lt < e.at || lt >= until) continue;
-    const q = backOut(clamp((lt - e.at) / 0.2)), ex2 = f * 70, ey2 = hy - hr - 70;
+    const q = backOut(clamp((lt - e.at) / 0.2)), temple = e.kind === 'sweat', ex2 = temple ? -f * (hr + 6) : f * 70, ey2 = temple ? hy - hr * 0.35 + clamp((lt - e.at) / 1.2) * 30 : hy - hr - 70;
     g += `<g transform="translate(${ex2},${ey2 + Math.sin(lt * 8) * 4}) scale(${f1(q * 100) / 100})">${emoteSVG(e.kind, lt)}</g>`;
   }
   if (it.tag) g += outlineText(0, 52, it.tag, { size: 34, color: '#fff', stroke: 8 });
@@ -714,7 +720,7 @@ function holdSVG(what, x, y, f) {
     case 'briefcase': return `<g transform="translate(${f1(x)},${f1(y + 60)})"><path d="M${f1(-f * 4)},-62 q${f * 10},20 ${f * 4},44" stroke="#9aa0a6" stroke-width="6" fill="none" stroke-dasharray="8 5"/><rect x="-62" y="-20" width="124" height="88" rx="10" fill="#6d4325" stroke="#2b1a0e" stroke-width="5"/><path d="M-24,-20 v-16 h48 v16" fill="none" stroke="#2b1a0e" stroke-width="6"/><rect x="-10" y="10" width="20" height="14" fill="#d4a93a" stroke="#2b1a0e" stroke-width="3"/></g>`;
     case 'phone': return `<g transform="translate(${f1(x)},${f1(y)})"><path d="M-30,-20 q30,-30 60,0 l-10,10 q-20,-14 -40,0z" fill="#222"/></g>`;
     case 'pistol': return `<g transform="translate(${f1(x)},${f1(y)}) scale(${f},1)"><path d="M-6,-10 h56 v14 h-38 l-6,26 h-14z" fill="#2b2b2b" stroke="#111" stroke-width="3"/></g>`;
-    case 'shovel': return `<g transform="translate(${f1(x)},${f1(y)}) rotate(${f * 35})"><rect x="-6" y="-170" width="12" height="190" fill="#7a5230" stroke="#111" stroke-width="3"/><path d="M-26,-182 h52 v-14 h-52z" fill="#5a3a22"/><path d="M-40,20 h80 l-10,80 q-30,20 -60,0z" fill="#8a8f96" stroke="#111" stroke-width="4"/>${arg === 'coal' ? '<path d="M-34,26 q34,-30 68,0z" fill="#222"/>' : ''}</g>`;
+    case 'shovel': return `<g transform="translate(${f1(x)},${f1(y)}) rotate(${f * -30})"><rect x="-6" y="-170" width="12" height="190" fill="#7a5230" stroke="#111" stroke-width="3"/><path d="M-26,-182 h52 v-14 h-52z" fill="#5a3a22"/><path d="M-40,20 h80 l-10,80 q-30,20 -60,0z" fill="#8a8f96" stroke="#111" stroke-width="4"/>${arg === 'coal' ? '<path d="M-34,26 q34,-30 68,0z" fill="#222"/>' : ''}</g>`;
     case 'torch': return `<g transform="translate(${f1(x)},${f1(y)}) rotate(${f * -20})"><path d="M0,0 L${f * 420},-120 L${f * 420},120Z" fill="#fff8d0" opacity=".35"/><rect x="${f > 0 ? -60 : 0}" y="-14" width="60" height="28" rx="6" fill="#333" stroke="#111" stroke-width="3"/></g>`;
     case 'magnifier': return `<g transform="translate(${f1(x)},${f1(y)}) rotate(${f * -30})"><rect x="-9" y="10" width="18" height="90" rx="8" fill="#6d4325" stroke="#111" stroke-width="4"/><circle cy="-40" r="52" fill="#cfe9f7" fill-opacity=".55" stroke="#333" stroke-width="12"/><path d="M-26,-62 q14,-14 32,-10" stroke="#fff" stroke-width="7" fill="none"/></g>`;
     case 'pointer': return `<line x1="${f1(x)}" y1="${f1(y)}" x2="${f1(x + f * 120)}" y2="${f1(y - 90)}" stroke="#7a4a22" stroke-width="7" stroke-linecap="round"/>`;

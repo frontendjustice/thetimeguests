@@ -449,8 +449,8 @@ BGX.nightsea = (bg, lt) => {
   for (let i = 0; i < 22; i++) { const y = hz + 20 + Math.pow(i / 22, 1.5) * (H - hz); const off = (lt * 25 * (1 + i / 12) + i * 71) % 220; o += `<path d="M${-220 + off},${f1(y)} q55,-10 110,0 t110,0 t110,0 t110,0 t110,0 t110,0 t110,0 t110,0 t110,0 t110,0 t110,0 t110,0" stroke="rgba(160,190,255,${f1(0.05 + i / 160)})" stroke-width="${f1(2 + i / 5)}" fill="none"/>`; }
   return o;
 };
-BGX.spotlight = (bg) => `<defs><radialGradient id="spotF" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fff2c4" stop-opacity=".9"/><stop offset="1" stop-color="#fff2c4" stop-opacity="0"/></radialGradient><linearGradient id="spotB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff6d5" stop-opacity=".55"/><stop offset="1" stop-color="#fff6d5" stop-opacity=".05"/></linearGradient></defs>
-  <rect width="${W}" height="${H}" fill="${bg.color || '#0d0f14'}"/><path d="M${W / 2 - 70},0 H${W / 2 + 70} L${W / 2 + 330},${H * 0.8} H${W / 2 - 330}Z" fill="url(#spotB)"/><ellipse cx="${W / 2}" cy="${H * 0.8}" rx="360" ry="80" fill="url(#spotF)"/>`;
+BGX.spotlight = (bg) => { const fy = (bg.floor || 0.8) * H; return `<defs><radialGradient id="spotF" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fff2c4" stop-opacity=".9"/><stop offset="1" stop-color="#fff2c4" stop-opacity="0"/></radialGradient><linearGradient id="spotB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff6d5" stop-opacity=".55"/><stop offset="1" stop-color="#fff6d5" stop-opacity=".05"/></linearGradient></defs>
+  <rect width="${W}" height="${H}" fill="${bg.color || '#0d0f14'}"/><path d="M${W / 2 - 70},0 H${W / 2 + 70} L${W / 2 + 330},${fy} H${W / 2 - 330}Z" fill="url(#spotB)"/><ellipse cx="${W / 2}" cy="${fy}" rx="360" ry="80" fill="url(#spotF)"/>`; };
 BGX.londonnight = (bg) => {
   const r = rng(hashStr('london'));
   let o = `<defs><linearGradient id="lsk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0b1330"/><stop offset="1" stop-color="#3a3f63"/></linearGradient></defs><rect width="${W}" height="${H}" fill="url(#lsk)"/>`;
@@ -768,8 +768,9 @@ ITEM.crate = (it, lt) => {
   if (open > 0) for (let k = 0; k < (it.rats || 3); k++) o += `<g transform="translate(${-120 + k * 120},${f1(-250 + 60 * (1 - open))}) rotate(${-62 + k * 12}) scale(.72)">${ratSVG({ dead: it.dead !== false, seed: k }, lt)}</g>`;
   o += `<rect x="-230" y="-260" width="460" height="260" fill="#b98a55" stroke="#5c3b1e" stroke-width="7"/>${[-180, -120, -60].map(yy => `<path d="M-230,${yy} H230" stroke="#8a6238" stroke-width="5"/>`).join('')}<path d="M-230,-260 L230,0 M230,-260 L-230,0" stroke="#8a6238" stroke-width="10" opacity=".55"/>`;
   o += `<text y="-115" font-size="${it.labelSize || 46}" font-weight="900" text-anchor="middle" fill="#2b1b0c" font-family="Inter" letter-spacing="3" opacity=".85">${esc(it.label || '')}</text>`;
-  o += open > 0 ? `<g transform="translate(250,-250) rotate(${f1(25 * open)})"><rect x="-20" y="-60" width="220" height="40" fill="#c99b62" stroke="#5c3b1e" stroke-width="6" transform="rotate(-8)"/></g>`
-    : `<rect x="-240" y="-292" width="480" height="40" fill="#c99b62" stroke="#5c3b1e" stroke-width="6"/>`;
+  // open lid leans against the crate's right side (behind it), closed lid sits on top
+  o = o.replace('filter="url(#ds)">', 'filter="url(#ds)">' + (open > 0 ? `<g transform="translate(230,0) rotate(${f1(14 * open)})"><rect x="-10" y="${f1(-300 - 40 * open)}" width="44" height="${f1(300 + 40 * open)}" fill="#c99b62" stroke="#5c3b1e" stroke-width="6"/><path d="M12,${f1(-280 - 40 * open)} V-20" stroke="#8a6238" stroke-width="4"/></g>` : ''));
+  if (open <= 0) o += `<rect x="-240" y="-292" width="480" height="40" fill="#c99b62" stroke="#5c3b1e" stroke-width="6"/>`;
   return o + '</g>';
 };
 
@@ -809,7 +810,6 @@ BGX.classroom = (bg) => {
   o += `<text x="${W / 2}" y="350" font-size="92" text-anchor="middle" fill="#f4f4ee" font-family="Gochi Hand" opacity=".9">ACHTUNG!</text>`;
   o += `<g transform="translate(${W / 2},620) scale(1.5)" opacity=".85" fill="none" stroke="#f4f4ee" stroke-width="5"><ellipse rx="105" ry="50"/><path d="M95,-20 Q140,-40 180,10 Q140,34 95,24"/><path d="M110,-40 Q100,-80 130,-74"/><path d="M-100,10 C-150,40 -190,-20 -240,10"/><path d="M128,-10 l10,10 M138,-10 l-10,10"/></g>`;
   o += `<text x="${W - 120}" y="820" text-anchor="end" font-size="60" fill="#f4f4ee" font-family="Gochi Hand" opacity=".85">= BOMBE!</text>`;
-  o += `${flagSVG('wehrmacht', W / 2 - 90, 60, 180, 120)}`;
   return o;
 };
 ITEM.desk = (it, lt) => { const [x, y] = posOf(it); const s = it.scale || 1; return `<g transform="translate(${f1(x)},${f1(y)}) scale(${s})"><rect x="-200" y="-20" width="400" height="40" fill="#8a6238" stroke="#4a3018" stroke-width="5"/><rect x="-180" y="20" width="18" height="160" fill="#4a3018"/><rect x="162" y="20" width="18" height="160" fill="#4a3018"/></g>`; };

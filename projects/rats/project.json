@@ -69,14 +69,15 @@
     {
      "at": "It",
      "bg": {
-      "type": "spotlight"
+      "type": "spotlight",
+      "floor": 0.7
      },
      "items": [
       {
        "type": "rat",
        "x": 0.5,
-       "y": 0.62,
-       "scale": 2.4,
+       "y": 0.66,
+       "scale": 2.3,
        "dead": true,
        "at": 0
       },
@@ -94,7 +95,7 @@
        "style": "stamp",
        "text": "TOP SECRET",
        "at": "rat+0.2",
-       "y": 0.8,
+       "y": 0.33,
        "size": 80,
        "sfx": "tick"
       }
@@ -152,8 +153,8 @@
       {
        "type": "text",
        "text": "SECRET SABOTAGE SERVICE",
-       "y": 0.16,
-       "size": 82,
+       "y": 0.3,
+       "size": 96,
        "color": "#ffe11a",
        "font": "Bangers",
        "at": "secret"
@@ -269,12 +270,13 @@
     {
      "at": "answer",
      "bg": {
-      "type": "boiler"
+      "type": "boiler",
+      "coalX": 0.92
      },
      "items": [
       {
        "cast": "stoker",
-       "x": 0.74,
+       "x": 0.66,
        "y": 0.86,
        "face": "left",
        "at": -1,
@@ -294,12 +296,12 @@
       {
        "type": "text",
        "text": "COAL",
-       "y": 0.5,
-       "size": 130,
+       "y": 0.66,
+       "size": 120,
        "color": "#ffe11a",
        "font": "Bangers",
        "at": "coal",
-       "x": 0.3
+       "x": 0.86
       }
      ]
     }
@@ -719,13 +721,14 @@
     {
      "at": "plan",
      "bg": {
-      "type": "spotlight"
+      "type": "spotlight",
+      "floor": 0.7
      },
      "items": [
       {
        "type": "rat",
        "x": 0.5,
-       "y": 0.66,
+       "y": 0.665,
        "scale": 2.0,
        "dead": true,
        "at": -1
@@ -783,8 +786,8 @@
       {
        "cast": "cadet",
        "x": 0.4,
-       "y": 0.99,
-       "scale": 0.9,
+       "y": 0.93,
+       "scale": 0.85,
        "at": -1,
        "mood": "shocked",
        "emotes": [
@@ -796,17 +799,11 @@
       },
       {
        "cast": "cadet",
-       "x": 0.75,
-       "y": 0.99,
-       "scale": 0.9,
+       "x": 0.78,
+       "y": 0.93,
+       "scale": 0.85,
        "at": -1,
-       "mood": "scared",
-       "emotes": [
-        {
-         "at": "rats",
-         "kind": "sweat"
-        }
-       ]
+       "mood": "scared"
       },
       {
        "type": "text",
@@ -836,13 +833,7 @@
        "at": -1,
        "mood": "worried",
        "pose": "hold",
-       "hold": "torch",
-       "emotes": [
-        {
-         "at": 0.3,
-         "kind": "sweat"
-        }
-       ]
+       "hold": "torch"
       },
       {
        "type": "coal",
@@ -930,8 +921,8 @@
       {
        "type": "check",
        "x": 0.5,
-       "y": 0.32,
-       "scale": 2.4,
+       "y": 0.44,
+       "scale": 1.8,
        "at": "success"
       },
       {
