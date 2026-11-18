@@ -41,6 +41,9 @@ shots[1] = [
     {'cast': 'stoker', 'x': 0.66, 'y': 0.86, 'face': 'left', 'at': -1, 'mood': 'neutral', 'pose': 'hold', 'hold': 'shovel:coal'},
     Y('BOILER ROOM', at='boiler', y=0.08, size=120),
     Y('COAL', at='coal', y=0.66, x=0.86, size=120)]},
+  {'at': 'someone', 'bg': {'type': 'boiler', 'coalX': 0.92}, 'camera': [{'at': 0, 'zoom': 1.15, 'x': 0.5, 'y': 0.6}, {'at': 0, 'zoom': 1.45, 'x': 0.5, 'y': 0.6, 'dur': 3}], 'items': [
+    {'cast': 'stoker', 'x': 0.66, 'y': 0.86, 'face': 'left', 'at': -1, 'mood': 'neutral', 'pose': 'hold', 'hold': 'shovel:coal', 'jumps': ['fire', 'all']},
+    Y('ALL DAY', at='all', y=0.2, size=130)]},
 ]
 shots[2] = [{'bg': SKITROOM, 'items': [
   {'cast': 'officer', 'x': 0.25, 'y': 0.84, 'face': 'right', 'at': -1, 'mood': 'smug', 'pose': 'point', 'say': [bubble("What if there's a dead rat in the coal?", dx=200, dy=-80)]},

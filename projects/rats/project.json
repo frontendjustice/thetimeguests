@@ -304,6 +304,53 @@
        "x": 0.86
       }
      ]
+    },
+    {
+     "at": "someone",
+     "bg": {
+      "type": "boiler",
+      "coalX": 0.92
+     },
+     "camera": [
+      {
+       "at": 0,
+       "zoom": 1.15,
+       "x": 0.5,
+       "y": 0.6
+      },
+      {
+       "at": 0,
+       "zoom": 1.45,
+       "x": 0.5,
+       "y": 0.6,
+       "dur": 3
+      }
+     ],
+     "items": [
+      {
+       "cast": "stoker",
+       "x": 0.66,
+       "y": 0.86,
+       "face": "left",
+       "at": -1,
+       "mood": "neutral",
+       "pose": "hold",
+       "hold": "shovel:coal",
+       "jumps": [
+        "fire",
+        "all"
+       ]
+      },
+      {
+       "type": "text",
+       "text": "ALL DAY",
+       "y": 0.2,
+       "size": 130,
+       "color": "#ffe11a",
+       "font": "Bangers",
+       "at": "all"
+      }
+     ]
     }
    ]
   },
