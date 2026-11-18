@@ -61,6 +61,8 @@ Topic ideas not yet made: the Ghost Army (inflatable tanks), why Ireland stayed 
 - `gemini-3.8-flash-tts` reads the style prompt **aloud** before the line. Don't use it (in an emergency, trim the take at the pause before the line and say so).
 - Per-model TTS quota is about 10/day, and failed or retried requests seem to count. The transcription models also have daily limits (about 20/day each), so the transcript gate can be blocked even when voice is not.
 - A per-minute 429 waits 62s once (engine). A `PerDay` 429 means stop until the reset at 08:00 UTC.
+- Character lines get `"sps": 0` (natural acted pace). The tempo nudge (up to 1.25×) blurred the final "l" of "coal" into "coat"; a project-level `sps` also applies to characters unless they set their own.
+- A line ending in a question can swallow its last consonant. If the transcript misses it, re-voice once with `tts` ending in a full stop and a short `direction` such as "say coal clearly".
 - Keep one model per role in a video: narrator on `gemini-3.1-flash-tts-preview`, characters on `gemini-2.5-flash-preview-tts`. Mix only with the user's approval.
 
 ## Hard limits and gotchas

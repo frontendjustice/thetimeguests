@@ -359,7 +359,8 @@
    "voice": {
     "name": "Orus",
     "model": "gemini-2.5-flash-preview-tts",
-    "style": "Say it like a sly British intelligence officer in 1941, quick and conspiratorial"
+    "style": "Say it like a sly British intelligence officer in 1941, quick and conspiratorial",
+    "sps": 0
    },
    "captions": false,
    "pause": 0.1,
@@ -418,6 +419,8 @@
      ]
     }
    ],
+   "tts": "What if there's a dead rat... in the coal.",
+   "direction": "say coal clearly",
    "rawAudio": "assets/voice/line03.wav"
   },
   {
@@ -425,7 +428,8 @@
    "voice": {
     "name": "Puck",
     "model": "gemini-2.5-flash-preview-tts",
-    "style": "Say it like a sly British intelligence officer in 1941, quick and conspiratorial"
+    "style": "Say it like a sly British intelligence officer in 1941, quick and conspiratorial",
+    "sps": 0
    },
    "captions": false,
    "pause": 0.1,
@@ -495,7 +499,8 @@
    "voice": {
     "name": "Orus",
     "model": "gemini-2.5-flash-preview-tts",
-    "style": "Say it like a delighted British intelligence officer in 1941"
+    "style": "Say it like a delighted British intelligence officer in 1941",
+    "sps": 0
    },
    "captions": false,
    "pause": 0.3,
