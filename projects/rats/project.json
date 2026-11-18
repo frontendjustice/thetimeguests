@@ -3,7 +3,7 @@
  "title": "The Rat Bomb That Never Went Off",
  "voice": {
   "name": "Charon",
-  "model": "gemini-2.5-flash-preview-tts",
+  "model": "gemini-3.1-flash-tts-preview",
   "style": "Voice only, no music or sound effects. Read this at a brisk pace, about 170 words per minute, like a punchy, slightly witty YouTube Shorts history narrator. Confident and energetic, with only tiny pauses between sentences",
   "maxPause": 0.3,
   "lufs": -18,
@@ -26,7 +26,6 @@
     "maxPause": 0.4
    },
    "pause": 0.3,
-   "rawAudio": "assets/voice/line01.wav",
    "shots": [
     {
      "bg": {
@@ -40,7 +39,7 @@
       },
       {
        "at": 0,
-       "zoom": 1.0,
+       "zoom": 1,
        "dur": 1.6
       }
      ],
@@ -101,13 +100,13 @@
       }
      ]
     }
-   ]
+   ],
+   "rawAudio": "assets/voice/line01.wav"
   },
   {
    "say": "In 1941, Britain's secret sabotage service had a problem. How do you blow up a German factory without getting caught? The answer was in the boiler room. Factories ran on coal, and someone shovelled it into the fire all day.",
    "tts": "In nineteen forty-one, Britain's secret sabotage service had a problem. How do you blow up a German factory without getting caught? The answer was in the boiler room. Factories ran on coal, and someone shovelled it into the fire all day.",
    "pause": 0.25,
-   "rawAudio": "assets/voice/line02.wav",
    "shots": [
     {
      "bg": {
@@ -169,7 +168,7 @@
        {
         "at": 0,
         "lon": 10.5,
-        "lat": 51.0,
+        "lat": 51,
         "span": 14
        }
       ],
@@ -190,7 +189,7 @@
        "type": "icon",
        "kind": "factory",
        "pos": [
-        7.0,
+        7,
         51.45
        ],
        "scale": 1.3,
@@ -352,7 +351,8 @@
       }
      ]
     }
-   ]
+   ],
+   "rawAudio": "assets/voice/line02.wav"
   },
   {
    "say": "What if there's a dead rat in the coal?",
@@ -364,8 +364,6 @@
    },
    "captions": false,
    "pause": 0.1,
-   "rawAudio": "assets/voice/line03.wav",
-   "voiceNote": "gemini-3.8-flash-tts; style read aloud first, take cut at the pause before the line; transcript not yet machine-checked",
    "shots": [
     {
      "bg": {
@@ -420,7 +418,8 @@
       }
      ]
     }
-   ]
+   ],
+   "rawAudio": "assets/voice/line03.wav"
   },
   {
    "say": "The stoker throws it in the fire...",
@@ -432,8 +431,6 @@
    },
    "captions": false,
    "pause": 0.1,
-   "rawAudio": "assets/voice/line04.wav",
-   "voiceNote": "gemini-3.8-flash-tts; style read aloud first, take cut at the pause before the line; transcript not yet machine-checked",
    "shots": [
     {
      "bg": {
@@ -492,7 +489,8 @@
       }
      ]
     }
-   ]
+   ],
+   "rawAudio": "assets/voice/line04.wav"
   },
   {
    "say": "...and boom!",
@@ -504,8 +502,6 @@
    },
    "captions": false,
    "pause": 0.3,
-   "rawAudio": "assets/voice/line05.wav",
-   "voiceNote": "gemini-3.8-flash-tts; style read aloud first, take cut at the pause before the line; transcript not yet machine-checked",
    "shots": [
     {
      "bg": {
@@ -564,13 +560,13 @@
       }
      ]
     }
-   ]
+   ],
+   "rawAudio": "assets/voice/line05.wav"
   },
   {
    "say": "So an officer posing as a student got about a hundred rats, claiming they were for experiments. They filled them with plastic explosive, ready to hide in German coal piles.",
    "direction": "amused",
    "pause": 0.25,
-   "rawAudio": "assets/voice/line06.wav",
    "shots": [
     {
      "bg": {
@@ -704,7 +700,8 @@
       }
      ]
     }
-   ]
+   ],
+   "rawAudio": "assets/voice/line06.wav"
   },
   {
    "say": "But the very first shipment was caught by the Germans. The plan was dead. Or was it? The Germans were rattled. They showed the rats off at their top military schools, and went searching for more.",
@@ -713,7 +710,6 @@
     "maxPause": 0.4
    },
    "pause": 0.25,
-   "rawAudio": "assets/voice/line07.wav",
    "shots": [
     {
      "bg": {
@@ -776,7 +772,7 @@
        "type": "rat",
        "x": 0.5,
        "y": 0.665,
-       "scale": 2.0,
+       "scale": 2,
        "dead": true,
        "at": -1
       },
@@ -899,14 +895,13 @@
       }
      ]
     }
-   ]
+   ],
+   "rawAudio": "assets/voice/line07.wav"
   },
   {
    "say": "Britain's verdict? The trouble it caused them was a bigger success than if the rats had actually been used. The rats never blew up a single boiler. Just the idea of them was enough.",
    "direction": "wry, then quieter and slower at the very end",
    "pause": 1.2,
-   "rawAudio": "assets/voice/line08.wav",
-   "voiceNote": "Charon on gemini-3.8-flash-tts; the model read the style aloud first, so the take was cut at the pause before the line",
    "shots": [
     {
      "bg": {
@@ -993,7 +988,7 @@
      "camera": [
       {
        "at": 0,
-       "zoom": 1.0
+       "zoom": 1
       },
       {
        "at": 0,
@@ -1029,7 +1024,8 @@
       }
      ]
     }
-   ]
+   ],
+   "rawAudio": "assets/voice/line08.wav"
   }
  ],
  "cast": {
