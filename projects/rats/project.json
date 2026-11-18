@@ -39,7 +39,7 @@
       },
       {
        "at": 0,
-       "zoom": 1,
+       "zoom": 1.0,
        "dur": 1.6
       }
      ],
@@ -78,7 +78,8 @@
        "y": 0.66,
        "scale": 2.3,
        "dead": true,
-       "at": 0
+       "at": 0,
+       "sfx": false
       },
       {
        "type": "text",
@@ -87,7 +88,8 @@
        "size": 150,
        "color": "#ffe11a",
        "font": "Bangers",
-       "at": "dead"
+       "at": "dead",
+       "sfx": false
       },
       {
        "type": "text",
@@ -168,7 +170,7 @@
        {
         "at": 0,
         "lon": 10.5,
-        "lat": 51,
+        "lat": 51.0,
         "span": 14
        }
       ],
@@ -189,7 +191,7 @@
        "type": "icon",
        "kind": "factory",
        "pos": [
-        7,
+        7.0,
         51.45
        ],
        "scale": 1.3,
@@ -774,7 +776,7 @@
        "type": "rat",
        "x": 0.5,
        "y": 0.665,
-       "scale": 2,
+       "scale": 2.0,
        "dead": true,
        "at": -1
       },
@@ -990,7 +992,7 @@
      "camera": [
       {
        "at": 0,
-       "zoom": 1
+       "zoom": 1.0
       },
       {
        "at": 0,

@@ -69,7 +69,7 @@ export function sfxEvents(scenes, opts = {}) {
         case 'web': if ((it.at || 0) >= 0) for (let k = 0; k < (it.points || []).length; k += 3) add('pop', t + (it.dur || 0.25) + k * (it.every == null ? 0.06 : it.every), 0.22); break;
       }
       if (it.blowAt != null) { add('boom', sc.start + it.blowAt, 0.45); if (it.type === 'bridge' || it.type === 'tunnel') add('crumble', sc.start + it.blowAt + 0.3, 0.45); }
-      if (it.type === 'crate' && it.openAt != null && it.openAt >= 0) add('thud', sc.start + it.openAt, 0.4);
+      if (it.type === 'crate' && it.openAt != null && it.openAt >= 0 && it.sfx !== false) add('tick', sc.start + it.openAt, 0.3);
       if (it.type === 'agentcard') { if (it.sickAt != null && it.sickAt >= 0) add('pop', sc.start + it.sickAt, 0.4); if (it.deadAt != null && it.deadAt >= 0) add('thud', sc.start + it.deadAt, 0.45); }
       if (it.explosives != null && it.explosives >= 0) add('tick', sc.start + it.explosives, 0.7);
     }

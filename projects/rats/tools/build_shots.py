@@ -24,8 +24,8 @@ shots[0] = [
     {'type': 'crate', 'x': 0.5, 'y': 0.76, 'label': 'TOP SECRET', 'openAt': 'never', 'rats': 3, 'at': 0, 'scale': 1.1},
     Y('SECRET WEAPON', at='secret', y=0.15, size=130)]},
   {'at': 'It', 'bg': {'type': 'spotlight', 'floor': 0.7}, 'items': [
-    {'type': 'rat', 'x': 0.5, 'y': 0.66, 'scale': 2.3, 'dead': True, 'at': 0},
-    Y('A DEAD RAT', at='dead', y=0.2, size=150),
+    {'type': 'rat', 'x': 0.5, 'y': 0.66, 'scale': 2.3, 'dead': True, 'at': 0, 'sfx': False},
+    Y('A DEAD RAT', at='dead', y=0.2, size=150, sfx=False),
     {'type': 'text', 'style': 'stamp', 'text': 'TOP SECRET', 'at': 'rat+0.2', 'y': 0.33, 'size': 80, 'sfx': 'tick'}]},
 ]
 shots[1] = [
