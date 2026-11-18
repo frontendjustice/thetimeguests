@@ -1,0 +1,110 @@
+{
+ "name": "rats-thumbnail",
+ "captions": {
+  "enabled": false
+ },
+ "autoPush": false,
+ "vignette": true,
+ "scenes": [
+  {
+   "dur": 2,
+   "shots": [
+    {
+     "bg": {
+      "type": "spotlight",
+      "floor": 0.62
+     },
+     "items": [
+      {
+       "type": "text",
+       "text": "BRITAIN'S SECRET",
+       "font": "Bangers",
+       "at": -5,
+       "y": 0.08,
+       "size": 130,
+       "color": "#ffffff",
+       "strokeW": 24,
+       "spacing": 3
+      },
+      {
+       "type": "text",
+       "text": "WEAPON:",
+       "font": "Bangers",
+       "at": -5,
+       "y": 0.155,
+       "size": 150,
+       "color": "#ffffff",
+       "strokeW": 26,
+       "spacing": 3
+      },
+      {
+       "type": "text",
+       "text": "A DEAD RAT",
+       "font": "Bangers",
+       "at": -5,
+       "y": 0.25,
+       "size": 215,
+       "color": "#ffe11a",
+       "strokeW": 34,
+       "spacing": 3
+      },
+      {
+       "type": "rat",
+       "x": 0.53,
+       "y": 0.56,
+       "scale": 2.2,
+       "dead": true,
+       "explosive": true,
+       "fuse": true,
+       "at": -5
+      },
+      {
+       "type": "text",
+       "style": "stamp",
+       "text": "TOP SECRET",
+       "at": -5,
+       "x": 0.62,
+       "y": 0.385,
+       "size": 58,
+       "rotate": -6
+      },
+      {
+       "type": "char",
+       "x": 0.24,
+       "y": 0.985,
+       "scale": 1.05,
+       "face": "right",
+       "at": -5,
+       "enter": "none",
+       "mood": "scared",
+       "sweat": false,
+       "pose": "point",
+       "emotes": [
+        {
+         "at": -5,
+         "kind": "!!",
+         "until": 9
+        }
+       ],
+       "outfit": "military",
+       "color": "#7a7a63",
+       "hair": "side",
+       "mustache": "toothbrush"
+      },
+      {
+       "type": "text",
+       "style": "stamp",
+       "text": "TRUE STORY",
+       "at": -5,
+       "x": 0.7,
+       "y": 0.76,
+       "size": 56,
+       "rotate": -4,
+       "color": "#ffe11a"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
