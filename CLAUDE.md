@@ -1,6 +1,6 @@
 # thetimeguests: project context for Claude Code
 
-YouTube history Shorts channel **@thetimeguest**: animated WW2 "why/how" explainers in the style of MapLore-type channels, but with original topics, scripts and art. Everything is code-drawn (maps, characters, props) and rendered by this repo's engine. Read `README.md` for the engine reference and `docs/reference-breakdown.md` for the style rules learned from a shot-by-shot study of a top channel.
+YouTube history Shorts channel **@thetimeguest**: animated "why/how" history explainers (true stories that sound made up; WW2 so far, but the channel covers all of history) in the style of MapLore-type channels, but with original topics, scripts and art. Everything is code-drawn (maps, characters, props) and rendered by this repo's engine. Read `README.md` for the engine reference and `docs/reference-breakdown.md` for the style rules learned from a shot-by-shot study of a top channel.
 
 ## Setup in a fresh session
 
@@ -42,7 +42,7 @@ Topic ideas not yet made: the Ghost Army (inflatable tanks), why Ireland stayed 
 4. **Art gallery**: render new props as full-res stills before using them in shots.
 5. **Shots**: about 2.5s each, every noun or verb shown literally, action from frame 0, a different location per beat. Check with `--shots`, then the full render.
 6. **Review the actual MP4**: frame sheets every 0.5s; loudness (effects about 0.5 dB over the voice, no spikes in pauses). Fix, re-render, re-check.
-7. **Deliver**: video, thumbnail (separate one-shot project, 1080×1920, checked at feed size), title (short hook, under about 40 chars, plus `#history #didyouknow #ww2`).
+7. **Deliver**: video, thumbnail (separate one-shot project, 1080×1920, checked at feed size), title (short hook, under about 40 chars, plus `#history #didyouknow` and an era tag such as `#ww2`).
 
 ## Animation rules (learned from frame reviews; check every shot against these)
 

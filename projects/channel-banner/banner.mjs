@@ -57,7 +57,7 @@ await page.evaluate((guides) => {
   // --- title band (safe area) ---
   s += `<rect x="0" y="${SAFE.y - 30}" width="${BW}" height="${SAFE.h + 60}" fill="url(#band)"/>`;
   s += outlineText(BW / 2, SAFE.y + 205, 'THE TIME GUEST', { size: 190, font: 'Bangers', color: '#ffe11a', stroke: 34, strokeColor: '#111', spacing: 6 });
-  s += outlineText(BW / 2, SAFE.y + 310, 'WW2 STORIES THAT SOUND MADE UP... BUT ARE TRUE', { size: 60, font: 'Bangers', color: '#ffffff', stroke: 12, strokeColor: '#111', spacing: 3 });
+  s += outlineText(BW / 2, SAFE.y + 310, 'STORIES THAT SOUND MADE UP... BUT ARE TRUE', { size: 60, font: 'Bangers', color: '#ffffff', stroke: 12, strokeColor: '#111', spacing: 3 });
   s += `<text x="${BW / 2}" y="${SAFE.y + 385}" font-size="44" font-weight="800" text-anchor="middle" fill="#e6d3a3" letter-spacing="3">@thetimeguest</text>`;
   // --- inner characters (inside the safe area) ---
   s += `<g>${ITEM.chicken({ x: 712 / W, y: (SAFE.y + SAFE.h - 6) / H, scale: 0.42, face: 'right', at: -5 }, lt)}</g>`;
