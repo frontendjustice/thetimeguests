@@ -359,8 +359,7 @@
    "voice": {
     "name": "Orus",
     "model": "gemini-2.5-flash-preview-tts",
-    "style": "Say it like a sly British intelligence officer in 1941, quick and conspiratorial",
-    "sps": 4.6
+    "style": "Say it like a sly British intelligence officer in 1941, quick and conspiratorial"
    },
    "captions": false,
    "pause": 0.1,
@@ -426,8 +425,7 @@
    "voice": {
     "name": "Puck",
     "model": "gemini-2.5-flash-preview-tts",
-    "style": "Say it like a sly British intelligence officer in 1941, quick and conspiratorial",
-    "sps": 4.6
+    "style": "Say it like a sly British intelligence officer in 1941, quick and conspiratorial"
    },
    "captions": false,
    "pause": 0.1,
@@ -497,8 +495,7 @@
    "voice": {
     "name": "Orus",
     "model": "gemini-2.5-flash-preview-tts",
-    "style": "Say it like a delighted British intelligence officer in 1941",
-    "sps": 4.6
+    "style": "Say it like a delighted British intelligence officer in 1941"
    },
    "captions": false,
    "pause": 0.3,
